@@ -1,0 +1,2 @@
+module RecordqnyntsHelper
+end

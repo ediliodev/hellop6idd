@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Serial:</strong>
+  <%= @ticket.serial %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ticket.user.email %>
+</p>
+
+<p>
+  <strong>Fechaimpresion:</strong>
+  <%= @ticket.fechaimpresion %>
+</p>
+
+<p>
+  <strong>Activo:</strong>
+  <%= @ticket.activo %>
+</p>
+
+<p>
+  <strong>Ganador:</strong>
+  <%= @ticket.ganador %>
+</p>
+
+<p>
+  <strong>Pago:</strong>
+  <%= @ticket.pago %>
+</p>
+
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>

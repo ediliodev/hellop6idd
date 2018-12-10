@@ -1,0 +1,18 @@
+ remomueller commented on Nov 14, 2017 •
+
+For anyone trying out devise with MRI 2.5.0-preview1, it looks like devise has a fix for this on the master branch: 1009096
+
+Add the following to gems.rb (or Gemfile):
+
+# gem 'devise',               '~> 4.3.0'
+gem 'devise', git: 'https://github.com/plataformatec/devise' #, ref: '88e9a85'
+
+The ref is optional but can be used in case master is failing.
+
+Also, here is a related (closed) issue on the Ruby issue tracker: https://bugs.ruby-lang.org/issues/13939
+
+>>OK LO DE ARRIBA ME RESOLVIO CUANDO USO RAILS 5.1.6 (VIENE 5.0.6) DEVISE 4 FIXED.
+
+OK SACAD DEL LINK:
+https://github.com/plataformatec/devise/issues/4630
+

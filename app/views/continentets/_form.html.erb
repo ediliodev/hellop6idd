@@ -1,0 +1,27 @@
+<%= form_for(continentet) do |f| %>
+  <% if continentet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(continentet.errors.count, "error") %> prohibited this continentet from being saved:</h2>
+
+      <ul>
+      <% continentet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

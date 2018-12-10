@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @controlqltkt.numero %>
+</p>
+
+<p>
+  <strong>Limite:</strong>
+  <%= @controlqltkt.limite %>
+</p>
+
+<p>
+  <strong>Vendida:</strong>
+  <%= @controlqltkt.vendida %>
+</p>
+
+<%= link_to 'Edit', edit_controlqltkt_path(@controlqltkt) %> |
+<%= link_to 'Back', controlqltkts_path %>

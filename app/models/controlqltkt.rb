@@ -1,0 +1,2 @@
+class Controlqltkt < ApplicationRecord
+end

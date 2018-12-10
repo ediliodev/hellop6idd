@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @colectort.nombre %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @colectort.apellido %>
+</p>
+
+<p>
+  <strong>Cedula:</strong>
+  <%= @colectort.cedula %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @colectort.telefono %>
+</p>
+
+<%= link_to 'Edit', edit_colectort_path(@colectort) %> |
+<%= link_to 'Back', colectorts_path %>

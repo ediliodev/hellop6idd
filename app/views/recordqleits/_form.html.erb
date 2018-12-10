@@ -1,0 +1,32 @@
+<%= form_for(recordqleit) do |f| %>
+  <% if recordqleit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recordqleit.errors.count, "error") %> prohibited this recordqleit from being saved:</h2>
+
+      <ul>
+      <% recordqleit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ticket_id %>
+    <%= f.text_field :ticket_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :n1 %>
+    <%= f.number_field :n1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :monto %>
+    <%= f.number_field :monto %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

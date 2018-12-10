@@ -1,0 +1,2 @@
+class Controlqreat < ApplicationRecord
+end

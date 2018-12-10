@@ -1,0 +1,2 @@
+class Controltreat < ApplicationRecord
+end

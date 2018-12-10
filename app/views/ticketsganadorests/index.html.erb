@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ticketsganadorests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>Sucursal</th>
+      <th>FechaProcesado</th>
+      <th>Jugada</th>
+      <th>Sorteo</th>
+      <th>FechaSorteo</th>
+      <th>Montoapostado</th>
+      <th>Montoacobrar</th>
+      <th>Grupoprocesado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ticketsganadorests.each do |ticketsganadorest| %>
+      <tr>
+        <td><%= ticketsganadorest.ticket.id %></td>
+        <td><%= ticketsganadorest.sucursal %></td>        
+        <td><%= ticketsganadorest.ticket.updated_at.to_date %></td>
+        <td><%= ticketsganadorest.jugada %></td>
+        <td><%= ticketsganadorest.sorteo %></td>
+        <td><%= ticketsganadorest.fechasorteo %></td>
+        <td>$<%=ticketsganadorest.montoapostado %></td>
+        <td>$<%=ticketsganadorest.montoacobrar %></td>
+        <td><%= ticketsganadorest.grupoprocesado %></td>
+        <td><%= link_to 'Show', ticketsganadorest %></td>
+        <td><%= link_to 'Edit', edit_ticketsganadorest_path(ticketsganadorest) %></td>
+        <td><%= link_to 'Destroy', ticketsganadorest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ticketsganadorest', new_ticketsganadorest_path %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recordpnytts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>N2</th>
+      <th>Siglas</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordpnytts.each do |recordpnytt| %>
+      <tr>
+        <td><%= recordpnytt.ticket %></td>
+        <td><%= recordpnytt.n1 %></td>
+        <td><%= recordpnytt.n2 %></td>
+        <td><%= recordpnytt.siglas %></td>
+        <td><%= recordpnytt.monto %></td>
+        <td><%= link_to 'Show', recordpnytt %></td>
+        <td><%= link_to 'Edit', edit_recordpnytt_path(recordpnytt) %></td>
+        <td><%= link_to 'Destroy', recordpnytt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recordpnytt', new_recordpnytt_path %>

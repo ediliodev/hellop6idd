@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordqnnt.ticket.id %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordqnnt.n1 %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordqnnt.monto %>
+</p>
+
+<%= link_to 'Edit', edit_recordqnnt_path(@recordqnnt) %> |
+<%= link_to 'Back', recordqnnts_path %>

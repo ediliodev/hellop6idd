@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordpreat.ticket %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordpreat.n1 %>
+</p>
+
+<p>
+  <strong>N2:</strong>
+  <%= @recordpreat.n2 %>
+</p>
+
+<p>
+  <strong>Siglas:</strong>
+  <%= @recordpreat.siglas %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordpreat.monto %>
+</p>
+
+<%= link_to 'Edit', edit_recordpreat_path(@recordpreat) %> |
+<%= link_to 'Back', recordpreats_path %>

@@ -1,0 +1,89 @@
+
+
+f2  = MiniMagick::Tool::Montage.new do |montage|
+                montage << @hash_f2["a"]
+                espacio = "./MMTICKETFONTS/f2_font/espacio_numeros.png"
+                montage.merge! [ @hash_f2["n1"], espacio , @hash_f2["n2"], espacio , @hash_f2["n3"], espacio , @hash_f2["n4"], espacio , @hash_f2["n5"], @hash_f2["ns_qp"], @hash_f2["n6"], @hash_f2["mb_qp"]  ]
+                 montage << "-tile 13x1"
+                 montage << "-geometry +0+0"
+                montage << "./MMTICKETFONTS/f2_font/f2.png"
+              end
+
+
+
+
+
+
+
+      ::  f1.png:
+magick convert header_ticket_logo.png .\\outputs\\f1.png
+
+::  f2.png:
+magick montage A.png 0.png espacio_digitos.png 6_espaciado.png espacio_numeros.png 4_espaciado.png 5.png espacio_numeros.png 5.png espacio_digitos.png 1.png espacio_numeros.png 6_espaciado.png espacio_digitos.png 3.png espacio_numeros.png 6_espaciado.png espacio_digitos.png 9.png qp_izq.png 2.png espacio_digitos.png 3.png qp_der.png -tile 25x1  -geometry +0+0  .\\outputs\\f2.png
+cd .\\outputs\\
+magick convert f2.png -resize 576x33! f2.png
+
+
+cd ..
+
+:: f3.png:
+magick montage f3_sorteo_dia_fri.png f3_sorteo_mes_jan.png f3_sorteo_dia_0.png f3_sorteo_espacio_digitos.png f3_sorteo_dia_0.png f3_sorteo_espacio_numeros.png f3_sorteo_anio_18.png -tile 7x1 -geometry +0+0 .\\outputs\\f3.png
+cd .\\outputs\\
+magick convert f3.png -resize 576x84 f3.png 
+cd ..
+
+:: f4.png:
+magick  convert f4_price.png .\\outputs\\f4.png
+
+:: f5:
+magick convert f5_serial.png .\\outputs\f5.png
+
+
+:: f6:
+magick convert f6_fecha.png .\\outputs\f6.png
+
+
+:: f7:
+magick convert f7_mensaje.png .\\outputs\f7.png
+
+
+:: f8:
+magick convert f8_barcode.png .\\outputs\f8.png
+
+:: formar el ticket:
+cd .\\outputs\\
+magick montage f1.png f2.png f3.png f4.png f5.png f6.png f7.png f8.png -tile 1x8 -geometry +0+0 ticket.png
+cd ..
+
+
+
+
+create_table "paists", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "nombre_moneda"
+    t.string   "simbolo_moneda"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+
+  ++++++++
+  procedimiento para imprimir el ticket desde java
+
+  1- recibir la imagen base_64
+  2- decode image to file en path.
+  3- ejecutar codigo java exec "comandos desde el SO"
+  4- borrar la imagen y todo lo relacionado.png o el folder ./foderimagentickets/tk001.png ejemplo. 
+  
+
+
+
+<% pp = Paist.last %>  
+	<% if pp.last.simbolo_moneda == "n" %>
+	
+	<%=  pp.last.nombre %>  
+	<%  pp.last.simbolo_moneda = "y"%>
+	<%  pp.save %>
+	<%else%>
+	
+	<%end%>

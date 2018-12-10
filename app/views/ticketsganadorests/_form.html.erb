@@ -1,0 +1,37 @@
+<%= form_for(ticketsganadorest) do |f| %>
+  <% if ticketsganadorest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ticketsganadorest.errors.count, "error") %> prohibited this ticketsganadorest from being saved:</h2>
+
+      <ul>
+      <% ticketsganadorest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ticket_id %>
+    <%= f.text_field :ticket_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :jugada %>
+    <%= f.text_field :jugada %>
+  </div>
+
+  <div class="field">
+    <%= f.label :montoapostado %>
+    <%= f.text_field :montoapostado %>
+  </div>
+
+  <div class="field">
+    <%= f.label :montoacobrar %>
+    <%= f.text_field :montoacobrar %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module ControlqnyntsHelper
+end

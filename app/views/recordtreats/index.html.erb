@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recordtreats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>N2</th>
+      <th>N3</th>
+      <th>Siglas</th>
+      <th>Monto</th>
+      <th>Seleccionada</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordtreats.each do |recordtreat| %>
+      <tr>
+        <td><%= recordtreat.ticket %></td>
+        <td><%= recordtreat.n1 %></td>
+        <td><%= recordtreat.n2 %></td>
+        <td><%= recordtreat.n3 %></td>
+        <td><%= recordtreat.siglas %></td>
+        <td><%= recordtreat.monto %></td>
+        <td><%= recordtreat.seleccionada %></td>
+        <td><%= link_to 'Show', recordtreat %></td>
+        <td><%= link_to 'Edit', edit_recordtreat_path(recordtreat) %></td>
+        <td><%= link_to 'Destroy', recordtreat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recordtreat', new_recordtreat_path %>

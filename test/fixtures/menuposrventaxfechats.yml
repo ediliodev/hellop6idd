@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sucursal: MyString
+  desde: 2018-10-26
+  hasta: 2018-10-26
+  venta: MyString
+
+two:
+  sucursal: MyString
+  desde: 2018-10-26
+  hasta: 2018-10-26
+  venta: MyString

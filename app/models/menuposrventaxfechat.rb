@@ -1,0 +1,2 @@
+class Menuposrventaxfechat < ApplicationRecord
+end

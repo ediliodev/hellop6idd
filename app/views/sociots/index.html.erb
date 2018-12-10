@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sociots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Telefono</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sociots.each do |sociot| %>
+      <tr>
+        <td><%= sociot.nombre %></td>
+        <td><%= sociot.apellido %></td>
+        <td><%= sociot.telefono %></td>
+        <td><%= link_to 'Show', sociot %></td>
+        <td><%= link_to 'Edit', edit_sociot_path(sociot) %></td>
+        <td><%= link_to 'Destroy', sociot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sociot', new_sociot_path %>

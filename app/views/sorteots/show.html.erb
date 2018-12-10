@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @sorteot.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @sorteot.descripcion %>
+</p>
+
+<p>
+  <strong>Sigla:</strong>
+  <%= @sorteot.sigla %>
+</p>
+
+<p>
+  <strong>Abreviaturamovil:</strong>
+  <%= @sorteot.abreviaturamovil  %>
+</p>
+
+
+
+
+<p>
+  <strong>Horariosorteot:</strong>
+  <%= @sorteot.horariosorteot.nombre %>
+</p>
+
+<p>
+  <strong>Loteriat:</strong>
+  <%= @sorteot.loteriat.nombre %>
+</p>
+
+<p>
+  <strong>Activo:</strong>
+  <%= @sorteot.activo %>
+</p>
+
+<p>
+  <strong>Abierto:</strong>
+  <%= @sorteot.abierto %>
+</p>
+
+<%= link_to 'Edit', edit_sorteot_path(@sorteot) %> |
+<%= link_to 'Back', sorteots_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Colectorts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Cedula</th>
+      <th>Telefono</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @colectorts.each do |colectort| %>
+      <tr>
+        <td><%= colectort.nombre %></td>
+        <td><%= colectort.apellido %></td>
+        <td><%= colectort.cedula %></td>
+        <td><%= colectort.telefono %></td>
+        <td><%= link_to 'Show', colectort %></td>
+        <td><%= link_to 'Edit', edit_colectort_path(colectort) %></td>
+        <td><%= link_to 'Destroy', colectort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Colectort', new_colectort_path %>

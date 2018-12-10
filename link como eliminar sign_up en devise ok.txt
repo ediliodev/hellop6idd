@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/39773890/how-to-remove-disable-sign-up-from-devise

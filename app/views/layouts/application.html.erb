@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>syslot809</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=0"> 
+
+  </head>
+
+  <body>
+
+
+<!--Mensaje de error de login o demas gema Devise ted ok -->
+	
+		 <!--DOS ETIQUETAS MANDATORIAS POR DEVICE GEM -->
+    <% if  not user_signed_in?  %>
+      <p id="alert22" class="alert"><%= alert %></p>
+    <% end %>
+	
+  
+ <!-- Limpiar el mensaje luego de 3segs.  -->
+  <script type="text/javascript"> 
+
+	function limpiar_mensaje() {
+		
+		document.getElementById('alert22').style.display = 'none';
+    	document.getElementById('alert22').style.visibility = 'none';
+    	document.getElementById('notice').style.display = 'none';
+    	document.getElementById('notice').style.visibility = 'none';
+    	
+	}
+	window.setTimeout(limpiar_mensaje, 2000);
+  	
+  </script>
+
+<div id="detalles_usuario">
+
+  <% if user_signed_in? && (session[:tipo_cliente] != "movil") %>
+    Logged in as <strong><%= current_user.email %> - </strong>.
+    <%= link_to 'Edit profile', edit_user_registration_path %> |
+    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+  <% else if not user_signed_in? %>
+    <%= link_to "Sign up", new_user_registration_path %> |
+    <%= link_to "Login", new_user_session_path %>
+    <%end%>
+  <% end %>
+  
+</div>
+
+
+
+    <%= yield %>
+
+    <footer>
+    </br>
+     <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >INICIO</button> 
+    </footer>
+
+  </body>
+
+</html>

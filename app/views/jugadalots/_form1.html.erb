@@ -1,0 +1,67 @@
+
+<%= form_for(jugadalot) do |form| %>
+   <% if jugadalot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(jugadalot.errors.count, "error") %> prohibited this jugadalot from being saved:</h2>
+
+      <ul>
+      <% jugadalot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+<table>
+  <thead>
+    <tr>
+     <!--  <th>Ticket</th> -->
+     <!--  <th>N1</th> -->
+     <!--  <th>N2</th> -->
+     <!--  <th>N3</th> -->
+      <% if  @tipo_cliente != "movil" %>
+        <th>Jugadas (qpt)</th>
+      <%end%>
+      
+      <% if  @tipo_cliente == "movil" %>
+        <th></th>
+      <%end%>
+
+     <!--  <th>Monto</th> -->
+     <!--  <th>Sorteo</th> -->
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+     <tr>
+
+       <!-- <td> <%= form.number_field :n1, id: :jugadalot_n1, min:0,  max: 99 %></td> -->
+        <!-- <td> <%= form.number_field :n2, id: :jugadalot_n2, min:0,  max: 99 %></td> -->
+        <!-- <td><%= form.number_field :n3, id: :jugadalot_n3,  min:0,  max: 99  %></td> -->
+        <td> <%= form.text_field :qpt, id: :jugadalot_qpt , autofocus: true,  autocomplete: "off" %></td>
+        <!-- <td><%= form.number_field :monto, id: :jugadalot_monto, min: 1 %></td> -->
+        <td><%= form.submit "Enviar" %></td>
+        <td> <button onclick="borrartodo()">Reset</button>  </td>
+      </tr>
+
+  </tbody>
+
+</table>
+
+
+<% end %>
+ 
+
+<script>
+
+  function borrartodo() {
+    document.getElementById("jugadalot_qpt").value = "/bt";
+    document.getElementById("new_jugadalot").submit(); 
+  }
+
+</script>
+
+ 

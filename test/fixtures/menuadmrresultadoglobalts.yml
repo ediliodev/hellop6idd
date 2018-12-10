@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  desde: 2018-11-05
+  hasta: 2018-11-05
+  sucursal: MyString
+  venta: 1
+  ganadores: 1
+  balance: 1
+
+two:
+  desde: 2018-11-05
+  hasta: 2018-11-05
+  sucursal: MyString
+  venta: 1
+  ganadores: 1
+  balance: 1

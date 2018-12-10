@@ -1,0 +1,36 @@
+
+ <body onload="onload();"> 
+
+	 <script type="text/javascript"> 
+
+	     var textbox; 
+
+	     function onload() {  
+	         textbox = document.getElementById('textbox'); 
+	     } 
+
+
+	     function showAndroidToast(toast) { 
+	         Android.showToast(textbox.value); 
+	     } 
+
+	 </script> 
+
+
+	
+	 <div id="inner"> 
+
+	 	<input type="text" name="enter" class="enter" placeholder="Write something here!" id="textbox"/> 
+	 	<input type="button" value="Send message to android!" onClick="showAndroidToast()" /> 
+	
+	 </div>
+
+	 <p>
+	 
+	 	<h3>Cliente ID: <%= @cliente_id %></h3>
+	 	<h3>Tipo Cliente: <%= @tipo_cliente%></h3>
+
+	 </p>
+
+
+

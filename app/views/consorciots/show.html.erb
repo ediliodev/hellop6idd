@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @consorciot.nombre %>
+</p>
+
+<p>
+  <strong>Abreviatura:</strong>
+  <%= @consorciot.abreviatura %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @consorciot.telefono %>
+</p>
+
+<%= link_to 'Edit', edit_consorciot_path(@consorciot) %> |
+<%= link_to 'Back', consorciots_path %>

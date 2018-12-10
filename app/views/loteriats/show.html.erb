@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @loteriat.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @loteriat.descripcion %>
+</p>
+
+<p>
+  <strong>Paist:</strong>
+  <%= @loteriat.paist.nombre %>
+</p>
+
+<%= link_to 'Edit', edit_loteriat_path(@loteriat) %> |
+<%= link_to 'Back', loteriats_path %>

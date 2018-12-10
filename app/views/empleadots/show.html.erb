@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @empleadot.nombre %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @empleadot.apellido %>
+</p>
+
+<p>
+  <strong>Cedula:</strong>
+  <%= @empleadot.cedula %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @empleadot.telefono %>
+</p>
+
+<%= link_to 'Edit', edit_empleadot_path(@empleadot) %> |
+<%= link_to 'Back', empleadots_path %>

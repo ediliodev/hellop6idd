@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @provinciat.nombre %>
+</p>
+
+<p>
+  <strong>Paist:</strong>
+  <%= @provinciat.paist.nombre %>
+</p>
+
+<%= link_to 'Edit', edit_provinciat_path(@provinciat) %> |
+<%= link_to 'Back', provinciats_path %>

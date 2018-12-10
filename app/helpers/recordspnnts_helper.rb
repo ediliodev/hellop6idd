@@ -1,0 +1,2 @@
+module RecordspnntsHelper
+end

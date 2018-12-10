@@ -1,0 +1,3 @@
+class Recordpreat < ApplicationRecord
+  belongs_to :ticket
+end

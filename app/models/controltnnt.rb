@@ -1,0 +1,2 @@
+class Controltnnt < ApplicationRecord
+end

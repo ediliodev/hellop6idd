@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Zonats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @zonats.each do |zonat| %>
+      <tr>
+        <td><%= zonat.nombre %></td>
+        <td><%= zonat.descripcion %></td>
+        <td><%= link_to 'Show', zonat %></td>
+        <td><%= link_to 'Edit', edit_zonat_path(zonat) %></td>
+        <td><%= link_to 'Destroy', zonat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Zonat', new_zonat_path %>

@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Pagina de prueba
+		</title>
+	</head>
+
+ <body onload="onload();"> 
+
+	 <script type="text/javascript"> 
+
+	     var textbox; 
+
+	     function onload() {  
+	         textbox = document.getElementById('textbox'); 
+	     } 
+
+
+	     function showAndroidToast(toast) { 
+	         Android.showToast(textbox.value); 
+	     } 
+
+	 </script> 
+
+
+	 <div id="inner"> 
+	 <input type="text" name="enter" class="enter" placeholder="Write something here!" id="textbox"/> 
+
+	 <input type="button" value="Send message to android!" onClick="showAndroidToast()" /> 
+	 </div> 
+
+
+
+</body>
+
+
+</html>
+

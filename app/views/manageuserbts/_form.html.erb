@@ -1,0 +1,53 @@
+<%= form_for(manageuserbt) do |f| %>
+  <% if manageuserbt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(manageuserbt.errors.count, "error") %> prohibited this manageuserbt from being saved:</h2>
+
+      <ul>
+      <% manageuserbt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!-- 
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+-->
+
+
+<% if notice %>
+  <h3> <%= flash[:notice] %> </h3> 
+<% end %>
+
+<% if alert %>
+  <h3> <%= flash[:alert] %> </h3>
+<% end %>
+
+
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.select :email, User.order(:email).collect{ |item|  [item.email + " --> " +  item.nombre + " " + item.apellidos, item.email] } %>     
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "Nuevo password"  %>
+    <%= f.password_field :password%>
+  </div>
+
+  <div class="field">
+   <% # check_box_tag :activo?, 0, {:checked => "checked"} viejo del rails generator %>
+    <%= f.label :activo %>
+    <%= f.check_box :activo %> <!--Sacado del link: https://stackoverflow.com/questions/11796629/rails-check-box-tag-set-checked-with-default-value --> 
+  </div>
+
+<!-- Existe :modificadopor-->
+
+  <div class="actions">
+    <%= f.submit "Aplicar" %>
+  </div>
+<% end %>

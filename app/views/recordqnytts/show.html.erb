@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordqnytt.ticket %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordqnytt.n1 %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordqnytt.monto %>
+</p>
+
+<%= link_to 'Edit', edit_recordqnytt_path(@recordqnytt) %> |
+<%= link_to 'Back', recordqnytts_path %>

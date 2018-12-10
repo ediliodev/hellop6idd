@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sucursal: MyString
+  fecha: 2018-10-26
+  venta: MyString
+
+two:
+  sucursal: MyString
+  fecha: 2018-10-26
+  venta: MyString

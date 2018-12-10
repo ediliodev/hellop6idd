@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Jugadalots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>N2</th>
+      <th>N3</th>
+      <th>Monto</th>
+      <th>Qpt</th>
+      <th>Sorteo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jugadalots.each do |jugadalot| %>
+      <tr>
+        <td><%= jugadalot.ticket %></td>
+        <td><%= jugadalot.n1 %></td>
+        <td><%= jugadalot.n2 %></td>
+        <td><%= jugadalot.n3 %></td>
+        <td><%= jugadalot.monto %></td>
+        <td><%= jugadalot.qpt %></td>
+        <td><%= jugadalot.sorteo %></td>
+        <td><%= link_to 'Show', jugadalot %></td>
+        <td><%= link_to 'Edit', edit_jugadalot_path(jugadalot) %></td>
+        <td><%= link_to 'Destroy', jugadalot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Jugadalot', new_jugadalot_path %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket: MyString
+  n1: 1
+  n2: 1
+  n3: 1
+  monto: 1
+  qpt: MyString
+  sorteo: MyString
+
+two:
+  ticket: MyString
+  n1: 1
+  n2: 1
+  n3: 1
+  monto: 1
+  qpt: MyString
+  sorteo: MyString

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Loteriats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Paist</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @loteriats.each do |loteriat| %>
+      <tr>
+        <td><%= loteriat.nombre %></td>
+        <td><%= loteriat.descripcion %></td>
+        <td><%= loteriat.paist.nombre %></td>
+        <td><%= link_to 'Show', loteriat %></td>
+        <td><%= link_to 'Edit', edit_loteriat_path(loteriat) %></td>
+        <td><%= link_to 'Destroy', loteriat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Loteriat', new_loteriat_path %>

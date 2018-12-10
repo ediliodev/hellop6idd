@@ -1,0 +1,2 @@
+module ControlqreatsHelper
+end

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @manageuserbt.email %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @manageuserbt.password %>
+</p>
+
+<p>
+  <strong>Activo?:</strong>
+  <%= @manageuserbt.activo ?  "Si" : "No" %>
+</p>
+
+<%= link_to 'Edit', edit_manageuserbt_path(@manageuserbt) %> |
+<%= link_to 'Back', manageuserbts_path %>

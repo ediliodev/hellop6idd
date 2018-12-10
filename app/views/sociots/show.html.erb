@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @sociot.nombre %>
+</p>
+
+<p>
+  <strong>Apellido:</strong>
+  <%= @sociot.apellido %>
+</p>
+
+<p>
+  <strong>Telefono:</strong>
+  <%= @sociot.telefono %>
+</p>
+
+<%= link_to 'Edit', edit_sociot_path(@sociot) %> |
+<%= link_to 'Back', sociots_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Impresionts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>Jugadas</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @impresionts.each do |impresiont| %>
+      <tr>
+        <td><%= impresiont.ticket %></td>
+        <td><%= impresiont.jugadas %></td>
+        <td><%= link_to 'Show', impresiont %></td>
+        <td><%= link_to 'Edit', edit_impresiont_path(impresiont) %></td>
+        <td><%= link_to 'Destroy', impresiont, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Impresiont', new_impresiont_path %>

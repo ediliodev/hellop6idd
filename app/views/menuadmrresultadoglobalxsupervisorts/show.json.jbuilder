@@ -1,0 +1,1 @@
+json.partial! "menuadmrresultadoglobalxsupervisorts/menuadmrresultadoglobalxsupervisort", menuadmrresultadoglobalxsupervisort: @menuadmrresultadoglobalxsupervisort

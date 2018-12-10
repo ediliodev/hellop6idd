@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordtnytt.ticket %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordtnytt.n1 %>
+</p>
+
+<p>
+  <strong>N2:</strong>
+  <%= @recordtnytt.n2 %>
+</p>
+
+<p>
+  <strong>N3:</strong>
+  <%= @recordtnytt.n3 %>
+</p>
+
+<p>
+  <strong>Siglas:</strong>
+  <%= @recordtnytt.siglas %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordtnytt.monto %>
+</p>
+
+<p>
+  <strong>Seleccionada:</strong>
+  <%= @recordtnytt.seleccionada %>
+</p>
+
+<%= link_to 'Edit', edit_recordtnytt_path(@recordtnytt) %> |
+<%= link_to 'Back', recordtnytts_path %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recordqreats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordqreats.each do |recordqreat| %>
+      <tr>
+        <td><%= recordqreat.ticket %></td>
+        <td><%= recordqreat.n1 %></td>
+        <td><%= recordqreat.monto %></td>
+        <td><%= link_to 'Show', recordqreat %></td>
+        <td><%= link_to 'Edit', edit_recordqreat_path(recordqreat) %></td>
+        <td><%= link_to 'Destroy', recordqreat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recordqreat', new_recordqreat_path %>

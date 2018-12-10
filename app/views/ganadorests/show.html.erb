@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sorteot:</strong>
+  <%= @ganadorest.sorteot.nombre %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @ganadorest.fecha %>
+</p>
+
+<p>
+  <strong>Primero:</strong>
+  <%= @ganadorest.primero %>
+</p>
+
+<p>
+  <strong>Segundo:</strong>
+  <%= @ganadorest.segundo %>
+</p>
+
+<p>
+  <strong>Tercero:</strong>
+  <%= @ganadorest.tercero %>
+</p>
+
+<%= link_to 'Edit', edit_ganadorest_path(@ganadorest) %> |
+<%= link_to 'Back', ganadorests_path %>

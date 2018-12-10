@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recordpleits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>N2</th>
+      <th>Siglas</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordpleits.each do |recordpleit| %>
+      <tr>
+        <td><%= recordpleit.ticket %></td>
+        <td><%= recordpleit.n1 %></td>
+        <td><%= recordpleit.n2 %></td>
+        <td><%= recordpleit.siglas %></td>
+        <td><%= recordpleit.monto %></td>
+        <td><%= link_to 'Show', recordpleit %></td>
+        <td><%= link_to 'Edit', edit_recordpleit_path(recordpleit) %></td>
+        <td><%= link_to 'Destroy', recordpleit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recordpleit', new_recordpleit_path %>

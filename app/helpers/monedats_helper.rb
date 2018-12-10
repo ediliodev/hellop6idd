@@ -1,0 +1,2 @@
+module MonedatsHelper
+end

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sorteot: one
+  fecha: 2018-10-05 01:40:36
+  primero: 1
+  segundo: 1
+  tercero: 1
+
+two:
+  sorteot: two
+  fecha: 2018-10-05 01:40:36
+  primero: 1
+  segundo: 1
+  tercero: 1

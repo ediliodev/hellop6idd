@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  siglasorteo: MyString
+  modeloventaq: MyString
+  modelocontrolq: MyString
+  modeloventap: MyString
+  modelocontrolp: MyString
+  modeloventat: MyString
+  modelocontrolt: MyString
+  modeloventasp: MyString
+  modelocontrolsp: MyString
+
+two:
+  nombre: MyString
+  siglasorteo: MyString
+  modeloventaq: MyString
+  modelocontrolq: MyString
+  modeloventap: MyString
+  modelocontrolp: MyString
+  modeloventat: MyString
+  modelocontrolt: MyString
+  modeloventasp: MyString
+  modelocontrolsp: MyString

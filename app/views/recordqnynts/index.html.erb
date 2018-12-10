@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recordqnynts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>Monto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordqnynts.each do |recordqnynt| %>
+      <tr>
+        <td><%= recordqnynt.ticket %></td>
+        <td><%= recordqnynt.n1 %></td>
+        <td><%= recordqnynt.monto %></td>
+        <td><%= link_to 'Show', recordqnynt %></td>
+        <td><%= link_to 'Edit', edit_recordqnynt_path(recordqnynt) %></td>
+        <td><%= link_to 'Destroy', recordqnynt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recordqnynt', new_recordqnynt_path %>

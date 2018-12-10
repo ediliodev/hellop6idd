@@ -1,0 +1,32 @@
+<%= form_for(controlqnnt) do |f| %>
+  <% if controlqnnt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(controlqnnt.errors.count, "error") %> prohibited this controlqnnt from being saved:</h2>
+
+      <ul>
+      <% controlqnnt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :numero %>
+    <%= f.number_field :numero %>
+  </div>
+
+  <div class="field">
+    <%= f.label :limite %>
+    <%= f.number_field :limite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendida %>
+    <%= f.number_field :vendida %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

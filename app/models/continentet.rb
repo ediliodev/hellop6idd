@@ -1,0 +1,2 @@
+class Continentet < ApplicationRecord
+end

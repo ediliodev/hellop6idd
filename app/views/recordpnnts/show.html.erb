@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordpnnt.ticket %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordpnnt.n1 %>
+</p>
+
+<p>
+  <strong>N2:</strong>
+  <%= @recordpnnt.n2 %>
+</p>
+
+<p>
+  <strong>Siglas:</strong>
+  <%= @recordpnnt.siglas %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordpnnt.monto %>
+</p>
+
+<%= link_to 'Edit', edit_recordpnnt_path(@recordpnnt) %> |
+<%= link_to 'Back', recordpnnts_path %>

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(ganadorest) do |f| %>
+  <% if ganadorest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ganadorest.errors.count, "error") %> prohibited this ganadorest from being saved:</h2>
+
+      <ul>
+      <% ganadorest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sorteot_id %>
+    <%= f.select :sorteot_id, Sorteot.order(:nombre).collect{ |item|  [ " --> " +  item.nombre , item.id ] } %>     
+  </div>
+
+  <div class="field">
+    <%= f.label :fecha %>
+    <%= f.datetime_select :fecha, :order => [:day, :month, :year] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :primero %>
+    <%= f.number_field :primero, autocomplete: "off"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :segundo %>
+    <%= f.number_field :segundo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tercero %>
+    <%= f.number_field :tercero %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+

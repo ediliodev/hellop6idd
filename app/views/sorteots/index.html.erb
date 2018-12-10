@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sorteots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Sigla</th>
+      <th>Abreviaturamovil</th>
+      <th>Horariosorteot</th>
+      <th>Loteriat</th>
+      <th>Activo</th>
+      <th>Abierto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sorteots.each do |sorteot| %>
+      <tr>
+        <td><%= sorteot.nombre %></td>
+        <td><%= sorteot.descripcion %></td>
+        <td><%= sorteot.sigla %></td>
+        <td><%= sorteot.abreviaturamovil %></td>
+        <td><%= sorteot.horariosorteot.nombre %></td>
+        <td><%= sorteot.loteriat.nombre %></td>
+        <td><%= sorteot.activo %></td>
+        <td><%= sorteot.abierto %></td>
+        <td><%= link_to 'Show', sorteot %></td>
+        <td><%= link_to 'Edit', edit_sorteot_path(sorteot) %></td>
+        <td><%= link_to 'Destroy', sorteot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sorteot', new_sorteot_path %>

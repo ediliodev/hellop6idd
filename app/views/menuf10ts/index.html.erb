@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reporte de Jugadas Validas Realizadas x Sorteo. (F10)</h1>
+
+<h2> Fecha: <%= @dia_formato_rd %> </h2>
+<h2> Sorteo: <%= @sorteot_f10_nombre %> </h2>
+
+
+<h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>QPT</th>
+      <th>N1</th>
+      <th>N2</th>
+      <th>N3</th>
+      <th>Monto</th>
+      <th>Sorteo</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @f10.each do |menuf10t| %>
+      <tr>
+        <td><%= menuf10t.ticket_id %></td>
+        <td><%= menuf10t.qpt %></td>
+        <td><%= (menuf10t.n1 < 10 ) ? "0" + menuf10t.n1.to_s : menuf10t.n1 %></td>
+        <td><%= menuf10t.n2.nil? ?  '*' : ( (menuf10t.n2 < 10) ? "0" + menuf10t.n2.to_s : menuf10t.n2 )  %></td>
+        <td><%= menuf10t.n3.nil? ?  '*' : ( (menuf10t.n3 < 10) ? "0" + menuf10t.n3.to_s : menuf10t.n3 )  %></td>
+        <td>$<%= menuf10t.monto %></td>
+        <td><%= @sorteot_f10_nombre %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Menu', menuts_path %>
+
+
+<h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>

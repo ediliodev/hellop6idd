@@ -1,0 +1,2 @@
+class Menuadmrresultadoglobalxsupervisort < ApplicationRecord
+end

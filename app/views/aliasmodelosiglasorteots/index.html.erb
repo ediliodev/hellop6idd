@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Aliasmodelosiglasorteots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Siglasorteo</th>
+      <th>Modeloventaq</th>
+      <th>Modelocontrolq</th>
+      <th>Modeloventap</th>
+      <th>Modelocontrolp</th>
+      <th>Modeloventat</th>
+      <th>Modelocontrolt</th>
+      <th>Modeloventasp</th>
+      <th>Modelocontrolsp</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @aliasmodelosiglasorteots.each do |aliasmodelosiglasorteot| %>
+      <tr>
+        <td><%= aliasmodelosiglasorteot.nombre %></td>
+        <td><%= aliasmodelosiglasorteot.siglasorteo %></td>
+        <td><%= aliasmodelosiglasorteot.modeloventaq %></td>
+        <td><%= aliasmodelosiglasorteot.modelocontrolq %></td>
+        <td><%= aliasmodelosiglasorteot.modeloventap %></td>
+        <td><%= aliasmodelosiglasorteot.modelocontrolp %></td>
+        <td><%= aliasmodelosiglasorteot.modeloventat %></td>
+        <td><%= aliasmodelosiglasorteot.modelocontrolt %></td>
+        <td><%= aliasmodelosiglasorteot.modeloventasp %></td>
+        <td><%= aliasmodelosiglasorteot.modelocontrolsp %></td>
+        <td><%= link_to 'Show', aliasmodelosiglasorteot %></td>
+        <td><%= link_to 'Edit', edit_aliasmodelosiglasorteot_path(aliasmodelosiglasorteot) %></td>
+        <td><%= link_to 'Destroy', aliasmodelosiglasorteot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Aliasmodelosiglasorteot', new_aliasmodelosiglasorteot_path %>

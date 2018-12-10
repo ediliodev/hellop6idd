@@ -1,0 +1,2 @@
+module RecordpreatsHelper
+end

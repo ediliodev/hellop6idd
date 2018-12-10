@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Controlqltkts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Limite</th>
+      <th>Vendida</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controlqltkts.each do |controlqltkt| %>
+      <tr>
+        <td><%= controlqltkt.numero %></td>
+        <td><%= controlqltkt.limite %></td>
+        <td><%= controlqltkt.vendida %></td>
+        <td><%= link_to 'Show', controlqltkt %></td>
+        <td><%= link_to 'Edit', edit_controlqltkt_path(controlqltkt) %></td>
+        <td><%= link_to 'Destroy', controlqltkt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Controlqltkt', new_controlqltkt_path %>

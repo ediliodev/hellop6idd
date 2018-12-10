@@ -1,0 +1,2 @@
+module RecordqltktsHelper
+end

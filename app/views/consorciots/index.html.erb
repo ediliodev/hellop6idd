@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Consorciots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Abreviatura</th>
+      <th>Telefono</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @consorciots.each do |consorciot| %>
+      <tr>
+        <td><%= consorciot.nombre %></td>
+        <td><%= consorciot.abreviatura %></td>
+        <td><%= consorciot.telefono %></td>
+        <td><%= link_to 'Show', consorciot %></td>
+        <td><%= link_to 'Edit', edit_consorciot_path(consorciot) %></td>
+        <td><%= link_to 'Destroy', consorciot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Consorciot', new_consorciot_path %>

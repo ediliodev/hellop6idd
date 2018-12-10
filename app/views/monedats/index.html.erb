@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Monedats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Simbolo</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Paist</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @monedats.each do |monedat| %>
+      <tr>
+        <td><%= monedat.simbolo %></td>
+        <td><%= monedat.nombre %></td>
+        <td><%= monedat.descripcion %></td>
+        <td><%= monedat.paist.nombre %></td>
+        <td><%= link_to 'Show', monedat %></td>
+        <td><%= link_to 'Edit', edit_monedat_path(monedat) %></td>
+        <td><%= link_to 'Destroy', monedat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Monedat', new_monedat_path %>

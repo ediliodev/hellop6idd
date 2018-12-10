@@ -1,0 +1,2 @@
+class Mensajepiedepaginat < ApplicationRecord
+end

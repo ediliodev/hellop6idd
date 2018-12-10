@@ -1,0 +1,2 @@
+class Menuadmrresultadoglobalt < ApplicationRecord
+end

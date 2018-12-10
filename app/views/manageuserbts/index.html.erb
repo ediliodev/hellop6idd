@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listar Usuarios del UserModel Real not from >xManageuserbts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Activo?</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @realusers.each do |realuser| %>
+      <tr>
+
+        <td><%= realuser.email%></td> <!--manageuserbt.email contiene el id de User en el selct de HTML del recurso http://localhost:3000/manageuserbts/new -->
+      
+
+
+
+        <td><%= "*******************"  %></td>
+        <td><%= realuser.activo? ? "Si" : "No" %></td>
+         <td><%= link_to 'Editar', edit_manageuserbt_path(realuser) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Manageuserbt', new_manageuserbt_path %>

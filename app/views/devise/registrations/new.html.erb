@@ -1,0 +1,129 @@
+<h2>Sign up -  Creacion de sucursales / Usuarios </h2>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+
+  <div class="field">
+    <%= f.label :consorciot %>
+    <%= f.select :consorciot_id, Consorciot.order(:nombre).collect{ |item|  [ " --> " + item.nombre , item.id ] } , autofocus: true   %>     
+
+  </div>
+
+   <div class="field">
+    <%= f.label :sucursalbt %>
+    <%= f.text_field :sucursalbt, autocomplete: "off"  %>
+  </div>
+
+   <div class="field">
+    <%= f.label :siglas %>
+    <%= f.text_field :siglas, autocomplete: "off"  %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+</br>
+</br>
+
+  <div class="field">
+    <%= f.label :tipousuariot %>
+    <%= f.select :tipousuariot_id, Tipousuariot.order(:tipo_usuario).collect{ |item|  [item.tipo_usuario, item.id] } %>     
+  </div>
+
+  <div class="field">
+    <%= f.label :telefono %>
+    <%= f.text_field :telefono, autocomplete: "off" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :direccion %>
+    <%= f.text_field :direccion, autocomplete: "off" %>
+  </div>
+
+</br>
+
+  </div class="field">
+    <%= f.label :ciudadt %>
+    <%= f.select :ciudadt_id, Ciudadt.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+  </div>
+
+
+  <div class="field">
+    <%= f.label :provinciat %>
+    <%= f.select :provinciat_id, Provinciat.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :zonat %>
+    <%= f.select :zonat_id, Zonat.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+  </div>
+
+
+</br>
+
+  <div class="field">
+    <%= f.label :vendedor %>
+    <%= f.text_field :vendedor, autocomplete: "off" %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :contacto %>
+    <%= f.text_field :contacto, autocomplete: "off" %>
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :supervisort %>
+    <%= f.select :supervisort_id, Supervisort.order(:nombre).collect{ |item|  [ item.nombre + " " + item.apellido , item.id ] } %>     
+  </div>
+
+
+  <div class="field">
+    <%= f.label :colectort %>
+    <%= f.select :colectort_id, Colectort.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+  </div>
+
+
+  <div class="field">
+    <%= f.label :sociot %>
+    <%= f.select :sociot_id, Sociot.order(:nombre).collect{ |item|  [ item.nombre + " " + item.apellido , item.id ] } %>     
+  </div>
+
+
+  <div class="field">
+    <%= f.label :activo %>
+    <%= f.select :activo, ["si", "no"].collect{ |item|  [ item, item ] } %>     
+
+  </div>
+
+
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

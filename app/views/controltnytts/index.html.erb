@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Controltnytts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>N1</th>
+      <th>N2</th>
+      <th>N3</th>
+      <th>Siglas</th>
+      <th>Limite</th>
+      <th>Vendida</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controltnytts.each do |controltnytt| %>
+      <tr>
+        <td><%= controltnytt.n1 %></td>
+        <td><%= controltnytt.n2 %></td>
+        <td><%= controltnytt.n3 %></td>
+        <td><%= controltnytt.siglas %></td>
+        <td><%= controltnytt.limite %></td>
+        <td><%= controltnytt.vendida %></td>
+        <td><%= link_to 'Show', controltnytt %></td>
+        <td><%= link_to 'Edit', edit_controltnytt_path(controltnytt) %></td>
+        <td><%= link_to 'Destroy', controltnytt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Controltnytt', new_controltnytt_path %>

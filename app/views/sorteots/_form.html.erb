@@ -1,0 +1,60 @@
+<%= form_for(sorteot) do |f| %>
+  <% if sorteot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sorteot.errors.count, "error") %> prohibited this sorteot from being saved:</h2>
+
+      <ul>
+      <% sorteot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sigla %>
+    <%= f.text_field :sigla %>
+  </div>
+
+
+ <div class="field">
+    <%= f.label :abreviaturamovil %>
+    <%= f.text_field :abreviaturamovil %>
+  </div>
+  
+
+  <div class="field">
+    <%= f.label :horariosorteot_id %>
+    <%= f.select :horariosorteot_id, Horariosorteot.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+
+  </div>
+
+  <div class="field">
+    <%= f.label :loteriat_id %>
+    <%= f.select :loteriat_id, Loteriat.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+  </div>
+
+  <div class="field">
+    <%= f.label :activo %>
+    <%= f.select :activo, ["si", "no"].collect{ |item|  [ item, item ] } %>     
+  </div>
+
+  <div class="field">
+    <%= f.label :abierto %>
+    <%= f.select :abierto, ["si", "no"].collect{ |item|  [ item, item ] } %>     
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

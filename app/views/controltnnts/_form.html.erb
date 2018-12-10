@@ -1,0 +1,47 @@
+<%= form_for(controltnnt) do |f| %>
+  <% if controltnnt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(controltnnt.errors.count, "error") %> prohibited this controltnnt from being saved:</h2>
+
+      <ul>
+      <% controltnnt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :n1 %>
+    <%= f.number_field :n1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :n2 %>
+    <%= f.number_field :n2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :n3 %>
+    <%= f.number_field :n3 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :siglas %>
+    <%= f.text_field :siglas %>
+  </div>
+
+  <div class="field">
+    <%= f.label :limite %>
+    <%= f.number_field :limite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendida %>
+    <%= f.number_field :vendida %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

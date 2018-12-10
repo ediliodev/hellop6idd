@@ -1,0 +1,234 @@
+
+<% if  @tipo_cliente == "desktop" %>
+
+  <h3 id="banca"> Sucursal:  <%= current_user.siglas%> - user: <%= current_user.email%> </h3>
+
+  <%= link_to 'Menu', menuts_path %>
+  <%= link_to 'Calculadora', '../menuts/calculadora' %>
+
+  <%= render 'reloj'  %>
+
+  <% unless session[:loteria_manual] == nil %>
+  <h4>Sorteo actual: <%= session[:loteria_manual] %> - <%= session[:loteria_manual_nombre] %></h4>
+  <% end %>
+
+  <% unless session[:ticket_id] == nil %>
+  <h5>Ticket actual:  <%= session[:ticket_id] %> </h5>
+  <% end %>
+
+
+  <%= render 'form1', jugadalot: @jugadalot %>
+
+
+  <div id="jugadas">
+  	<p id="notice"><%= notice %></p>
+
+  <% unless @total == 0 %>  
+  <h2>Total: $ <%= number_to_currency(@total, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2> <!-- sacado de apidock.com number_to_currency example ok ted. -->
+  <% end %>
+
+  <% unless @efectivo_recibido == nil  %>
+  <h2>DEVUELTA: $ <%= number_to_currency((@efectivo_recibido - session[:total_tk_viejo].to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+  <h2>Recibido: $ <%= number_to_currency(@efectivo_recibido , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+  <h2>Total: $ <%= number_to_currency(session[:total_tk_viejo], :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+
+  <% end %>
+
+
+  <table>
+    <thead>
+      <tr>
+        <!-- <th>Ticket</th> -->
+        <th>QPT</th>
+        <th>N1</th>
+        <th>N2</th>
+        <th>N3</th>
+        <th>-Monto-</th>
+        <th>Sorteo</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @jugadalots.reverse_each do |jugadat| %>
+
+  		<% if jugadat.n1 == nil  %>
+  		<% @n1 = "*" %>
+  		<% elsif jugadat.n1.to_i < 10  %>
+  		<% @n1 = "0" + jugadat.n1.to_s %>
+  		<% else %>
+  		<% @n1 = jugadat.n1.to_s %>
+  		<% end %>
+
+  		<% if jugadat.n2 == nil  %>
+  		<% @n2 = "*" %>
+  		<% elsif jugadat.n2.to_i < 10  %>
+  		<% @n2 = "0" + jugadat.n2.to_s %>
+  		<% else %>
+  		<% @n2 = jugadat.n2.to_s %>
+  		<% end %>
+
+  		<% if jugadat.n3 == nil  %>
+  		<% @n3 = "*" %>
+  		<% elsif jugadat.n3.to_i < 10  %>
+  		<% @n3 = "0" + jugadat.n3.to_s %>
+  		<% else %>
+  		<% @n3 = jugadat.n3.to_s %>
+  		<% end %>
+
+        <tr>
+          
+          <td><%= jugadat.qpt %>-></td>
+          <td><%= @n1 %></td>
+          <td><%= @n2 %></td>
+          <td><%= @n3 %></td>
+          <td>$<%= jugadat.monto %></td>
+          <td><%= jugadat.sorteot.nombre %></td>
+         <!--  <td><%= link_to 'Show', jugadat %></td> -->
+         <!--  <td><%= link_to 'Edit', edit_jugadalot_path(jugadat) %></td> -->
+          <td><%= link_to 'Eliminar', jugadat, method: :delete%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+<%end%>
+
+
+
+
+
+
+<% if  @tipo_cliente == "movil" %>
+
+<!-- Seccion vista movil -->
+<script type="text/javascript">
+  document.getElementById('detalles_usuario').innerHTML = "";
+</script>
+
+<div class="klk">
+ <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >INICIO</button> 
+
+ <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "" + "\'" + ";"%> >MENU</button>
+
+ <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >CALC.</button> 
+ 
+ <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >SALIR</button> 
+
+</div>
+
+ 
+
+  <div class="klk">
+    <br>
+    (( SUCURSAL: <%= current_user.siglas%> ))
+  </div>
+
+
+  <%= render 'relojmovil'  %>
+
+  <% unless session[:loteria_manual] == nil %>
+  <h4>Sorteo actual: <%= session[:loteria_manual] %> - <%= session[:loteria_manual_nombre] %></h4>
+  <% end %>
+
+  <% unless session[:ticket_id] == nil %>
+  <!-- <h5>Ticket actual:  <%= session[:ticket_id] %> </h5> -->
+  <% end %>
+
+
+  <%= render 'form1', jugadalot: @jugadalot %>
+
+
+  <div id="jugadas">
+    <p id="notice"><%= notice %></p>
+
+  <% unless @total == 0 %>  
+  <h2>Total: $ <%= number_to_currency(@total, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2> <!-- sacado de apidock.com number_to_currency example ok ted. -->
+  <% end %>
+
+  <% unless @efectivo_recibido == nil  %>
+  <h2>DEVUELTA: $ <%= number_to_currency((@efectivo_recibido - session[:total_tk_viejo].to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+  <h2>Recibido: $ <%= number_to_currency(@efectivo_recibido , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+  <h2>Total: $ <%= number_to_currency(session[:total_tk_viejo], :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+
+  <% end %>
+
+
+  <table>
+    <thead>
+      <tr>
+        <!-- <th>Ticket</th> -->
+        <th>QPT</th>
+        <th>N1</th>
+        <th>N2</th>
+        <th>N3</th>
+        <th>-$-</th>
+        <th>Sorteo</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @jugadalots.reverse_each do |jugadat| %>
+
+      <% if jugadat.n1 == nil  %>
+      <% @n1 = "*" %>
+      <% elsif jugadat.n1.to_i < 10  %>
+      <% @n1 = "0" + jugadat.n1.to_s %>
+      <% else %>
+      <% @n1 = jugadat.n1.to_s %>
+      <% end %>
+
+      <% if jugadat.n2 == nil  %>
+      <% @n2 = "*" %>
+      <% elsif jugadat.n2.to_i < 10  %>
+      <% @n2 = "0" + jugadat.n2.to_s %>
+      <% else %>
+      <% @n2 = jugadat.n2.to_s %>
+      <% end %>
+
+      <% if jugadat.n3 == nil  %>
+      <% @n3 = "*" %>
+      <% elsif jugadat.n3.to_i < 10  %>
+      <% @n3 = "0" + jugadat.n3.to_s %>
+      <% else %>
+      <% @n3 = jugadat.n3.to_s %>
+      <% end %>
+
+        <tr>
+          
+          <td><%= jugadat.qpt %>-></td>
+          <td><%= @n1 %></td>
+          <td><%= @n2 %></td>
+          <td><%= @n3 %></td>
+          <td>$<%= jugadat.monto %></td>
+          <td><%= jugadat.sorteot.abreviaturamovil %></td>
+         <!--  <td><%= link_to 'Show', jugadat %></td> -->
+         <!--  <td><%= link_to 'Edit', edit_jugadalot_path(jugadat) %></td> -->
+          <td><%= link_to 'X', jugadat, method: :delete%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%end%>
+
+
+
+<!-- Si no es dektop ni movil o no se ha enviado los params cliente_id y tipo_cliente mostraremoes esta vista -->
+
+
+<% if  (@tipo_cliente != "desktop") && (@tipo_cliente != "movil") %>
+
+    <h2> Bienvenido, favor presione el <b> BOTON ROJO (APP) o cerrar y abrir la aplicacion nuevamente (Desktop)</b> para iniciar el sistema correctamente o contacte la Central para asistencia. Gracias.</h2>
+
+<% end %>
+
+
+
+
+
+
+
+

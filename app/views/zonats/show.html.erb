@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @zonat.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @zonat.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_zonat_path(@zonat) %> |
+<%= link_to 'Back', zonats_path %>

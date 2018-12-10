@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Controlpnytts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>N1</th>
+      <th>N2</th>
+      <th>Siglas</th>
+      <th>Limite</th>
+      <th>Vendida</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controlpnytts.each do |controlpnytt| %>
+      <tr>
+        <td><%= controlpnytt.n1 %></td>
+        <td><%= controlpnytt.n2 %></td>
+        <td><%= controlpnytt.siglas %></td>
+        <td><%= controlpnytt.limite %></td>
+        <td><%= controlpnytt.vendida %></td>
+        <td><%= link_to 'Show', controlpnytt %></td>
+        <td><%= link_to 'Edit', edit_controlpnytt_path(controlpnytt) %></td>
+        <td><%= link_to 'Destroy', controlpnytt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Controlpnytt', new_controlpnytt_path %>

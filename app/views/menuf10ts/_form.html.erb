@@ -1,0 +1,29 @@
+<%= form_for(menuf10t) do |f| %>
+  <% if menuf10t.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(menuf10t.errors.count, "error") %> prohibited this menuf10t from being saved:</h2>
+
+      <ul>
+      <% menuf10t.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :fecha %>
+    <%= f.date_select :fecha, :order => [:day, :month, :year]%>
+
+  </div>
+
+  <div class="field">
+    <%= f.label :sorteot_id %>
+    <%= f.select :sorteot_id, Sorteot.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Consultar" %>
+  </div>
+
+<% end %>

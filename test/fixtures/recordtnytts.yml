@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket: one
+  n1: 1
+  n2: 1
+  n3: 1
+  siglas: MyString
+  monto: 1
+  seleccionada: MyString
+
+two:
+  ticket: two
+  n1: 1
+  n2: 1
+  n3: 1
+  siglas: MyString
+  monto: 1
+  seleccionada: MyString

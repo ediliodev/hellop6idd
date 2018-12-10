@@ -1,0 +1,2 @@
+class Zonat < ApplicationRecord
+end

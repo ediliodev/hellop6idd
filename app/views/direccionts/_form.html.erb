@@ -1,0 +1,32 @@
+<%= form_for(direcciont) do |f| %>
+  <% if direcciont.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(direcciont.errors.count, "error") %> prohibited this direcciont from being saved:</h2>
+
+      <ul>
+      <% direcciont.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :direccion %>
+    <%= f.text_field :direccion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sector %>
+    <%= f.text_field :sector %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cuidadt_id %>
+    <%= f.text_field :cuidadt_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recordtgmts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>N1</th>
+      <th>N2</th>
+      <th>N3</th>
+      <th>Siglas</th>
+      <th>Monto</th>
+      <th>Seleccionada</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recordtgmts.each do |recordtgmt| %>
+      <tr>
+        <td><%= recordtgmt.ticket %></td>
+        <td><%= recordtgmt.n1 %></td>
+        <td><%= recordtgmt.n2 %></td>
+        <td><%= recordtgmt.n3 %></td>
+        <td><%= recordtgmt.siglas %></td>
+        <td><%= recordtgmt.monto %></td>
+        <td><%= recordtgmt.seleccionada %></td>
+        <td><%= link_to 'Show', recordtgmt %></td>
+        <td><%= link_to 'Edit', edit_recordtgmt_path(recordtgmt) %></td>
+        <td><%= link_to 'Destroy', recordtgmt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recordtgmt', new_recordtgmt_path %>

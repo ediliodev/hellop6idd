@@ -1,0 +1,57 @@
+<%= form_for(horariosorteot) do |f| %>
+  <% if horariosorteot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(horariosorteot.errors.count, "error") %> prohibited this horariosorteot from being saved:</h2>
+
+      <ul>
+      <% horariosorteot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :lunes %>
+    <%= f.datetime_select :lunes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :martes %>
+    <%= f.datetime_select :martes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :miercoles %>
+    <%= f.datetime_select :miercoles %>
+  </div>
+
+  <div class="field">
+    <%= f.label :jueves %>
+    <%= f.datetime_select :jueves %>
+  </div>
+
+  <div class="field">
+    <%= f.label :viernes %>
+    <%= f.datetime_select :viernes %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sabado %>
+    <%= f.datetime_select :sabado %>
+  </div>
+
+  <div class="field">
+    <%= f.label :domingo %>
+    <%= f.datetime_select :domingo %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

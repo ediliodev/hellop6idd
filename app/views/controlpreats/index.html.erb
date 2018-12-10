@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Controlpreats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>N1</th>
+      <th>N2</th>
+      <th>Siglas</th>
+      <th>Limite</th>
+      <th>Vendida</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controlpreats.each do |controlpreat| %>
+      <tr>
+        <td><%= controlpreat.n1 %></td>
+        <td><%= controlpreat.n2 %></td>
+        <td><%= controlpreat.siglas %></td>
+        <td><%= controlpreat.limite %></td>
+        <td><%= controlpreat.vendida %></td>
+        <td><%= link_to 'Show', controlpreat %></td>
+        <td><%= link_to 'Edit', edit_controlpreat_path(controlpreat) %></td>
+        <td><%= link_to 'Destroy', controlpreat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Controlpreat', new_controlpreat_path %>

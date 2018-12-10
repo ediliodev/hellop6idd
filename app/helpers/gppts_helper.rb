@@ -1,0 +1,2 @@
+module GpptsHelper
+end

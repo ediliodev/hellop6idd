@@ -1,0 +1,35 @@
+<%= form_for(menuposrventaxfechat) do |f| %>
+
+
+  <% if menuposrventaxfechat.errors.any? %>
+
+    <div id="error_explanation">
+      <h2><%= pluralize(menuposrventaxfechat.errors.count, "error") %> prohibited this menuposrventaxfechat from being saved:</h2>
+
+      <ul>
+      <% menuposrventaxfechat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+
+
+  <div class="field">
+    <%= f.label :desde %>
+    <%= f.date_select :desde, :order => [:day, :month, :year]%>
+  </div>
+
+  <div class="field">
+    <%= f.label :hasta %>
+    <%= f.date_select :hasta, :order => [:day, :month, :year]%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Consultar" %>
+  </div>
+
+<% end %>
+
+

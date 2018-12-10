@@ -1,0 +1,67 @@
+<%= form_for(aliasmodelosiglasorteot) do |f| %>
+  <% if aliasmodelosiglasorteot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(aliasmodelosiglasorteot.errors.count, "error") %> prohibited this aliasmodelosiglasorteot from being saved:</h2>
+
+      <ul>
+      <% aliasmodelosiglasorteot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :siglasorteo %>
+    <%= f.text_field :siglasorteo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modeloventaq %>
+    <%= f.text_field :modeloventaq %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modelocontrolq %>
+    <%= f.text_field :modelocontrolq %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modeloventap %>
+    <%= f.text_field :modeloventap %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modelocontrolp %>
+    <%= f.text_field :modelocontrolp %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modeloventat %>
+    <%= f.text_field :modeloventat %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modelocontrolt %>
+    <%= f.text_field :modelocontrolt %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modeloventasp %>
+    <%= f.text_field :modeloventasp %>
+  </div>
+
+  <div class="field">
+    <%= f.label :modelocontrolsp %>
+    <%= f.text_field :modelocontrolsp %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

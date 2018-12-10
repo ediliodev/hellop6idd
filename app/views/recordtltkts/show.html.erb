@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordtltkt.ticket %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordtltkt.n1 %>
+</p>
+
+<p>
+  <strong>N2:</strong>
+  <%= @recordtltkt.n2 %>
+</p>
+
+<p>
+  <strong>N3:</strong>
+  <%= @recordtltkt.n3 %>
+</p>
+
+<p>
+  <strong>Siglas:</strong>
+  <%= @recordtltkt.siglas %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordtltkt.monto %>
+</p>
+
+<p>
+  <strong>Seleccionada:</strong>
+  <%= @recordtltkt.seleccionada %>
+</p>
+
+<%= link_to 'Edit', edit_recordtltkt_path(@recordtltkt) %> |
+<%= link_to 'Back', recordtltkts_path %>

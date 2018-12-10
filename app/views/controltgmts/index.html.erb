@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Controltgmts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>N1</th>
+      <th>N2</th>
+      <th>N3</th>
+      <th>Siglas</th>
+      <th>Limite</th>
+      <th>Vendida</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controltgmts.each do |controltgmt| %>
+      <tr>
+        <td><%= controltgmt.n1 %></td>
+        <td><%= controltgmt.n2 %></td>
+        <td><%= controltgmt.n3 %></td>
+        <td><%= controltgmt.siglas %></td>
+        <td><%= controltgmt.limite %></td>
+        <td><%= controltgmt.vendida %></td>
+        <td><%= link_to 'Show', controltgmt %></td>
+        <td><%= link_to 'Edit', edit_controltgmt_path(controltgmt) %></td>
+        <td><%= link_to 'Destroy', controltgmt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Controltgmt', new_controltgmt_path %>

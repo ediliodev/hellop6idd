@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @continentet.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @continentet.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_continentet_path(@continentet) %> |
+<%= link_to 'Back', continentets_path %>

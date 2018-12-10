@@ -1,0 +1,32 @@
+<%= form_for(consorciot) do |f| %>
+  <% if consorciot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(consorciot.errors.count, "error") %> prohibited this consorciot from being saved:</h2>
+
+      <ul>
+      <% consorciot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :abreviatura %>
+    <%= f.text_field :abreviatura %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telefono %>
+    <%= f.text_field :telefono %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

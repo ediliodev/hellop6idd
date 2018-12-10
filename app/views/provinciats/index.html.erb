@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Provinciats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Paist</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @provinciats.each do |provinciat| %>
+      <tr>
+        <td><%= provinciat.nombre %></td>
+        <td><%= provinciat.paist.nombre %></td>
+        <td><%= link_to 'Show', provinciat %></td>
+        <td><%= link_to 'Edit', edit_provinciat_path(provinciat) %></td>
+        <td><%= link_to 'Destroy', provinciat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Provinciat', new_provinciat_path %>

@@ -1,0 +1,2 @@
+class Controlpnytt < ApplicationRecord
+end

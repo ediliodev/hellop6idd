@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ganadorests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sorteot</th>
+      <th>Fecha</th>
+      <th>Primero</th>
+      <th>Segundo</th>
+      <th>Tercero</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ganadorests.each do |ganadorest| %>
+      <tr>
+        <td><%= ganadorest.sorteot.nombre %></td>
+        <td><%= ganadorest.fecha %></td>
+        <td><%= ganadorest.primero %></td>
+        <td><%= ganadorest.segundo %></td>
+        <td><%= ganadorest.tercero %></td>
+        <td><%= link_to 'Show', ganadorest %></td>
+        <td><%= link_to 'Edit', edit_ganadorest_path(ganadorest) %></td>
+        <td><%= link_to 'Destroy', ganadorest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ganadorest', new_ganadorest_path %>

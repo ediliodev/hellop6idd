@@ -1,0 +1,2 @@
+class Controltnytt < ApplicationRecord
+end

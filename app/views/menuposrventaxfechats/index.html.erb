@@ -1,0 +1,192 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reporte de venta</h1>
+<h2>Desde:  <%= @dia1.to_s %> </h2>
+<h2>Hasta:  <%= @dia2.to_s %> </h2>
+<h2>Sucursal:  <%= current_user.email.split("@")[0] %> </h2>
+<h2>Venta: $ <%= number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+<h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
+
+
+<p id="data" style="display:none;" >
+
+import jpos.JposConst;
+import jpos.JposException;
+import jpos.POSPrinter;
+import jpos.POSPrinterConst; 
+
+import jpos.events.ErrorEvent;
+import jpos.events.ErrorListener;
+import jpos.events.OutputCompleteEvent;
+import jpos.events.OutputCompleteListener;
+import jpos.events.StatusUpdateEvent;
+import jpos.events.StatusUpdateListener;
+import jpos.util.JposPropertiesConst;
+
+public class StarReceiptTest implements OutputCompleteListener, StatusUpdateListener, ErrorListener {
+
+  public void outputCompleteOccurred(OutputCompleteEvent event) {
+    System.out.println("OutputCompleteEvent received: time = "
+        + System.currentTimeMillis() + " output id = "
+        + event.getOutputID());
+  }
+
+  public void statusUpdateOccurred(StatusUpdateEvent event) {
+    System.out.println("StatusUpdateEvent : status id = " + event.getStatus());
+  }
+
+  public void errorOccurred(ErrorEvent event) {
+    System.out.println("ErrorEvent received: time = "
+        + System.currentTimeMillis() + " error code = "
+        + event.getErrorCode() + " error code extended = "
+        + event.getErrorCodeExtended());
+
+    try {
+      Thread.sleep(1000);
+    } catch (Exception e) {
+    }
+
+    event.setErrorResponse(JposConst.JPOS_ER_RETRY);
+  }
+
+  public void runTest(String[] args) {
+    /*
+     * If you want to place the jpos.xml file elsewhere on your local file
+     * system then uncomment the following line and specify the full path to
+     * jpos.xml.
+     * 
+     * If you want to place the jpos.xml file on a webserver for access over
+     * the internet then uncomment the second System.setProperty line below
+     * and specify the full URL to jpos.xml.
+     */
+    System.setProperty( JposPropertiesConst.JPOS_POPULATOR_FILE_PROP_NAME, "jpos.xml");
+    // System.setProperty(JposPropertiesConst.JPOS_POPULATOR_FILE_URL_PROP_NAME, "http://some-where-remote.com/jpos.xml");
+
+    // constants defined for convenience sake (could be inlined)
+    String ESC = ((char) 0x1b) + "";
+    String LF = ((char) 0x0a) + "";
+    String SPACES = "                                                                      ";
+
+    // instantiate a new jpos.POSPrinter object
+    POSPrinter printer = new POSPrinter();
+
+    try {
+      // register for asynchronous OutputCompleteEvent notification
+      printer.addOutputCompleteListener(this);
+
+      // register for asynchronous StatusUpdateEvent notification
+      printer.addStatusUpdateListener(this);
+
+      // register for asynchronous ErrorEvent notification
+      printer.addErrorListener(this);
+
+      // open the printer object according to the entry names defined in jpos.xml
+      printer.open("Star TSP100 Cutter (TSP143)");
+
+      // claim exclusive usage of the printer object
+      printer.claim(1);
+
+      // enable the device for input and output
+      printer.setDeviceEnabled(true);
+
+      printer.setAsyncMode(true);
+
+      // set map mode to metric - all dimensions specified in 1/100mm units
+      printer.setMapMode(POSPrinterConst.PTR_MM_METRIC); // unit = 1/100 mm - i.e. 1 cm = 10 mm = 10 * 100 units
+
+      do {
+        
+        if (printer.getCoverOpen() == true) {
+          System.out.println("printer.getCoverOpen() == true");
+          // cover open so do not attempt printing
+          break;
+        }
+
+        // check if the printer is out of paper
+        if (printer.getRecEmpty() == true) {
+          System.out.println("printer.getRecEmpty() == true");
+
+          // the printer is out of paper so do not attempt printing
+          break;
+        }
+
+       
+        // outputted to the printer in one shot - increased reliability
+        printer.transactionPrint(POSPrinterConst.PTR_S_RECEIPT, POSPrinterConst.PTR_TP_TRANSACTION);
+
+  
+        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|4C" + ESC + "|bC" + "- <%= session[:consorcio] %> -" + LF);
+        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|bC" + "  <%= session[:telefono] %> " + " - ( <%= session[:siglas] %> ) " + LF);
+            
+
+        
+
+        <%= @st %>
+
+
+
+        // the ESC + "|100fP" control code causes the printer to execute
+        // a paper cut after feeding to the cutter position
+        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|100fP");
+
+        // terminate the transaction causing all of the above buffered
+        // data to be sent to the printer
+        printer.transactionPrint(POSPrinterConst.PTR_S_RECEIPT, POSPrinterConst.PTR_TP_NORMAL);
+
+        System.out.println("Async transaction print submited: time = "
+            + System.currentTimeMillis() + " output id = " + printer.getOutputID());
+
+        // exit our printing loop
+      } while (false);
+    } catch (JposException e) {
+      // display any errors that come up
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      // close the printer object
+      if (printer.getState() != JposConst.JPOS_S_CLOSED) {
+        try {
+          while (printer.getState() != JposConst.JPOS_S_IDLE) {
+            Thread.sleep(0);
+          }
+
+          printer.close();
+        } catch (Exception e) {
+        }
+      }
+    }
+
+    System.out.println("StarReceiptTest finished.");
+  }
+
+  public static void main(String[] args) {
+    new StarReceiptTest().runTest(args);
+  }
+}
+    
+</p>
+
+
+  <script type="text/javascript">
+
+  function imprime(){
+    document.getElementById("este").disabled = true;
+    
+    var ststst = document.getElementById("data").innerHTML;
+    app.pcData(ststst, "ticket");
+    
+    document.getElementById("este").style.display = "none"; 
+   
+    }
+
+  </script>
+
+
+
+<div class="seccion_boton_imprimir">
+  <button id="este"  type="button" onClick="imprime();">Imprimir</buttom> 
+</div>
+
+
+

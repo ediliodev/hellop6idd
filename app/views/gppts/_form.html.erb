@@ -1,0 +1,72 @@
+<%= form_for(gppt) do |f| %>
+  <% if gppt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(gppt.errors.count, "error") %> prohibited this gppt from being saved:</h2>
+
+      <ul>
+      <% gppt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre %>
+  </div>
+
+  <div class="field">
+    <%= f.label :q1 %>
+    <%= f.text_field :q1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :q2 %>
+    <%= f.text_field :q2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :q3 %>
+    <%= f.text_field :q3 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :p12 %>
+    <%= f.text_field :p12 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :p13 %>
+    <%= f.text_field :p13 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :p23 %>
+    <%= f.text_field :p23 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sp %>
+    <%= f.text_field :sp %>
+  </div>
+
+  <div class="field">
+    <%= f.label :t123 %>
+    <%= f.text_field :t123 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :t13 %>
+    <%= f.text_field :t13 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :t23 %>
+    <%= f.text_field :t23 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

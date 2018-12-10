@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Continentets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @continentets.each do |continentet| %>
+      <tr>
+        <td><%= continentet.nombre %></td>
+        <td><%= continentet.descripcion %></td>
+        <td><%= link_to 'Show', continentet %></td>
+        <td><%= link_to 'Edit', edit_continentet_path(continentet) %></td>
+        <td><%= link_to 'Destroy', continentet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Continentet', new_continentet_path %>

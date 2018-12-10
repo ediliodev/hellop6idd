@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre: MyString
+  descripcion: MyString
+  sigla: MyString
+  horariosorteot: one
+  loteriat: one
+  activo: MyString
+  abierto: MyString
+
+two:
+  nombre: MyString
+  descripcion: MyString
+  sigla: MyString
+  horariosorteot: two
+  loteriat: two
+  activo: MyString
+  abierto: MyString

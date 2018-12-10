@@ -1,0 +1,3 @@
+class Recordpnytt < ApplicationRecord
+  belongs_to :ticket
+end

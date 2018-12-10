@@ -1,0 +1,2 @@
+class Controlpgmt < ApplicationRecord
+end

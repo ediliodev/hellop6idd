@@ -1,0 +1,2 @@
+module ControlpnntsHelper
+end

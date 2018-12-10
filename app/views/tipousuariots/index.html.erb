@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tipousuariots</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipo usuario</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipousuariots.each do |tipousuariot| %>
+      <tr>
+        <td><%= tipousuariot.tipo_usuario %></td>
+        <td><%= tipousuariot.descripcion %></td>
+        <td><%= link_to 'Show', tipousuariot %></td>
+        <td><%= link_to 'Edit', edit_tipousuariot_path(tipousuariot) %></td>
+        <td><%= link_to 'Destroy', tipousuariot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tipousuariot', new_tipousuariot_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ticket:</strong>
+  <%= @recordpleit.ticket %>
+</p>
+
+<p>
+  <strong>N1:</strong>
+  <%= @recordpleit.n1 %>
+</p>
+
+<p>
+  <strong>N2:</strong>
+  <%= @recordpleit.n2 %>
+</p>
+
+<p>
+  <strong>Siglas:</strong>
+  <%= @recordpleit.siglas %>
+</p>
+
+<p>
+  <strong>Monto:</strong>
+  <%= @recordpleit.monto %>
+</p>
+
+<%= link_to 'Edit', edit_recordpleit_path(@recordpleit) %> |
+<%= link_to 'Back', recordpleits_path %>

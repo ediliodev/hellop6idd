@@ -1,0 +1,2 @@
+class Horariosorteot < ApplicationRecord
+end

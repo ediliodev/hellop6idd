@@ -1,0 +1,27 @@
+<%= form_for(impresiont) do |f| %>
+  <% if impresiont.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(impresiont.errors.count, "error") %> prohibited this impresiont from being saved:</h2>
+
+      <ul>
+      <% impresiont.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ticket_id %>
+    <%= f.text_field :ticket_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :jugadas %>
+    <%= f.text_area :jugadas %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

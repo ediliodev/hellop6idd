@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mensajepiedepaginats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tipodemensaje</th>
+      <th>Mensaje</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mensajepiedepaginats.each do |mensajepiedepaginat| %>
+      <tr>
+        <td><%= mensajepiedepaginat.tipodemensaje %></td>
+        <td><%= mensajepiedepaginat.mensaje %></td>
+        <td><%= link_to 'Show', mensajepiedepaginat %></td>
+        <td><%= link_to 'Edit', edit_mensajepiedepaginat_path(mensajepiedepaginat) %></td>
+        <td><%= link_to 'Destroy', mensajepiedepaginat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mensajepiedepaginat', new_mensajepiedepaginat_path %>

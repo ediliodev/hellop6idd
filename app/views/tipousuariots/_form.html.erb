@@ -1,0 +1,27 @@
+<%= form_for(tipousuariot) do |f| %>
+  <% if tipousuariot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tipousuariot.errors.count, "error") %> prohibited this tipousuariot from being saved:</h2>
+
+      <ul>
+      <% tipousuariot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tipo_usuario %>
+    <%= f.text_field :tipo_usuario %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

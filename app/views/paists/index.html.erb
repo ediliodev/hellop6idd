@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Paists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Continentet</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @paists.each do |paist| %>
+      <tr>
+        <td><%= paist.nombre %></td>
+        <td><%= paist.continentet.nombre %></td>
+        <td><%= link_to 'Show', paist %></td>
+        <td><%= link_to 'Edit', edit_paist_path(paist) %></td>
+        <td><%= link_to 'Destroy', paist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Paist', new_paist_path %>

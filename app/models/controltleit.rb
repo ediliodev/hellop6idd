@@ -1,0 +1,2 @@
+class Controltleit < ApplicationRecord
+end

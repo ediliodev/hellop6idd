@@ -1,0 +1,2 @@
+class Menuposrventadiaactualt < ApplicationRecord
+end

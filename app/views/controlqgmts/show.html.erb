@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Numero:</strong>
+  <%= @controlqgmt.numero %>
+</p>
+
+<p>
+  <strong>Limite:</strong>
+  <%= @controlqgmt.limite %>
+</p>
+
+<p>
+  <strong>Vendida:</strong>
+  <%= @controlqgmt.vendida %>
+</p>
+
+<%= link_to 'Edit', edit_controlqgmt_path(@controlqgmt) %> |
+<%= link_to 'Back', controlqgmts_path %>

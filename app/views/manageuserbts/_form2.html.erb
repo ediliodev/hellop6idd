@@ -1,0 +1,49 @@
+
+
+<h2>Edit </h2>
+
+<%= form_for(user_registration_path) do |f| %>
+
+  <div class="field">
+    <%= f.label :nombre %>
+    <%= f.text_field :nombre, :value => User.find(@real_user_edit).nombre  %>
+  </div>
+
+   <div class="field">
+    <%= f.label :apellidos %>
+    <%= f.text_field :apellidos, :value => User.find(@real_user_edit).apellidos  %>
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, :value => User.find(@real_user_edit).email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :telefono %><br />
+    <%= f.text_field :telefono, autocomplete: "off",  :value => User.find(@real_user_edit).telefono  %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :tipousuariot %>
+    <%= f.select :tipousuariot_id, Tipousuariot.order(:tipo_usuario).collect{ |item|  [item.tipo_usuario, item.id] }, :selected =>  User.find(@real_user_edit).tipousuariot_id %>  
+  </div>
+
+  <div class="field">
+    <%= f.label :sucursalt %>
+    <%= f.select :sucursalt_id, Sucursalt.order(:siglas).collect{ |item|  [ " #{item.consorciot.nombre} -> " + item.siglas , item.id] } %>     
+  </div>
+
+
+
+
+
+
+  <div class="actions">
+    <%= f.submit "Actualizar" %>
+  </div>
+
+<% end %>

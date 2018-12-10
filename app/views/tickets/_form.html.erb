@@ -1,0 +1,47 @@
+<%= form_for(ticket) do |f| %>
+  <% if ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+      <ul>
+      <% ticket.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :serial %>
+    <%= f.text_field :serial %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.select :user_id, User.order(:email).collect{ |item|  [ item.email , item.id ] } %>     
+  </div>
+
+  <div class="field">
+    <%= f.label :fechaimpresion %>
+    <%= f.datetime_select :fechaimpresion %>
+  </div>
+
+  <div class="field">
+    <%= f.label :activo %>
+    <%= f.text_field :activo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ganador %>
+    <%= f.text_field :ganador %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pago %>
+    <%= f.text_field :pago %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
