@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181206013500) do
+ActiveRecord::Schema.define(version: 20181210063549) do
 
   create_table "aliasmodelosiglasorteots", force: :cascade do |t|
     t.string   "nombre"
@@ -701,6 +701,13 @@ ActiveRecord::Schema.define(version: 20181206013500) do
     t.string   "abreviaturamovil"
     t.index ["horariosorteot_id"], name: "index_sorteots_on_horariosorteot_id"
     t.index ["loteriat_id"], name: "index_sorteots_on_loteriat_id"
+  end
+
+  create_table "sucursalts", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "supervisorts", force: :cascade do |t|
