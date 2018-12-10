@@ -17,6 +17,10 @@ gem 'capistrano-rbenv', '~> 2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.6'
+
+# Use postgresql as the database for Active Record
+gem 'pg', '>= 0.18', '< 2.0'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
