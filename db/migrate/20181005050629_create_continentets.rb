@@ -7,12 +7,6 @@ class CreateContinentets < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-   create_table :sucursalts do |t|
-      t.string :nombre
-      t.string :descripcion
-
-      t.timestamps
-    end
 
   end
 end
