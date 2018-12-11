@@ -8,3 +8,8 @@ class CreateProvinciats < ActiveRecord::Migration[5.0]
     end
   end
 end
+
+
+# 20181005052603_create_provinciats.rb
+# 20181005050714_create_paists.rb
+#20181005050715
