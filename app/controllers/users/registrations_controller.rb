@@ -1,11 +1,12 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
-
+before_action :configure_sign_up_params_ted
 before_action :authenticate_user!, :redirect_unless_admin,  only: [:new, :create]
   skip_before_action :require_no_authentication
 
   private
+
   def redirect_unless_admin
 #if current_user == nil
 
@@ -24,18 +25,24 @@ before_action :authenticate_user!, :redirect_unless_admin,  only: [:new, :create
 # end
 
   if current_user
-    if current_user.email == "edilio69@hotmail.com"
-     flash[:notice] = "admin lo que sea aqui..."
+    #if current_user.email == "edilio69@hotmail.com"
+    if current_user.tipousuariot_id  == 2 
+     flash[:notice] = "admin para creacion de usuarios/sucursal ok."
      #sign_up
     # redirect_to root_path and return
 
 
     else # no es necesario pero me aseguro de que ese current_user no cree nuevos usuarios, mejor lo mando para el main menu root_path.
-      flash[:notice] = "Crear un usuario nuevo Requiere autorizacion. Favor contactar Central"
+      flash[:notice] = "ERROR x - Crear un usuario nuevo Requiere autorizacion. Favor contactar Central"
       redirect_to root_path and return
     
     end
   end # end del if current_user
+
+#Esto si no esta logeado ni es admin, debe estar logeado y ser admin para poder crear usuario, redireccionar ok.
+flash[:notice] = "ERROR x - Debes estar logeado y ser admin para esta accion. Este incidente sera reportado. Favo contactar Central."
+redirect_to root_path and return
+
 
  #flash[:notice] = "Crear un usuario nuevo Requiere Login y autorizacion. Favor contactar Central"
   #    redirect_to root_path and return
@@ -107,4 +114,12 @@ before_action :authenticate_user!, :redirect_unless_admin,  only: [:new, :create
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+end
+
+private
+
+def configure_sign_up_params_ted
+
+  # params.permit(:consorciot, :sucursalbt, :siglas, :vendedor, :contacto)
+  #ppediente de completar, de lo contrario la asigacion la haremos com params directo del borwser al modelo...? (like session[:id_cliente] y session[:tipo_cliente]) ...+/*
 end

@@ -1,36 +1,33 @@
+<p id="notice"><%= notice %></p>
 
- <body onload="onload();"> 
+<h1>Ciudadts</h1>
 
-	 <script type="text/javascript"> 
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Provinciat</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-	     var textbox; 
+  <tbody>
+    <% @ciudadts.each do |ciudadt| %>
+      <tr>
+        <td><%= ciudadt.nombre %></td>
+        <td><%= ciudadt.provinciat.nombre %></td>
+        <td><%= link_to 'Show', ciudadt %></td>
+        <td><%= link_to 'Edit', edit_ciudadt_path(ciudadt) %></td>
+        <td><%= link_to 'Destroy', ciudadt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-	     function onload() {  
-	         textbox = document.getElementById('textbox'); 
-	     } 
+<br>
 
+<%= link_to 'New Ciudadt', new_ciudadt_path %>
 
-	     function showAndroidToast(toast) { 
-	         Android.showToast(textbox.value); 
-	     } 
-
-	 </script> 
-
-
-	
-	 <div id="inner"> 
-
-	 	<input type="text" name="enter" class="enter" placeholder="Write something here!" id="textbox"/> 
-	 	<input type="button" value="Send message to android!" onClick="showAndroidToast()" /> 
-	
-	 </div>
-
-	 <p>
-	 
-	 	<h3>Cliente ID: <%= @cliente_id %></h3>
-	 	<h3>Tipo Cliente: <%= @tipo_cliente%></h3>
-
-	 </p>
 
 
 

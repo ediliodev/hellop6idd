@@ -2,6 +2,8 @@ class Menuf10tsController < ApplicationController
 
   
   def index
+
+    #OJO EN FURUTO PENDIENTE CERRAR EL SORTEO (@sorteot_id) DEL CUAL SE TIRA EL REPORTE DE F10. OK TED. PDTE.
    
     @dia = session[:fecha_f10].values.reverse.join("-") # para la consulta de by_day(fehca en ingles yyyy-mm-dd)    
     @sorteot_id = session[:sorteot_f10]

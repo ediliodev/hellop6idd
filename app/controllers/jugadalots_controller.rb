@@ -85,14 +85,17 @@ class JugadalotsController < ApplicationController
    entrada = params.require(:jugadalot).permit(:qpt)
    entrada = entrada[:qpt]
       @stt = "888"
+      
+      
 
 
-    #case ...
-      #Aqui va la logica del controller. 
 
-    #end
-
-
+      #Aqui va la parte del controlador con el case..end ok ted.
+      
+      #case...
+      
+      #end..
+       
   end
 
   # PATCH/PUT /jugadalots/1

@@ -38,9 +38,25 @@
 
 
 
+# A - TODOS LOS MODELOS DE QUINIELA JUNTOS:
+
+#["controlqnnt", "controlqgmt", "controlqleit", "controlqreat", "controlqnytt", "controlqnynt", "controlqltkt" ].each do |modelo|
+	
+#	 modelo = modelo.capitalize.classify.constantize
+
+#	100.times do |number|
+#		entrada = modelo.new
+#		entrada.numero = number
+#		entrada.limite = 1000
+#		entrada.vendida = 0
+#		entrada.save
+# 	end
+# end
+
 
 
 #-------------------------------------------------------------------------------------------
+
 
 #Script para llenado de disponibilidad inicial de los Pale del sorteo Nacional Noche.
 
@@ -99,6 +115,46 @@
 
 
 
+# B - TODOS LOS MODELOS DE PALE JUNTOS:
+
+
+#[ "controlpnnt", "controlpgmt", "controlpleit", "controlpreat", "controlpnytt", "controlpnynt", "controlpltkt" ].each do |modelo|
+#	
+#		 modelo = modelo.capitalize.classify.constantize
+#
+#		 100.times do |n1|
+#
+#			n1_sigla = (n1.to_i < 10 )? ("0" + n1.to_s) : n1.to_s
+#
+#			n1.upto(99) do |n2|
+#				n2_sigla = (n2.to_i < 10 )? ("0" + n2.to_s) : n2.to_s
+#
+#				#procesar insercion de combinacione y disponibiliad de pales:
+#				pale = modelo.new
+#				pale.n1 = n1
+#				pale.n2 = n2
+#				pale.siglas = n1_sigla + "-" + n2_sigla
+#				pale.limite = 100
+#				pale.vendida = 0
+#				pale.save
+#
+#			end
+#
+#		 end
+#end
+
+
+
+
+
+
+
+
+
+
+
+
+
 #-------------------------------------------------------------------------------------------
 
 #Script para llenado de disponibilidad inicial de Tripletas del sorteo Nacional Noche.
@@ -137,41 +193,82 @@
 
 #Aqui llenaremos las tablas de tripletas hasta el 01-99-99 para fines de prueba. ok ted. seed.
 
-["controltgmt", "controltleit", "controltreat", "controltnytt", "controltnynt", "controltltkt" ].each do |modelo|
-	
-		modelo = modelo.capitalize.classify.constantize
+#["controltnnt", "controltgmt", "controltleit", "controltreat", "controltnytt", "controltnynt", "controltltkt" ].each do |modelo|
+#	
+#		modelo = modelo.capitalize.classify.constantize
+#
+#
+#		100.times do |n1|
+#
+#			n1_sigla = (n1.to_i < 10 )? ("0" + n1.to_s) : n1.to_s
+#
+#			n1.upto(99) do |n2|
+#				n2_sigla = (n2.to_i < 10 )? ("0" + n2.to_s) : n2.to_s
+#
+#
+#				n2.upto(99) do |n3|
+#				    n3_sigla = (n3.to_i < 10 )? ("0" + n3.to_s) : n3.to_s
+#					#procesar insercion de combinacione y disponibiliad de tripletas:
+#					tripleta = modelo.new
+#					tripleta.n1 = n1
+#					tripleta.n2 = n2
+#					tripleta.n3 = n3
+#					tripleta.siglas = n1_sigla + "-" + n2_sigla + "-" + n3_sigla
+#					tripleta.limite = 5
+#					tripleta.vendida = 0
+#			    	tripleta.save
+#
+#		  	end
+#
+#			end
+#
+#		end
+#
+#	end # end del each del aaray.
 
 
-		2.times do |n1|
-
-			n1_sigla = (n1.to_i < 10 )? ("0" + n1.to_s) : n1.to_s
-
-			n1.upto(99) do |n2|
-				n2_sigla = (n2.to_i < 10 )? ("0" + n2.to_s) : n2.to_s
-
-
-				n2.upto(99) do |n3|
-				    n3_sigla = (n3.to_i < 10 )? ("0" + n3.to_s) : n3.to_s
-					#procesar insercion de combinacione y disponibiliad de tripletas:
-					tripleta = modelo.new
-					tripleta.n1 = n1
-					tripleta.n2 = n2
-					tripleta.n3 = n3
-					tripleta.siglas = n1_sigla + "-" + n2_sigla + "-" + n3_sigla
-					tripleta.limite = 10
-					tripleta.vendida = 0
-			    	tripleta.save
-
-		  	end
-
-			end
-
-		end
-
-	end # end del each del aaray.
+#-------------------------------------------------------------------------------------------
 
 
 
+
+
+# C - TODOS LOS MODELOS DE TRIPLETA JUNTOS:
+
+
+
+# ["controltgmt", "controltleit", "controltreat", "controltnytt", "controltnynt", "controltltkt" ].each do |modelo|
+# 	
+# 		modelo = modelo.capitalize.classify.constantize
+# 
+# 
+# 		2.times do |n1|
+# 
+# 			n1_sigla = (n1.to_i < 10 )? ("0" + n1.to_s) : n1.to_s
+# 
+# 			n1.upto(99) do |n2|
+# 				n2_sigla = (n2.to_i < 10 )? ("0" + n2.to_s) : n2.to_s
+# 
+# 
+# 				n2.upto(99) do |n3|
+# 				    n3_sigla = (n3.to_i < 10 )? ("0" + n3.to_s) : n3.to_s
+# 					#procesar insercion de combinacione y disponibiliad de tripletas:
+# 					tripleta = modelo.new
+# 					tripleta.n1 = n1
+# 					tripleta.n2 = n2
+# 					tripleta.n3 = n3
+# 					tripleta.siglas = n1_sigla + "-" + n2_sigla + "-" + n3_sigla
+# 					tripleta.limite = 5
+# 					tripleta.vendida = 0
+# 			    	tripleta.save
+# 
+# 		  	end
+# 
+# 			end
+# 
+# 		end
+# 
+# 	end # end del each del aaray.
 
 
 

@@ -41,14 +41,18 @@
 
   <% if user_signed_in? && (session[:tipo_cliente] != "movil") %>
     Logged in as <strong><%= current_user.email %> - </strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <%= link_to "Salir", destroy_user_session_path, method: :delete %>
   <% else if not user_signed_in? %>
-    <%= link_to "Sign up", new_user_registration_path %> |
+   
     <%= link_to "Login", new_user_session_path %>
     <%end%>
   <% end %>
-  
+
+  <% if user_signed_in? && (session[:tipo_cliente] == "desktop") && (current_user.tipousuariot_id == 2) %>
+   | <%= link_to 'Editar', edit_user_registration_path %> |
+   <%= link_to "Nueva Sucursal", new_user_registration_path %> 
+  <%end%>
+
 </div>
 
 
