@@ -38,20 +38,21 @@
 
 
 
-# A - TODOS LOS MODELOS DE QUINIELA JUNTOS:
+ #A - TODOS LOS MODELOS DE QUINIELA JUNTOS:
 
 #["controlqnnt", "controlqgmt", "controlqleit", "controlqreat", "controlqnytt", "controlqnynt", "controlqltkt" ].each do |modelo|
-	
-#	 modelo = modelo.capitalize.classify.constantize
 
-#	100.times do |number|
-#		entrada = modelo.new
-#		entrada.numero = number
-#		entrada.limite = 1000
-#		entrada.vendida = 0
-#		entrada.save
-# 	end
-# end
+["controlqnnt"].each do |modelo|	
+	 modelo = modelo.capitalize.classify.constantize
+
+	100.times do |number|
+		entrada = modelo.new
+		entrada.numero = number
+		entrada.limite = 1000
+		entrada.vendida = 0
+		entrada.save
+	end
+ end
 
 
 
