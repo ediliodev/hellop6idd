@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
 before_action :configure_account_update_params, only: [:update]
 before_action :configure_sign_up_params  # sign_up_params
-before_action :authenticate_user!, :redirect_unless_admin,  only: [:new, :create]
+before_action :authenticate_user!, :redirect_unless_admin #,  only: [:new, :create] (En todos)
 skip_before_action :require_no_authentication
 
   # GET /resource/sign_up
