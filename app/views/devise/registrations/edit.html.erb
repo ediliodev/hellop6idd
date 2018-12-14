@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit <%= resource_name.to_s.humanize %>/Sucursal: <%=current_user.email%></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
@@ -6,13 +6,58 @@
   <% if false #Ted no mostrar editar email ojo %>
       <div class="field">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.email_field :email %>
       </div>
+
+    <div class="field">
+      <%= f.label :tipousuariot %>
+      <%= f.text_field :tipousuariot_id, autocomplete: "off"  %>
+    </div>
+
   <% end %>
+
+
+  <div class="field">
+    <%= f.label :activo %>
+    <%= f.check_box :activo %>
+   
+
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :consorciot %>
+    <%= f.select :consorciot_id, Consorciot.order(:nombre).collect{ |item|  [ " --> " + item.nombre , item.id ] }  %>     
+
+  </div>
+
+   <div class="field">
+    <%= f.label :sucursalbt %>
+    <%= f.text_field :sucursalbt, autocomplete: "off"  %>
+  </div>
+
+   <div class="field">
+    <%= f.label :siglas %>
+    <%= f.text_field :siglas, autocomplete: "off"  %>
+  </div>
+
+
+
+  <div class="field">
+    <%=  "GPPago:" %>
+    <%= f.select :gppt_id, Gppt.order(:nombre).collect{ |item|  [ "-----> " + item.nombre , item.id ] }  %>     
+
+  </div>
+
+</br>
+
+
+
 
  <div class="field">
     <%= f.label :telefono %>
-    <%= f.text_field :telefono, autocomplete: "off" %>
+    <%= f.text_field :telefono, autocomplete: "off"%>
   </div>
 
 
@@ -74,57 +119,7 @@
     <%= f.select :sociot_id, Sociot.order(:nombre).collect{ |item|  [ item.nombre + " " + item.apellido , item.id ] } %>     
   </div>
 
-
-  <div class="field">
-    <%= f.label :activo %>
-    <%= f.select :activo, ["si", "no"].collect{ |item|  [ item, item ] } %>     
-
-  </div>
-
-
-<!-- -->
-
-
-
-
-  <div class="field">
-    <%= f.label :consorciot %>
-    <%= f.select :consorciot_id, Consorciot.order(:nombre).collect{ |item|  [ " --> " + item.nombre , item.id ] } , autofocus: true   %>     
-
-  </div>
-
-   <div class="field">
-    <%= f.label :sucursalbt %>
-    <%= f.text_field :sucursalbt, autocomplete: "off"  %>
-  </div>
-
-   <div class="field">
-    <%= f.label :siglas %>
-    <%= f.text_field :siglas, autocomplete: "off"  %>
-  </div>
-
-
-
-
-
-<div class="field">
-    <%= f.label :tipousuariot %>
-    <%= f.text_field :tipousuariot_id, autocomplete: "off"  %>
-
-    
-  </div>
-
-
-
-
-<!-- -->
-
-
-
-
-
-
-
+</br>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -144,28 +139,15 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+</br>
+
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label "Contrasena_Actual" %> <i>(Se necesita para confirmar los cambios)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
-  <!--CAMPO DE TELEFONO UPDATE PROVISIONAL -->
-  <div class="field">
-    <%= f.label :telefono %><br />
-    <%= f.text_field :telefono, autofocus: true %>
-  </div>
-
+  
   <div class="actions">
     <%= f.submit "(Actualizar)" %>
   </div>
 <% end %>
-
-
-<!-- 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
-
--->

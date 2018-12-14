@@ -12,14 +12,7 @@ append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
 
-#Tasks ted test:
 
-namespace :deploy do
-  desc "reload the database with seed data TEDDDDDDDDDDDDDDDD"
-  task :seed do
-    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
-  end
-end
 
 
 

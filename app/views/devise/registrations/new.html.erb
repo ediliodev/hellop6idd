@@ -1,4 +1,4 @@
-<h2>Sign up -  Creacion de sucursales / Usuarios </h2>
+<h2>BabyLot - Creacion de Sucursales / Usuarios </h2>
 
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -6,24 +6,34 @@
 
 
   <div class="field">
-    <%= f.label :consorciot %>
-    <%= f.select :consorciot_id, Consorciot.order(:nombre).collect{ |item|  [ " --> " + item.nombre , item.id ] } , autofocus: true   %>     
+    <%= f.label "Consorcio" %>
+    <%= f.select :consorciot_id, Consorciot.order(:nombre).collect{ |item|  [ " --> " + item.nombre , item.id ] }  %>     
 
   </div>
 
    <div class="field">
-    <%= f.label :sucursalbt %>
-    <%= f.text_field :sucursalbt, autocomplete: "off"  %>
+    <%= f.label "Sucursal" %>
+    <%= f.text_field :sucursalbt, autocomplete: "off", autofocus: true  %>
   </div>
 
+
    <div class="field">
-    <%= f.label :siglas %>
+    <%= f.label "Siglas" %>
     <%= f.text_field :siglas, autocomplete: "off"  %>
   </div>
 
 
   <div class="field">
-    <%= f.label :email %>
+    <%= "GPPago:" %>
+    <%= f.select :gppt_id, Gppt.order(:nombre).collect{ |item|  [ "-----> " + item.nombre , item.id ] }  %>     
+  </div>
+
+</br>
+
+
+  <div class="field">
+    <%= "Email (ej: abcxxx@central.com )" %>
+  </br>
     <%= f.email_field :email, autocomplete: "off" %>
   </div>
 
@@ -44,7 +54,7 @@
 </br>
 
   <div class="field">
-    <%= f.label :tipousuariot %>
+    <%= f.label "Tipo_de_usuario" %>
     <%= f.select :tipousuariot_id, Tipousuariot.order(:tipo_usuario).collect{ |item|  [item.tipo_usuario, item.id] } %>     
   </div>
 
@@ -62,20 +72,20 @@
 </br>
 
   </div class="field">
-    <%= f.label :ciudadt %>
+    <%= f.label "Ciudad" %>
     <%= f.select :ciudadt_id, Ciudadt.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
   </div>
 
 
   <div class="field">
-    <%= f.label :provinciat %>
+    <%= f.label "Provincia" %>
     <%= f.select :provinciat_id, Provinciat.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
   </div>
 
 
 
   <div class="field">
-    <%= f.label :zonat %>
+    <%= f.label "Zona" %>
     <%= f.select :zonat_id, Zonat.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
   </div>
 
@@ -83,47 +93,45 @@
 </br>
 
   <div class="field">
-    <%= f.label :vendedor %>
+    <%= f.label "Vendedor" %>
     <%= f.text_field :vendedor, autocomplete: "off" %>
   </div>
 
 
   <div class="field">
-    <%= f.label :contacto %>
+    <%= f.label "Contacto" %>
     <%= f.text_field :contacto, autocomplete: "off" %>
   </div>
 
 
 
   <div class="field">
-    <%= f.label :supervisort %>
+    <%= f.label "Supervisor" %>
     <%= f.select :supervisort_id, Supervisort.order(:nombre).collect{ |item|  [ item.nombre + " " + item.apellido , item.id ] } %>     
   </div>
 
 
   <div class="field">
-    <%= f.label :colectort %>
+    <%= f.label "Colector" %>
     <%= f.select :colectort_id, Colectort.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
   </div>
 
 
   <div class="field">
-    <%= f.label :sociot %>
+    <%= f.label "Socio" %>
     <%= f.select :sociot_id, Sociot.order(:nombre).collect{ |item|  [ item.nombre + " " + item.apellido , item.id ] } %>     
   </div>
 
 
   <div class="field">
     <%= f.label :activo %>
-    <%= f.select :activo, ["si", "no"].collect{ |item|  [ item, item ] } %>     
-
+    <%= f.check_box :activo, { checked: true } %>
   </div>
 
 
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Crear ok" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
