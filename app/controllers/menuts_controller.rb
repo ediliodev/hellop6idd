@@ -30,5 +30,11 @@ class MenutsController < ApplicationController
   def calculadora    
   end
 
+  def ayudacomando
+  end
+
+def menut_params
+      params.require(:menut).permit!
+end
  
 end

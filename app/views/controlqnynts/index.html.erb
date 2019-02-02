@@ -1,13 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Controlqnynts</h1>
+<h2>Control y Monitoreo de Quinielas</h2>
+<h2>Loteria NY Noche</h2>
+<h4>(para buscar presione CTRL+F)</h4>
 
 <table>
   <thead>
     <tr>
       <th>Numero</th>
-      <th>Limite</th>
       <th>Vendida</th>
+      <th>Limite</th>     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<% @totalqdisponible = @totalqvendida = 0 %>
+  <tbody>
+    <% @controlqnyntsb.each do |controlqnynt| %>
+      <tr>
+        <td><b><%= controlqnynt.numero < 10 ? "0" + controlqnynt.numero.to_s : controlqnynt.numero  %></td>
+        <td>$<%= controlqnynt.vendida %></td>
+        <td>$<%= controlqnynt.limite %></td>
+        <td><%= link_to 'Show', controlqnynt %></td>
+        <td><%= link_to 'Edit', edit_controlqnynt_path(controlqnynt) %></td>
+        <td><%= link_to 'Destroy', controlqnynt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% @totalqdisponible += controlqnynt.limite  %>
+        <% @totalqvendida += controlqnynt.vendida  %>
+      </tr>
+       
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Total Disponible Global: <%= number_to_currency(@totalqdisponible, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %></h3>
+
+<h3>Total Vendida: <%= number_to_currency(@totalqvendida, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> </h3>
+
+<br>
+
+<h2>Ordenado por numeros:</h2>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Vendida</th>
+      <th>Limite</th>     
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,17 +53,22 @@
   <tbody>
     <% @controlqnynts.each do |controlqnynt| %>
       <tr>
-        <td><%= controlqnynt.numero %></td>
-        <td><%= controlqnynt.limite %></td>
-        <td><%= controlqnynt.vendida %></td>
+        <td><b><%= controlqnynt.numero < 10 ? "0" + controlqnynt.numero.to_s : controlqnynt.numero  %></td>
+        <td>$<%= controlqnynt.vendida %></td>
+        <td>$<%= controlqnynt.limite %></td>
         <td><%= link_to 'Show', controlqnynt %></td>
         <td><%= link_to 'Edit', edit_controlqnynt_path(controlqnynt) %></td>
         <td><%= link_to 'Destroy', controlqnynt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+       
     <% end %>
   </tbody>
 </table>
 
-<br>
+<h3>Total Disponible Global: <%= number_to_currency(@totalqdisponible, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %></h3>
 
-<%= link_to 'New Controlqnynt', new_controlqnynt_path %>
+<h3>Total Vendida: <%= number_to_currency(@totalqvendida, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> </h3>
+
+
+
+

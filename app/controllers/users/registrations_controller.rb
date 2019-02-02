@@ -1,4 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  skip_load_and_authorize_resource # Ted cancancan skip
+
   # before_action :configure_sign_up_params, only: [:create]
 before_action :configure_account_update_params, only: [:update]
 before_action :configure_sign_up_params  # sign_up_params
@@ -52,6 +54,11 @@ skip_before_action :require_no_authentication
    def configure_sign_up_params
      devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :created_at, :updated_at, :telefono, :sucursalt_id, :tipousuariot_id, :activo, :consorciot_id, :sucursalbt, :siglas, :direccion, :ciudadt_id, :provinciat_id, :zonat_id, :vendedor, :contacto, :supervisort_id, :colectort_id, :sociot_id, :gppt_id])
    end
+
+ def configure_sign_in_params
+     devise_parameter_sanitizer.permit(:sign_ip, keys: [:email, :created_at, :updated_at, :telefono, :sucursalt_id, :tipousuariot_id, :activo, :consorciot_id, :sucursalbt, :siglas, :direccion, :ciudadt_id, :provinciat_id, :zonat_id, :vendedor, :contacto, :supervisort_id, :colectort_id, :sociot_id, :gppt_id])
+   end
+
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_account_update_params

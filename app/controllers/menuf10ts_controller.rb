@@ -64,5 +64,11 @@ class Menuf10tsController < ApplicationController
   def destroy
   end
 
+
+private
+
+def menuf10t_params
+      params.require(:menuf10t).permit!
+end
  
 end

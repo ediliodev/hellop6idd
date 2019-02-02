@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181210063549) do
+ActiveRecord::Schema.define(version: 20181231035931) do
+
+  create_table "activacionclientets", force: :cascade do |t|
+    t.string   "email"
+    t.string   "clienteid"
+    t.string   "tipocliente"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "aliasmodelosiglasorteots", force: :cascade do |t|
     t.string   "nombre"
@@ -738,6 +746,8 @@ ActiveRecord::Schema.define(version: 20181210063549) do
     t.datetime "updated_at",     null: false
     t.datetime "fechaimpresion"
     t.string   "pagadopor"
+    t.string   "latitud"
+    t.string   "longitud"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 

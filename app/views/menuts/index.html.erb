@@ -11,21 +11,58 @@
 
 <% if current_user.tipousuariot_id == 2  %>
 
-	<h4> *RESULTADOS: (No Disponible por ahora) </h4>
-	<h4> <%= link_to 'Resultados x Sucursal', new_menuposrventadiaactualt_path %> </h4>
-	<h4> <%= link_to 'Resultados x Grupo', new_menuposrventaxfechat_path %> </h4>
-	<h4> <%= link_to 'Resultados Global', new_menuposrventaxfechat_path %> </h4>
-	<h4> <%= link_to 'Resultados Condicional', new_menuposrventaxfechat_path %> </h4>
-                             
 	<h4> *ADMINISTRAR: </h4>
 	<h4> <%= link_to 'Sorteos -Crear/Abrir/Cerrar', sorteots_path %> </h4>
 	<h4> <%= link_to 'Insertar NUMEROS GANADORES', new_ganadorest_path %> </h4>
 	<h4> <%= link_to 'Generar F10 (Reporte de Jugadas activa) x Sorteo', new_menuf10t_path %> </h4>
 	<h4> <%= link_to 'Reporte de Resultados Global x Fecha', new_menuadmrresultadoglobalt_path %> </h4>
 	<h4> <%= link_to 'Reporte de Resultados Global x Fecha x Supervisor', new_menuadmrresultadoglobalxsupervisort_path %> </h4>
+	
+	</br>
+
+	<h4> *MONITOREO Y CONTROL DE QPT X SORTEO: </h4>
+	
+	<h4> <%= link_to 'Nacional Noche - Control Q', controlqnnts_path %> </h4>
+	<h4> <%= link_to 'Nacional Noche - Control P', controlpnnts_path %> </h4>
+	<h4> <%= link_to 'Nacional Noche - Control T', controltnnts_path %> </h4>
+	
+	<h4> <%= link_to 'Ganamas - Control Q', controlqgmts_path %> </h4>
+	<h4> <%= link_to 'Ganamas - Control P', controlpgmts_path %> </h4>
+	<h4> <%= link_to 'Ganamas - Control T', controltgmts_path %> </h4>
+	
+	<h4> <%= link_to 'Leisa - Control Q', controlqleits_path %> </h4>
+	<h4> <%= link_to 'Leisa - Control P', controlpleits_path %> </h4>
+	<h4> <%= link_to 'Leisa - Control T', controltleits_path %> </h4>
+
+	<h4> <%= link_to 'Real - Control Q', controlqreats_path %> </h4>
+	<h4> <%= link_to 'Real - Control P', controlpreats_path %> </h4>
+	<h4> <%= link_to 'Real - Control T', controltreats_path %> </h4>
+
+	<h4> <%= link_to 'NY Noche - Control Q', controlqnynts_path %> </h4>
+	<h4> <%= link_to 'NY Noche - Control P', controlpnynts_path %> </h4>
+	<h4> <%= link_to 'NY Noche - Control T', controltnynts_path %> </h4>
+
+	<h4> <%= link_to 'NY Tarde - Control Q', controlqnytts_path %> </h4>
+	<h4> <%= link_to 'NY Tarde - Control P', controlpnytts_path %> </h4>
+	<h4> <%= link_to 'NY Tarde - Control T', controltnytts_path %> </h4>
+
+	<h4> <%= link_to 'Loteka - Control Q', controlqltkts_path %> </h4>
+	<h4> <%= link_to 'Loteka - Control P', controlpltkts_path %> </h4>
+	<h4> <%= link_to 'Loteka - Control T', controltltkts_path %> </h4>
+
+
+	</br>
+
+	<h4> *RESULTADOS: (No Disponible por ahora) </h4>
+	<h4> <%= link_to 'Resultados x Sucursal', new_menuposrventadiaactualt_path %> </h4>
+	<h4> <%= link_to 'Resultados x Grupo', new_menuposrventaxfechat_path %> </h4>
+	<h4> <%= link_to 'Resultados Global', new_menuposrventaxfechat_path %> </h4>
+	<h4> <%= link_to 'Resultados Condicional', new_menuposrventaxfechat_path %> </h4>
+                             
 <% end %>
 
 
+</br>
 
 <h4> *AYUDA COMANDOS: </h4>
 <h4> /at -> Anular Ticket.</h4>

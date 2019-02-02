@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :activacionclientets
   resources :menuf10ts
   resources :controlpleits
   resources :recordtltkts
@@ -48,8 +49,9 @@ Rails.application.routes.draw do
   resources :aliasmodelosiglasorteots
   resources :ticketsganadorests
   get '/menuts/calculadora', to: 'menuts#calculadora'
-
+  get '/menuts/ayudacomando', to: 'menuts#ayudacomando'
   resources :menuts
+
   resources :menuposrventaxfechats
   resources :menuposrventadiaactualts
   resources :impresionts
@@ -72,6 +74,8 @@ Rails.application.routes.draw do
   resources :monedats
   resources :paists
   resources :continentets
+  get '/jugadalots/activar', to: 'jugadalots#activar'
+  get '/jugadalots/salirmanualmente', to: 'jugadalots#salirmanualmente'
   resources :jugadalots
   resources :manageuserbts
   #Definicion manual de las rutas requeridas para el modulo Devise:

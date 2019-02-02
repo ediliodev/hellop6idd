@@ -5,6 +5,7 @@ class ControlqltktsController < ApplicationController
   # GET /controlqltkts.json
   def index
     @controlqltkts = Controlqltkt.all
+    @controlqltktsb = Controlqltkt.all.order(:vendida => :desc)
   end
 
   # GET /controlqltkts/1

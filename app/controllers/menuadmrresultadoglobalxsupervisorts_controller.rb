@@ -153,4 +153,10 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
   def destroy
   end
 
+  private
+
+  def menuadmrresultadoglobalxsupervisort_params
+        params.require(:menuadmrresultadoglobalxsupervisort).permit!
+  end
+
 end

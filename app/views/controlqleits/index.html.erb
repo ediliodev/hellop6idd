@@ -1,13 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Controlqleits</h1>
+
+<h2>Control y Monitoreo de Quinielas</h2>
+<h2>Leidsa</h2>
+<h4>(para buscar presione CTRL+F)</h4>
+
 
 <table>
   <thead>
     <tr>
       <th>Numero</th>
-      <th>Limite</th>
       <th>Vendida</th>
+      <th>Limite</th>     
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<% @totalqdisponible = @totalqvendida = 0 %>
+  <tbody>
+    <% @controlqleitsb.each do |controlqleit| %>
+      <tr>
+        <td><b><%= controlqleit.numero < 10 ? "0" + controlqleit.numero.to_s : controlqleit.numero  %></td>
+        <td>$<%= controlqleit.vendida %></td>
+        <td>$<%= controlqleit.limite %></td>
+        <td><%= link_to 'Show', controlqleit %></td>
+        <td><%= link_to 'Edit', edit_controlqleit_path(controlqleit) %></td>
+        <td><%= link_to 'Destroy', controlqleit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% @totalqdisponible += controlqleit.limite  %>
+        <% @totalqvendida += controlqleit.vendida  %>
+      </tr>
+       
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Total Disponible Global: <%= number_to_currency(@totalqdisponible, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %></h3>
+
+<h3>Total Vendida: <%= number_to_currency(@totalqvendida, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> </h3>
+
+<br>
+
+<h2>Ordenado por numeros:</h2>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Vendida</th>
+      <th>Limite</th>     
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,17 +55,22 @@
   <tbody>
     <% @controlqleits.each do |controlqleit| %>
       <tr>
-        <td><%= controlqleit.numero %></td>
-        <td><%= controlqleit.limite %></td>
-        <td><%= controlqleit.vendida %></td>
+        <td><b><%= controlqleit.numero < 10 ? "0" + controlqleit.numero.to_s : controlqleit.numero  %></td>
+        <td>$<%= controlqleit.vendida %></td>
+        <td>$<%= controlqleit.limite %></td>
         <td><%= link_to 'Show', controlqleit %></td>
         <td><%= link_to 'Edit', edit_controlqleit_path(controlqleit) %></td>
         <td><%= link_to 'Destroy', controlqleit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+       
     <% end %>
   </tbody>
 </table>
 
-<br>
+<h3>Total Disponible Global: <%= number_to_currency(@totalqdisponible, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %></h3>
 
-<%= link_to 'New Controlqleit', new_controlqleit_path %>
+<h3>Total Vendida: <%= number_to_currency(@totalqvendida, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> </h3>
+
+
+
+

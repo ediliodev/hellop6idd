@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>syslot809</title>
+    <title>BabyLot</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -50,7 +50,8 @@
 
   <% if user_signed_in? && (session[:tipo_cliente] == "desktop") && (current_user.tipousuariot_id == 2) %>
    | <%= link_to 'Editar', edit_user_registration_path %> |
-   <%= link_to "Nueva Sucursal", new_user_registration_path %> 
+   <%= link_to "Nueva Suc.", new_user_registration_path %> |
+   <%= link_to "Inicio", root_path %> 
   <%end%>
 
 </div>

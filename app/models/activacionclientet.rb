@@ -1,0 +1,2 @@
+class Activacionclientet < ApplicationRecord
+end

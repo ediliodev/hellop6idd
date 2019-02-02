@@ -1,6 +1,11 @@
 class MenuposrventadiaactualtsController < ApplicationController
 
 
+#def params
+#    params.require(controller_name.classify.downcase.to_sym).permit(self.class::PERMITTED_PARAMS)
+#  end
+
+
   def index
     @dia = session[:fecha_venta_dia].values.reverse.join("-") # para la consulta de by_day(fehca en ingles yyyy-mm-dd)    
     @valor = Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids ).sum(:monto)
@@ -112,5 +117,10 @@ class MenuposrventadiaactualtsController < ApplicationController
   def destroy
   end
 
- 
+private
+
+def menuposrventadiaactualt_params
+      params.require(:menuposrventadiaactualt).permit(:fecha)
+end
+
 end

@@ -3,8 +3,12 @@ class ControltnntsController < ApplicationController
 
   # GET /controltnnts
   # GET /controltnnts.json
+
   def index
-    @controltnnts = Controltnnt.all
+
+   # @controltnnts = Controltnnt.all
+   @controltnnts = Controltnnt.all.order(:vendida => :desc).limit(100)
+
   end
 
   # GET /controltnnts/1

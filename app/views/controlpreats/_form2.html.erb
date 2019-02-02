@@ -1,0 +1,42 @@
+<%= form_for(controlpreat) do |f| %>
+  <% if controlpreat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(controlpreat.errors.count, "error") %> prohibited this controlpreat from being saved:</h2>
+
+      <ul>
+      <% controlpreat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :n1 %>
+    <%= f.number_field :n1, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :n2 %>
+    <%= f.number_field :n2, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :siglas %>
+    <%= f.text_field :siglas, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :limite %>
+    <%= f.number_field :limite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendida %>
+    <%= f.number_field :vendida, :readonly => true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

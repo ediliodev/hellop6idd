@@ -147,4 +147,11 @@ class MenuadmrresultadoglobaltsController < ApplicationController
   def destroy
   end
 
+  
+private
+
+def menuadmrresultadoglobalt_params
+      params.require(:menuadmrresultadoglobalt).permit!
+end
+
 end

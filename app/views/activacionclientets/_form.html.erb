@@ -1,0 +1,32 @@
+<%= form_for(activacionclientet) do |f| %>
+  <% if activacionclientet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(activacionclientet.errors.count, "error") %> prohibited this activacionclientet from being saved:</h2>
+
+      <ul>
+      <% activacionclientet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :clienteid %>
+    <%= f.text_field :clienteid %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipocliente %>
+    <%= f.text_field :tipocliente %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

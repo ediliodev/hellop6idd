@@ -1,23 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Controlqnnts</h1>
+<h2>Control y Monitoreo de Quinielas</h2>
+<h2>Nacional Noche</h2>
+<h4>(para buscar presione CTRL+F)</h4>
+
+
 
 <table>
   <thead>
     <tr>
       <th>Numero</th>
-      <th>Limite</th>
       <th>Vendida</th>
+      <th>Limite</th>      
       <th colspan="3"></th>
     </tr>
   </thead>
 <% @totalqdisponible = @totalqvendida = 0 %>
   <tbody>
-    <% @controlqnnts.each do |controlqnnt| %>
+    <% @controlqnntsb.each do |controlqnnt| %>
       <tr>
-        <td><%= controlqnnt.numero %></td>
-        <td><%= controlqnnt.limite %></td>
-        <td><%= controlqnnt.vendida %></td>
+        <td><b><%= controlqnnt.numero < 10 ? "0" + controlqnnt.numero.to_s : controlqnnt.numero  %></td>
+        <td>$<%= controlqnnt.vendida %></td>
+        <td>$<%= controlqnnt.limite %></td>
         <td><%= link_to 'Show', controlqnnt %></td>
         <td><%= link_to 'Edit', edit_controlqnnt_path(controlqnnt) %></td>
         <td><%= link_to 'Destroy', controlqnnt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -34,5 +38,38 @@
 
 <br>
 
-<%= link_to 'New Controlqnnt', new_controlqnnt_path %>
+<h2>Ordenado por numeros:</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numero</th>
+      <th>Vendida</th>
+      <th>Limite</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+<% @totalqdisponible = @totalqvendida = 0 %>
+  <tbody>
+    <% @controlqnnts.each do |controlqnnt| %>
+      <tr>
+        <td><b><%= controlqnnt.numero < 10 ? "0" + controlqnnt.numero.to_s : controlqnnt.numero  %></td>
+         <td>$<%= controlqnnt.vendida %></td>
+        <td>$<%= controlqnnt.limite %></td>
+        <td><%= link_to 'Show', controlqnnt %></td>
+        <td><%= link_to 'Edit', edit_controlqnnt_path(controlqnnt) %></td>
+        <td><%= link_to 'Destroy', controlqnnt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% @totalqdisponible += controlqnnt.limite  %>
+        <% @totalqvendida += controlqnnt.vendida  %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h3>Total Disponible Global: <%= number_to_currency(@totalqdisponible, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %></h3>
+
+<h3>Total Vendida: <%= number_to_currency(@totalqvendida, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  %> </h3>
+
+<br>
+
  

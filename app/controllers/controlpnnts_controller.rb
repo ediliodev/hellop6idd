@@ -4,7 +4,10 @@ class ControlpnntsController < ApplicationController
   # GET /controlpnnts
   # GET /controlpnnts.json
   def index
+
     @controlpnnts = Controlpnnt.all
+    @controlpnntsb = Controlpnnt.all.order(:vendida => :desc)
+
   end
 
   # GET /controlpnnts/1

@@ -14,6 +14,7 @@
       <th>Montoapostado</th>
       <th>Montoacobrar</th>
       <th>Grupoprocesado</th>
+      <th>Realizado</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,9 +31,11 @@
         <td>$<%=ticketsganadorest.montoapostado %></td>
         <td>$<%=ticketsganadorest.montoacobrar %></td>
         <td><%= ticketsganadorest.grupoprocesado %></td>
-        <td><%= link_to 'Show', ticketsganadorest %></td>
-        <td><%= link_to 'Edit', edit_ticketsganadorest_path(ticketsganadorest) %></td>
-        <td><%= link_to 'Destroy', ticketsganadorest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <%if ( ticketsganadorest.ticket.latitud && ticketsganadorest.ticket.longitud ) %>
+        <td><%= link_to 'Location', "https://maps.google.com/?q=#{ticketsganadorest.ticket.latitud},#{ticketsganadorest.ticket.longitud}"%> </td>
+        <%end%>
+
       </tr>
     <% end %>
   </tbody>

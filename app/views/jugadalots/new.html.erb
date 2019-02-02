@@ -112,9 +112,14 @@
 
  <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "" + "\'" + ";"%> >MENU</button>
 
- <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >CALC.</button> 
  
- <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >SALIR</button> 
+ <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "/ayudacomando" + "\'" + ";"%> >AYUDA</button> 
+
+<button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/salirmanualmente" + "\'" + ";"%> >EXIT</button> 
+
+
+
+
 
 </div>
 
@@ -131,6 +136,14 @@
   <% unless session[:loteria_manual] == nil %>
   <h4>Sorteo actual: <%= session[:loteria_manual] %> - <%= session[:loteria_manual_nombre] %></h4>
   <% end %>
+
+  <%if @mostrar_coordenadas %>
+    
+    <h3>Ubicacion  es..:  <%= @ubicacion  %> </h3>
+
+    <% @mostrar_coordenadas = false %> <!--No mostrar hasta una nueva coordenada -->
+  
+  <%end%>
 
   <% unless session[:ticket_id] == nil %>
   <!-- <h5>Ticket actual:  <%= session[:ticket_id] %> </h5> -->

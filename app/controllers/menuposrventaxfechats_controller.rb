@@ -122,5 +122,11 @@ class MenuposrventaxfechatsController < ApplicationController
   def destroy
   end
 
+private
+
+def menuposrventaxfechat_params
+      params.require(:menuposrventaxfechat).permit!
+end
+
 end
 
