@@ -4,14 +4,14 @@
 
 <h1>Menu:</h1>
 
-<h4> *VENTAS: </h4>
+<h4 style="color:darkblue;"> *VENTAS: </h4>
 <h4> <%= link_to 'Venta x dia', new_menuposrventadiaactualt_path %> </h4>
 <h4> <%= link_to 'Venta x rango de fecha', new_menuposrventaxfechat_path %> </h4>
 
 
 <% if current_user.tipousuariot_id == 2  %>
 
-	<h4> *ADMINISTRAR: </h4>
+	<h4 style="color:darkblue;"> *ADMINISTRAR: </h4>
 	<h4> <%= link_to 'Sorteos -Crear/Abrir/Cerrar', sorteots_path %> </h4>
 	<h4> <%= link_to 'Insertar NUMEROS GANADORES', new_ganadorest_path %> </h4>
 	<h4> <%= link_to 'Generar F10 (Reporte de Jugadas activa) x Sorteo', new_menuf10t_path %> </h4>
@@ -20,7 +20,7 @@
 	
 	</br>
 
-	<h4> *MONITOREO Y CONTROL DE QPT X SORTEO: </h4>
+	<h4 style="color:darkblue;"> *MONITOREO Y CONTROL DE QPT X SORTEO: </h4>
 	
 	<h4> <%= link_to 'Nacional Noche - Control Q', controlqnnts_path %> </h4>
 	<h4> <%= link_to 'Nacional Noche - Control P', controlpnnts_path %> </h4>
@@ -53,7 +53,7 @@
 
 	</br>
 
-	<h4> *RESULTADOS: (No Disponible por ahora) </h4>
+	<h4 style="color:darkblue;"> *RESULTADOS: (No Disponible por ahora) </h4>
 	<h4> <%= link_to 'Resultados x Sucursal', new_menuposrventadiaactualt_path %> </h4>
 	<h4> <%= link_to 'Resultados x Grupo', new_menuposrventaxfechat_path %> </h4>
 	<h4> <%= link_to 'Resultados Global', new_menuposrventaxfechat_path %> </h4>
@@ -64,13 +64,26 @@
 
 </br>
 
-<h4> *AYUDA COMANDOS: </h4>
+
+<h2> *AYUDA COMANDOS: </h2>
+
+<h3 style="color:darkblue;">Setear Sorteo:</h3>
+
+<h4> .01 -> Loteria Nacional</h4>
+<h4> .02 -> Ganamas</h4>
+<h4> .03 -> Leidsa Q.</h4>
+<h4> .04 -> Real Q.</h4>
+<h4> .05 -> NY Noche</h4>
+<h4> .06 -> NY Tarde</h4>
+<h4> .07 -> Loteka</h4>
+
+
+<h3 style="color:darkblue;">Otros:</h3>
 <h4> /at -> Anular Ticket.</h4>
 <h4> /ct -> Consultar Ticket.</h4>
 <h4> /pt -> Pagar Ticket.</h4>
 <h4> /g ->  Consultar ganadores de Hoy.</h4>
 <h4> /g+01-01-2018 ->  Consultar ganadores x fecha.</h4>
 <h4> /h ->  Consultar fecha y hora del sistema.</h4>
-
 
 

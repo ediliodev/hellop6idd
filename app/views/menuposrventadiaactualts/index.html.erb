@@ -3,6 +3,13 @@
 <h1>Reporte de venta</h1>
 <h2>Dia:  <%= @dia.to_s %> </h2>
 <h2>Sucursal:  <%= current_user.email.split("@")[0] %> </h2>
+
+<h2 style="color:blue;">Venta Total: $ <%= number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+<h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
+
+
+<h3>++++++++++++++++++</h3>
+
 <h3>Detallada por Sorteos:</h3>
 <h3>NN:  $ <%= number_to_currency(@venta_sorteo_nacional_noche, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h3>
 <h3>GM:  $ <%= number_to_currency(@venta_sorteo_ganamas, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h3>
@@ -13,7 +20,7 @@
 <h3>LKA: $ <%= number_to_currency(@venta_sorteo_loteka, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h3>
 
 
-<h2>Venta Total: $ <%= number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+<h2 style="color:blue;">Venta Total: $ <%= number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
 <h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
 
 
@@ -193,9 +200,13 @@ public class StarReceiptTest implements OutputCompleteListener, StatusUpdateList
 
 
 
-<div class="seccion_boton_imprimir">
-  <button id="este"  type="button" onClick="imprime();">Imprimir</buttom> 
-</div>
 
+<% if  @tipo_cliente == "desktop" %>
+
+  <div class="seccion_boton_imprimir">
+    <button id="este"  type="button" onClick="imprime();">Imprimir</buttom> 
+  </div>
+
+<% end %>
 
 

@@ -1,7 +1,7 @@
 
 <% if  @tipo_cliente == "desktop" %>
 
-  <h3 id="banca"> Sucursal:  <%= current_user.siglas%> - user: <%= current_user.email%> </h3>
+  <h3 id="banca" style="color:darkblue;"> Sucursal:  <%= current_user.siglas%> - user: <%= current_user.email%> </h3>
 
   <%= link_to 'Menu', menuts_path %>
   <%= link_to 'Calculadora', '../menuts/calculadora' %>
@@ -110,10 +110,11 @@
 <div class="klk">
  <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >INICIO</button> 
 
- <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "" + "\'" + ";"%> >MENU</button>
+ <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "" + "\'" + ";"%> >MENU / AYUDA</button>
 
- 
+ <!-- No funciona en produccion esto, puede ser por cancan ability model la accion del resource menuts#ayudacomando hay que permitirla y probar. Ver error en rails /log/production.logs. ok ted. comentar.
  <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "/ayudacomando" + "\'" + ";"%> >AYUDA</button> 
+-->
 
 <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/salirmanualmente" + "\'" + ";"%> >EXIT</button> 
 
@@ -126,8 +127,8 @@
  
 
   <div class="klk">
-    <br>
-    (( SUCURSAL: <%= current_user.siglas%> ))
+    
+    <h4 style="color:darkblue;"> (( SUCURSAL: <%= current_user.siglas%> )) </h4>
   </div>
 
 
