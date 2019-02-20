@@ -1,0 +1,218 @@
+00:00 git:wrapper
+      01 mkdir -p /tmp
+    ✔ 01 deploy@192.168.0.50 0.059s
+      Uploading /tmp/git-ssh-megamillion-production-ted.sh 100.0%
+      02 chmod 700 /tmp/git-ssh-megamillion-production-ted.sh
+    ✔ 02 deploy@192.168.0.50 0.061s
+00:00 git:check
+      01 git ls-remote git@github.com:ediliodev/hellop6idd.git HEAD
+      01 ebddbcfe640c17a244389646482e1362286f75b3	HEAD
+    ✔ 01 deploy@192.168.0.50 2.615s
+00:02 deploy:check:directories
+      01 mkdir -p /home/deploy/megamillion/shared /home/deploy/megamillion/releases
+    ✔ 01 deploy@192.168.0.50 0.019s
+00:02 deploy:check:linked_dirs
+      01 mkdir -p /home/deploy/megamillion/shared/log /home/deploy/megamillion/shared/tmp/pids /home/deploy/megamillion/shared/tmp/cache /home/deploy/megamillion/shared/tmp/sockets /home/deploy/megamillion/shared/vendor/bundle /home/deploy/megamillion/shared/public/system /home/deploy/megamillion/shared/public/uploads /home/deploy/megamillion/shared/public/assets
+    ✔ 01 deploy@192.168.0.50 0.058s
+00:02 deploy:check:make_linked_dirs
+      01 mkdir -p /home/deploy/megamillion/shared/config
+    ✔ 01 deploy@192.168.0.50 0.058s
+00:03 git:clone
+      The repository mirror is at /home/deploy/megamillion/repo
+00:03 git:update
+      01 git remote set-url origin git@github.com:ediliodev/hellop6idd.git
+    ✔ 01 deploy@192.168.0.50 0.064s
+      02 git remote update --prune
+      02 Fetching origin
+    ✔ 02 deploy@192.168.0.50 1.439s
+00:04 git:create_release
+      01 mkdir -p /home/deploy/megamillion/releases/20190220015637
+    ✔ 01 deploy@192.168.0.50 0.060s
+      02 git archive master | /usr/bin/env tar -x -f - -C /home/deploy/megamillion/releases/20190220015637
+    ✔ 02 deploy@192.168.0.50 0.594s
+00:05 deploy:set_current_revision
+      01 echo "ebddbcfe640c17a244389646482e1362286f75b3" > REVISION
+    ✔ 01 deploy@192.168.0.50 0.061s
+00:05 deploy:symlink:linked_files
+      01 mkdir -p /home/deploy/megamillion/releases/20190220015637/config
+    ✔ 01 deploy@192.168.0.50 0.059s
+      02 rm /home/deploy/megamillion/releases/20190220015637/config/database.yml
+    ✔ 02 deploy@192.168.0.50 0.060s
+      03 ln -s /home/deploy/megamillion/shared/config/database.yml /home/deploy/megamillion/releases/20190220015637/config/database.yml
+    ✔ 03 deploy@192.168.0.50 0.058s
+      04 rm /home/deploy/megamillion/releases/20190220015637/config/secrets.yml
+    ✔ 04 deploy@192.168.0.50 0.060s
+      05 ln -s /home/deploy/megamillion/shared/config/secrets.yml /home/deploy/megamillion/releases/20190220015637/config/secrets.yml
+    ✔ 05 deploy@192.168.0.50 0.060s
+00:06 deploy:symlink:linked_dirs
+      01 mkdir -p /home/deploy/megamillion/releases/20190220015637 /home/deploy/megamillion/releases/20190220015637/tmp /home/deploy/megamillion/releases/20190220015637/vendor /home/deploy/megamillion/releases/20190220015637/public
+    ✔ 01 deploy@192.168.0.50 0.059s
+      02 rm -rf /home/deploy/megamillion/releases/20190220015637/log
+    ✔ 02 deploy@192.168.0.50 0.060s
+      03 ln -s /home/deploy/megamillion/shared/log /home/deploy/megamillion/releases/20190220015637/log
+    ✔ 03 deploy@192.168.0.50 0.058s
+      04 ln -s /home/deploy/megamillion/shared/tmp/pids /home/deploy/megamillion/releases/20190220015637/tmp/pids
+    ✔ 04 deploy@192.168.0.50 0.059s
+      05 ln -s /home/deploy/megamillion/shared/tmp/cache /home/deploy/megamillion/releases/20190220015637/tmp/cache
+    ✔ 05 deploy@192.168.0.50 0.061s
+      06 ln -s /home/deploy/megamillion/shared/tmp/sockets /home/deploy/megamillion/releases/20190220015637/tmp/sockets
+    ✔ 06 deploy@192.168.0.50 0.058s
+      07 ln -s /home/deploy/megamillion/shared/vendor/bundle /home/deploy/megamillion/releases/20190220015637/vendor/bundle
+    ✔ 07 deploy@192.168.0.50 0.057s
+      08 ln -s /home/deploy/megamillion/shared/public/system /home/deploy/megamillion/releases/20190220015637/public/system
+    ✔ 08 deploy@192.168.0.50 0.060s
+      09 ln -s /home/deploy/megamillion/shared/public/uploads /home/deploy/megamillion/releases/20190220015637/public/uploads
+    ✔ 09 deploy@192.168.0.50 0.063s
+      10 ln -s /home/deploy/megamillion/shared/public/assets /home/deploy/megamillion/releases/20190220015637/public/assets
+    ✔ 10 deploy@192.168.0.50 0.064s
+00:08 bundler:install
+      01 $HOME/.rbenv/bin/rbenv exec bundle install --path /home/deploy/megamillion/shared/bundle --without development test --deployment --quiet
+    ✔ 01 deploy@192.168.0.50 0.570s
+00:09 deploy:assets:precompile
+      01 $HOME/.rbenv/bin/rbenv exec bundle exec rake assets:precompile
+    ✔ 01 deploy@192.168.0.50 3.116s
+00:12 deploy:assets:backup_manifest
+      01 mkdir -p /home/deploy/megamillion/releases/20190220015637/assets_manifest_backup
+    ✔ 01 deploy@192.168.0.50 0.060s
+      02 cp /home/deploy/megamillion/releases/20190220015637/public/assets/.sprockets-manifest-7a0e585c99bfe359d1e98470073fa232.json /home/deploy/megamillion/releases/20190220015637/assets_manifest_backup
+    ✔ 02 deploy@192.168.0.50 0.062s
+00:12 deploy:migrate
+      [deploy:migrate] Run `rake db:migrate`
+00:12 deploy:migrating
+      01 $HOME/.rbenv/bin/rbenv exec bundle exec rake db:migrate
+      01 rake aborted!
+      01 StandardError: An error has occurred, this and all later migrations canceled:
+      01 
+      01 PG::DatatypeMismatch: ERROR:  column "montoapostado" cannot be cast automatically to type integer
+      01 HINT:  You might need to specify "USING montoapostado::integer".
+      01 : ALTER TABLE "ticketsganadorests" ALTER COLUMN "montoapostado" TYPE integer
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:98:in `async_exec'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:98:in `block in execute'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract_adapter.rb:590:in `block in log'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activesupport-5.0.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract_adapter.rb:583:in `log'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:97:in `execute'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/schema_statements.rb:504:in `change_column'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:846:in `block in method_missing'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:815:in `block in say_with_time'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:815:in `say_with_time'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:835:in `method_missing'
+      01 /home/deploy/megamillion/releases/20190220015637/db/migrate/20190220013243_change_column_to_integer_from_ticketsganadorest.rb:3:in `change'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:789:in `exec_migration'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:773:in `block (2 levels) in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:772:in `block in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:771:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:951:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1232:in `block in execute_migration_in_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1300:in `block in ddl_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/database_statements.rb:232:in `block in transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/transaction.rb:189:in `within_new_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/database_statements.rb:232:in `transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/transactions.rb:211:in `transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1300:in `ddl_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1231:in `execute_migration_in_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1203:in `block in migrate_without_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1202:in `each'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1202:in `migrate_without_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1150:in `block in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1319:in `with_advisory_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1150:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1006:in `up'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:984:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/tasks/database_tasks.rb:163:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/rake-12.3.0/exe/rake:27:in `<top (required)>'
+      01 /home/deploy/.rbenv/versions/2.5.1/bin/bundle:23:in `load'
+      01 /home/deploy/.rbenv/versions/2.5.1/bin/bundle:23:in `<main>'
+      01 
+      01 Caused by:
+      01 ActiveRecord::StatementInvalid: PG::DatatypeMismatch: ERROR:  column "montoapostado" cannot be cast automatically to type integer
+      01 HINT:  You might need to specify "USING montoapostado::integer".
+      01 : ALTER TABLE "ticketsganadorests" ALTER COLUMN "montoapostado" TYPE integer
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:98:in `async_exec'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:98:in `block in execute'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract_adapter.rb:590:in `block in log'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activesupport-5.0.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract_adapter.rb:583:in `log'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:97:in `execute'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/schema_statements.rb:504:in `change_column'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:846:in `block in method_missing'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:815:in `block in say_with_time'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:815:in `say_with_time'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:835:in `method_missing'
+      01 /home/deploy/megamillion/releases/20190220015637/db/migrate/20190220013243_change_column_to_integer_from_ticketsganadorest.rb:3:in `change'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:789:in `exec_migration'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:773:in `block (2 levels) in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:772:in `block in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:771:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:951:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1232:in `block in execute_migration_in_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1300:in `block in ddl_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/database_statements.rb:232:in `block in transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/transaction.rb:189:in `within_new_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/database_statements.rb:232:in `transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/transactions.rb:211:in `transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1300:in `ddl_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1231:in `execute_migration_in_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1203:in `block in migrate_without_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1202:in `each'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1202:in `migrate_without_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1150:in `block in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1319:in `with_advisory_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1150:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1006:in `up'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:984:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/tasks/database_tasks.rb:163:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/rake-12.3.0/exe/rake:27:in `<top (required)>'
+      01 /home/deploy/.rbenv/versions/2.5.1/bin/bundle:23:in `load'
+      01 /home/deploy/.rbenv/versions/2.5.1/bin/bundle:23:in `<main>'
+      01 
+      01 Caused by:
+      01 PG::DatatypeMismatch: ERROR:  column "montoapostado" cannot be cast automatically to type integer
+      01 HINT:  You might need to specify "USING montoapostado::integer".
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:98:in `async_exec'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:98:in `block in execute'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract_adapter.rb:590:in `block in log'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activesupport-5.0.6/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract_adapter.rb:583:in `log'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/database_statements.rb:97:in `execute'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/postgresql/schema_statements.rb:504:in `change_column'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:846:in `block in method_missing'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:815:in `block in say_with_time'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:815:in `say_with_time'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:835:in `method_missing'
+      01 /home/deploy/megamillion/releases/20190220015637/db/migrate/20190220013243_change_column_to_integer_from_ticketsganadorest.rb:3:in `change'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:789:in `exec_migration'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:773:in `block (2 levels) in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:772:in `block in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/connection_pool.rb:398:in `with_connection'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:771:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:951:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1232:in `block in execute_migration_in_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1300:in `block in ddl_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/database_statements.rb:232:in `block in transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/transaction.rb:189:in `within_new_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/connection_adapters/abstract/database_statements.rb:232:in `transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/transactions.rb:211:in `transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1300:in `ddl_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1231:in `execute_migration_in_transaction'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1203:in `block in migrate_without_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1202:in `each'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1202:in `migrate_without_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1150:in `block in migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1319:in `with_advisory_lock'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1150:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:1006:in `up'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/migration.rb:984:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/tasks/database_tasks.rb:163:in `migrate'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/activerecord-5.0.6/lib/active_record/railties/databases.rake:58:in `block (2 levels) in <top (required)>'
+      01 /home/deploy/megamillion/shared/bundle/ruby/2.5.0/gems/rake-12.3.0/exe/rake:27:in `<top (required)>'
+      01 /home/deploy/.rbenv/versions/2.5.1/bin/bundle:23:in `load'
+      01 /home/deploy/.rbenv/versions/2.5.1/bin/bundle:23:in `<main>'
+      01 Tasks: TOP => db:migrate
+      01 (See full trace by running task with --trace)
+      01 == 20190220013243 ChangeColumnToIntegerFromTicketsganadorest: migrating =======
+      01 -- change_column(:ticketsganadorests, :montoapostado, :integer)
