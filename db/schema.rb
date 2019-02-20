@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181231035931) do
+ActiveRecord::Schema.define(version: 20190220013243) do
 
   create_table "activacionclientets", force: :cascade do |t|
     t.string   "email"
@@ -754,8 +754,8 @@ ActiveRecord::Schema.define(version: 20181231035931) do
   create_table "ticketsganadorests", force: :cascade do |t|
     t.integer  "ticket_id"
     t.string   "jugada"
-    t.string   "montoapostado"
-    t.string   "montoacobrar"
+    t.integer  "montoapostado"
+    t.integer  "montoacobrar"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "grupoprocesado"
