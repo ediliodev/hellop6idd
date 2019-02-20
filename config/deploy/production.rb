@@ -10,8 +10,10 @@
 #Local en el Colegio:
 #server '192.168.0.107', user: 'deploy', roles: %w{app db web}
 
+server '192.168.0.123', user: 'deploy', roles: %w{app db web}
+
 #Internet klk ted:
-server 'tknet01.sytes.net', user: 'deploy', roles: %w{app db web}
+#server 'tknet01.sytes.net', user: 'deploy', roles: %w{app db web}
 
 # role-based syntax
 # ==================
