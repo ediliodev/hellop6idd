@@ -10,6 +10,7 @@ class SorteotsController < ApplicationController
   # GET /sorteots/1
   # GET /sorteots/1.json
   def show
+    redirect_to sorteots_path # Ted ok. Esto puesto para que cada vez que se ABRA o CIERRE un sorteo manualmente lo envie a la lista de sorteos (index) y no al show del sorteo updated. ok ted. 
   end
 
   # GET /sorteots/new

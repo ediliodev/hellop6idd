@@ -1,1 +1,3 @@
-ok ted
+class JugadalotsController < ApplicationController
+end
+

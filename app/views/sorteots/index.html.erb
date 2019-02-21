@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Nombre</th>
+      <th>ABRIR/CERRAR</th>
       <th>Descripcion</th>
       <th>Sigla</th>
       <th>Abreviaturamovil</th>
@@ -20,17 +21,16 @@
   <tbody>
     <% @sorteots.each do |sorteot| %>
       <tr>
-        <td><%= sorteot.nombre %></td>
+        <td style="color:red;"><%= sorteot.nombre %></td>
+        <td><b><%= link_to 'ABRIR/CERRAR', edit_sorteot_path(sorteot) %></b></td>
         <td><%= sorteot.descripcion %></td>
         <td><%= sorteot.sigla %></td>
         <td><%= sorteot.abreviaturamovil %></td>
         <td><%= sorteot.horariosorteot.nombre %></td>
         <td><%= sorteot.loteriat.nombre %></td>
         <td><%= sorteot.activo %></td>
-        <td><%= sorteot.abierto %></td>
-        <td><%= link_to 'Show', sorteot %></td>
-        <td><%= link_to 'Edit', edit_sorteot_path(sorteot) %></td>
-        <td><%= link_to 'Destroy', sorteot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><b style="color:red;"><%= sorteot.abierto %></b></td>
+        <td><b><%= link_to 'ABRIR/CERRAR', edit_sorteot_path(sorteot) %></b></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,3 @@
 
 <br>
 
-<%= link_to 'New Sorteot', new_sorteot_path %>

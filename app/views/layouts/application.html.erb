@@ -48,13 +48,14 @@
     <%end%>
   <% end %>
 
-  <% if user_signed_in? && (session[:tipo_cliente] == "desktop") && (current_user.tipousuariot_id == 2) %>
+  <% if user_signed_in? && (session[:tipo_cliente] == "desktop") && (current_user.tipousuariot_id == 2) && (session[:terminal_autorizada] == true) %>
    | <%= link_to 'Editar', edit_user_registration_path %> |
    <%= link_to "Nueva Suc.", new_user_registration_path %> |
    <%= link_to "Inicio", root_path %> 
   <%end%>
 
 </div>
+
 
 
 

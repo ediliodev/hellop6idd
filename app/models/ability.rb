@@ -7,6 +7,7 @@ class Ability
 
        if  user.tipousuariot_id == 2
        #   if User.last.tipousuariot.tipo_usuario == "venta"
+
         can :manage, :all 
         cannot [:create,:update,:destroy], [Loteriat, Sorteot, Menut, Ticketsganadorest,Controlpnnt,Controlqnnt,Controltnnt  ,Controlspnnt ,Controlqgmt  ,Controlpgmt  ,Controltgmt  ,Controlqleit ,Controlpleit ,Controltleit ,Controlqreat ,Controlpreat ,Controltreat ,Controlqnytt ,Controlpnytt ,Controltnytt ,Controlqnynt ,Controlpnynt ,Controltnynt ,Controlqltkt ,Controlpltkt ,Controltltkt ]
         cannot [:update,:destroy], [Menuposrventadiaactualt, Menuposrventaxfechat, Menuadmrresultadoglobalt, Menuadmrresultadoglobalxsupervisort, Menuf10t]
@@ -16,8 +17,9 @@ class Ability
        # can :manage, :all # Exepto las combinaciones de QPT y Editar Borrar ?[Y las Loterias y Sorteos klk solo Webmaster mete mano ahi... OJo definifr algo bien aki.] o Crear numeros de ahi... klk
        # can [:create, :read, :update], [Jugadalot, Menut]
        cannot [:destroy], [Activacionclientet]
+       can :update, [Sorteot]
+       cannot [:destroy], [User]
 
-       can :manage, :all
 
        end
        
@@ -39,7 +41,7 @@ class Ability
           can :read, Colectort
           can :read, Mensajepiedepaginat
           can :read, Horariosorteot
-          can :read, User #Luego especificar User :id => current_user.id por ejemplo ok ted. Que pueda leer solo ese usuario(id) ver en link cancancan ted internet. ok.
+          can :read, User, id: user.id #Luego especificar User :id => current_user.id por ejemplo ok ted. Que pueda leer solo ese usuario(id) ver en link cancancan ted internet. ok.
           can :read, Ganadorest
           can :read, Aliasmodelosiglasorteot
           can :read, Menut

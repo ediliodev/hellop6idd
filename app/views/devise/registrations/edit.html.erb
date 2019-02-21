@@ -3,43 +3,48 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
+
   <% if false #Ted no mostrar editar email ojo %>
       <div class="field">
         <%= f.label :email %><br />
         <%= f.email_field :email %>
       </div>
 
-    <div class="field">
-      <%= f.label :tipousuariot %>
-      <%= f.text_field :tipousuariot_id, autocomplete: "off"  %>
-    </div>
+      <div class="field">
+        <%= f.label :tipousuariot %>
+        <%= f.text_field :tipousuariot_id, autocomplete: "off"  %>
+      </div>
+
+
+      <div class="field">
+        <%= f.label :activo %>
+        <%= f.check_box :activo %>
+      </div>
+      
 
   <% end %>
 
 
-  <div class="field">
-    <%= f.label :activo %>
-    <%= f.check_box :activo %>
-   
-
-  </div>
 
 
-
+<% if false #Ted no mostrar editar Consorcio para que nadie modifique eso en el frontend ojo ok ted. Only ted o via comandos en rails console, low level ok. %>
   <div class="field">
     <%= f.label :consorciot %>
     <%= f.select :consorciot_id, Consorciot.order(:nombre).collect{ |item|  [ " --> " + item.nombre , item.id ] }  %>     
-
   </div>
+
+<% end %>
+
+
 
    <div class="field">
     <%= f.label :sucursalbt %>
-    <%= f.text_field :sucursalbt, autocomplete: "off"  %>
+    <%= f.text_field :sucursalbt, autocomplete: "off", :readonly => true  %>
   </div>
 
    <div class="field">
     <%= f.label :siglas %>
-    <%= f.text_field :siglas, autocomplete: "off"  %>
+    <%= f.text_field :siglas, autocomplete: "off", :readonly => true  %>
   </div>
 
 

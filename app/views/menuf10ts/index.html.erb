@@ -19,6 +19,7 @@
       <th>N3</th>
       <th>Monto</th>
       <th>Sorteo</th>
+      <th>Impreso</th>
 
       <th colspan="3"></th>
     </tr>
@@ -34,6 +35,7 @@
         <td><%= menuf10t.n3.nil? ?  '*' : ( (menuf10t.n3 < 10) ? "0" + menuf10t.n3.to_s : menuf10t.n3 )  %></td>
         <td>$<%= menuf10t.monto %></td>
         <td><%= @sorteot_f10_nombre %></td>
+         <td><%= menuf10t.ticket.fechaimpresion %></td>
         
       </tr>
     <% end %>

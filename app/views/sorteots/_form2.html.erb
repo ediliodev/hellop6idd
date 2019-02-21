@@ -1,0 +1,73 @@
+<%= form_for(sorteot) do |f| %>
+  <% if sorteot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sorteot.errors.count, "error") %> prohibited this sorteot from being saved:</h2>
+
+      <ul>
+      <% sorteot.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style="color:red">
+    <%= f.label "Sorteo" %>
+    <%= f.text_field :nombre, :readonly => true %>
+  </div>
+
+  <div class="field" style="color:red">
+    <%= f.label :abierto %>
+    <%= f.select :abierto, ["si", "no"].collect{ |item|  [ item, item ] } %>     
+  </div>
+
+</br>
+
+  <div class="actions">
+    <%= f.submit "Actualizar" %>
+  </div>
+
+
+</br>
+</br>
+</br>
+
+  <div class="field" style="color:blue">
+
+    <%= f.label :descripcion %>
+    <%= f.text_field :descripcion, :readonly => true %>
+  </div>
+
+  <div class="field" style="color:blue">
+    <%= f.label :sigla %>
+    <%= f.text_field :sigla, :readonly => true %>
+  </div>
+
+
+ <div class="field" style="color:blue">
+    <%= f.label :abreviaturamovil %>
+    <%= f.text_field :abreviaturamovil, :readonly => true %>
+  </div>
+  
+
+  <div class="field" style="color:blue">
+    <%= f.label :horariosorteot_id %>
+    <b><%= sorteot.horariosorteot.nombre.to_s %> </b>
+
+  </div>
+
+  <div class="field" style="color:blue">
+    <%= f.label :loteriat_id %>
+   <b><%= sorteot.loteriat.nombre.to_s %> </b>  
+  </div>
+
+  <div class="field" style="color:blue">
+    <%= f.label :activo %>
+     <b><%= sorteot.activo.to_s %> </b>  
+  </div>
+
+
+  
+
+
+<% end %>
