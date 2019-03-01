@@ -25,17 +25,17 @@
 
   <div class="field">
     <%= f.label :primero %>
-    <%= f.number_field :primero, autocomplete: "off"  %>
+    <%= f.number_field :primero, autocomplete: "off",  min: 0, max: 99  %>
   </div>
 
   <div class="field">
     <%= f.label :segundo %>
-    <%= f.number_field :segundo %>
+    <%= f.number_field :segundo, autocomplete: "off",  min: 0, max: 99 %>
   </div>
 
   <div class="field">
     <%= f.label :tercero %>
-    <%= f.number_field :tercero %>
+    <%= f.number_field :tercero, autocomplete: "off",  min: 0, max: 99 %>
   </div>
 
   <div class="actions">

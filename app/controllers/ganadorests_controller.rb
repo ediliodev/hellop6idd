@@ -35,7 +35,10 @@ class GanadorestsController < ApplicationController
        @sorty.save  # Cierro el sorteo para procesar ganadores y reportes. No se permiten mas tickets.
    end
 
-   # Gurardar los Ganadorests
+   # @ganadorest.fecha  => datetime
+
+    @ganadorest.fecha  =  (@ganadorest.fecha - 4.hours).to_date.to_time # Esto para evitar que los ganadores de la noche 09:00pm salgan con fecha de consulta de mananaa 9+ 4 GMT =  1am del dia sgte. Evitamos eso. ok ted. y lugeo en /g consultar ganadores salgan bien con Time.now.to_date. Ya que active record guarda los datetime en formato GMT00 en la bdatos. ok ted.
+   # Guardar los Ganadorests
     if @ganadorest.save!
       # @ganadorest => sorteo, fecha, primero, segundo, tercero 
       @sorteo  = @ganadorest.sorteot.sigla

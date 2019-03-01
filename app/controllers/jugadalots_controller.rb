@@ -1,3 +1,6 @@
 class JugadalotsController < ApplicationController
-end
+  
+
+end # fin de la Clase.
+
 
