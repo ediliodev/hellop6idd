@@ -9,10 +9,10 @@
       <th>ABRIR/CERRAR</th>
       <th>Descripcion</th>
       <th>Sigla</th>
-      <th>Abreviaturamovil</th>
-      <th>Horariosorteot</th>
-      <th>Loteriat</th>
       <th>Activo</th>
+      <th>Horariosorteo</th>
+      <th>Loteria</th>
+      <th>AliasMovil</th>  
       <th>Abierto</th>
       <th colspan="3"></th>
     </tr>
@@ -25,10 +25,10 @@
         <td><b><%= link_to 'ABRIR/CERRAR', edit_sorteot_path(sorteot) %></b></td>
         <td><%= sorteot.descripcion %></td>
         <td><%= sorteot.sigla %></td>
-        <td><%= sorteot.abreviaturamovil %></td>
+        <td><%= sorteot.activo %></td>
         <td><%= sorteot.horariosorteot.nombre %></td>
         <td><%= sorteot.loteriat.nombre %></td>
-        <td><%= sorteot.activo %></td>
+        <td><%= sorteot.abreviaturamovil %></td>
         <td><b style="color:red;"><%= sorteot.abierto %></b></td>
         <td><b><%= link_to 'ABRIR/CERRAR', edit_sorteot_path(sorteot) %></b></td>
       </tr>

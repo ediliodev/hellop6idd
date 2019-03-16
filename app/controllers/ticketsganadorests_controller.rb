@@ -4,7 +4,11 @@ class TicketsganadorestsController < ApplicationController
   # GET /ticketsganadorests
   # GET /ticketsganadorests.json
   def index
-    @ticketsganadorests = Ticketsganadorest.all
+    # @ticketsganadorests = Ticketsganadorest.all
+    #Buscaremos tickets ganadores no pagos. Los tickets pagos no me interesan por ahora.
+    #Ticket ganadores no pagos.ids
+    @ticketsganadorests = Ticketsganadorest.where(:ticket_id => [Ticket.where(:ganador => "si", :pago => nil).ids])
+  
   end
 
   # GET /ticketsganadorests/1

@@ -1,0 +1,2 @@
+class Menuadmticketsganadoresxfechat < ApplicationRecord
+end

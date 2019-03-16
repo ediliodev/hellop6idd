@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :menuadmticketsganadoresxfechats
   resources :activacionclientets
   resources :menuf10ts
   resources :controlpleits

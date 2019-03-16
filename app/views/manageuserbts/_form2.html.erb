@@ -1,40 +1,107 @@
 
 
-<h2>Edit </h2>
+<%= form_for(@manageuserbt) do |f| %>
 
-<%= form_for(user_registration_path) do |f| %>
+
 
   <div class="field">
-    <%= f.label :nombre %>
-    <%= f.text_field :nombre, :value => User.find(@real_user_edit).nombre  %>
+    <% @sucursal =  User.find(@real_user_edit).email  %>
+    <h2> <b> Sucursal: <%=@sucursal%> </h2>
+    
   </div>
+
+
+  <div class="field">
+      <%= f.label :gppt_id %>
+      <%= f.select :gppt, Gppt.order(:nombre).collect{ |item|  [item.nombre, item.id] }, :selected => @real_user_edit.gppt_id %>  
+  </div>
+
+
+
 
    <div class="field">
-    <%= f.label :apellidos %>
-    <%= f.text_field :apellidos, :value => User.find(@real_user_edit).apellidos  %>
+    <%= f.label :direccion %>
+    <%= f.text_field :direccion, :value => User.find(@real_user_edit).direccion  %>
   </div>
 
 
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, :value => User.find(@real_user_edit).email %>
+    <%= f.label "ciudad" %>
+    <%= f.select :ciudad, Ciudadt.order(:nombre).collect{ |item|  [item.nombre, item.id] }, :selected =>  User.find(@real_user_edit).ciudadt_id %>  
   </div>
 
-  <div class="field">
+
+
+ <div class="field">
+    <%= f.label "provincia" %>
+    <%= f.select :provincia, Provinciat.order(:nombre).collect{ |item|  [item.nombre, item.id] }, :selected =>  User.find(@real_user_edit).provinciat_id %>  
+  </div>
+
+
+ <div class="field">
     <%= f.label :telefono %><br />
     <%= f.text_field :telefono, autocomplete: "off",  :value => User.find(@real_user_edit).telefono  %>
   </div>
 
+</br>
+
 
   <div class="field">
-    <%= f.label :tipousuariot %>
-    <%= f.select :tipousuariot_id, Tipousuariot.order(:tipo_usuario).collect{ |item|  [item.tipo_usuario, item.id] }, :selected =>  User.find(@real_user_edit).tipousuariot_id %>  
+    <%= f.label "zona" %>
+    <%= f.select :zona, Zonat.order(:nombre).collect{ |item|  [item.nombre, item.id] }, :selected =>  User.find(@real_user_edit).zonat_id %>  
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label "tipousuario" %>
+    <%= f.select :tipousuario, Tipousuariot.order(:tipo_usuario).collect{ |item|  [item.tipo_usuario, item.id] }, :selected =>  User.find(@real_user_edit).tipousuariot_id %>  
+  </div>
+
+
+   <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+   </div>
+</br>
+
+<!-- 
+  <div class="field">
+    <%= f.label :activo %>
+    <%= f.check_box :activo, id: :manageuserbt_activo %>
+  </div>
+-->
+
+
+
+   <div class="field">
+    <%= f.label :vendedor %>
+    <%= f.text_field :vendedor, :value => User.find(@real_user_edit).vendedor  %>
+  </div>
+
+
+
+   <div class="field">
+    <%= f.label :contacto %>
+    <%= f.text_field :contacto, :value => User.find(@real_user_edit).contacto  %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label "supervisor" %>
+    <%= f.select :supervisor, Supervisort.order(:nombre).collect{ |item|  [item.nombre + " " + item.apellido, item.id] }, :selected =>  User.find(@real_user_edit).supervisort_id %>  
+  </div>
+
+
+  <div class="field">
+    <%= f.label  :colector %>
+    <%= f.select :colector, Colectort.order(:nombre).collect{ |item|  [item.nombre + " " + item.apellido, item.id] }, :selected =>  User.find(@real_user_edit).colectort_id %>  
   </div>
 
   <div class="field">
-    <%= f.label :sucursalt %>
-    <%= f.select :sucursalt_id, Sucursalt.order(:siglas).collect{ |item|  [ " #{item.consorciot.nombre} -> " + item.siglas , item.id] } %>     
+    <%= f.label  :socio %>
+    <%= f.select :socio, Sociot.order(:nombre).collect{ |item|  [item.nombre + " " + item.apellido, item.id] }, :selected =>  User.find(@real_user_edit).sociot_id %>  
   </div>
 
 

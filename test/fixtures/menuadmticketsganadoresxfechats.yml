@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sucursal: MyString
+  desde: 2019-03-06
+  hasta: 2019-03-06
+
+two:
+  sucursal: MyString
+  desde: 2019-03-06
+  hasta: 2019-03-06

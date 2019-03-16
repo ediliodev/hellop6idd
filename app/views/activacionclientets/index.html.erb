@@ -5,8 +5,8 @@
 <table>
   <thead>
     <tr>
-      <th>Email</th>
-      <th>Clienteid</th>
+      <th>Sucursal</th>
+      <th>StatusCliente</th>
       <th>Tipocliente</th>
       <th colspan="3"></th>
     </tr>
@@ -16,11 +16,12 @@
     <% @activacionclientets.each do |activacionclientet| %>
       <tr>
         <td><%= activacionclientet.email %></td>
-        <td><%= activacionclientet.clienteid %></td>
+
+        <td><%= activacionclientet.clienteid == "nil"? "Reseteado":"Activo" %></td>
+
         <td><%= activacionclientet.tipocliente %></td>
-        <td><%= link_to 'Show', activacionclientet %></td>
-        <td><%= link_to 'Edit', edit_activacionclientet_path(activacionclientet) %></td>
-        <td><%= link_to 'Destroy', activacionclientet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Reset', activacionclientet %></td>
+       
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +29,5 @@
 
 <br>
 
-<%= link_to 'New Activacionclientet', new_activacionclientet_path %>
+<%= link_to 'Menu', menuts_path %>
+

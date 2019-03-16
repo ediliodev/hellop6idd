@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
+<h1>Reporte de Tickets Ganadores x Pagar</h1>
+<h2>Desde: (<%= @dia1.to_s %>) Hasta: (<%= @dia2.to_s %>) </h2>
 
-<h1>Tickets ganadores pendientes de pago:</h1>
+
 
 <table>
   <thead>
     <tr>
-      <th>Ticket</th>
       <th>Sucursal</th>
+      <th>Ticket</th>
       <th>FechaProcesado</th>
       <th>Jugada</th>
       <th>Sorteo</th>
@@ -20,10 +22,10 @@
   </thead>
 
   <tbody>
-    <% @ticketsganadorests.each do |ticketsganadorest| %>
+    <% @ticketsganadorestsxfechat.each do |ticketsganadorest| %>
       <tr>
-        <td><%= ticketsganadorest.ticket.id %></td>
-        <td><b><%= ticketsganadorest.sucursal %></td>        
+        <td><b><%= ticketsganadorest.sucursal %></td>
+        <td><%= ticketsganadorest.ticket.id %></td>        
         <td><%= ticketsganadorest.ticket.updated_at.to_date %></td>
         <td><%= ticketsganadorest.jugada %></td>
         <td><%= ticketsganadorest.sorteo %></td>
@@ -48,7 +50,7 @@
  
 <% @array_id_tks_jugadas = [] %>
 
-<% @ticketsganadorests.each do |ticketsganadorest| %>
+<% @ticketsganadorestsxfechat.each do |ticketsganadorest| %>
   <% @array_id_tks_jugadas << ticketsganadorest.ticket_id%>
   <% @array_id_tks_jugadas.uniq!%>
 <%end%>
@@ -57,10 +59,14 @@
 
 <% @suma_ticket_ganadores = 0%>
 
-<% @ticketsganadorests.each do |ticketsganadorest| %>
+<% @ticketsganadorestsxfechat.each do |ticketsganadorest| %>
   <% @suma_ticket_ganadores += ticketsganadorest.montoacobrar.to_i%>
 <%end%>
 
 
 <h2>Total Tickets: <%= ActionController::Base.helpers.number_to_currency(@array_id_tks_jugadas.size.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
-<h2>Total Moto:  $ <%= ActionController::Base.helpers.number_to_currency(@suma_ticket_ganadores.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+<h2>Total Monto:  $ <%= ActionController::Base.helpers.number_to_currency(@suma_ticket_ganadores.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+
+<h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
+
+<%= link_to 'Menu', menuts_path %>

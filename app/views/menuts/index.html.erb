@@ -5,8 +5,8 @@
 <h1>Menu:</h1>
 
 <h4 style="color:darkblue;"> *VENTAS: </h4>
-<h4> <%= link_to 'Venta x dia', new_menuposrventadiaactualt_path %> </h4>
-<h4> <%= link_to 'Venta x rango de fecha', new_menuposrventaxfechat_path %> </h4>
+<h4> <%= link_to 'Ventas x dia', new_menuposrventadiaactualt_path %> </h4>
+<h4> <%= link_to 'Cuadre de Ventas x fecha', new_menuposrventaxfechat_path %> </h4>
 
 
 <% if current_user.tipousuariot_id == 2  %>
@@ -17,7 +17,29 @@
 	<h4> <%= link_to 'Generar F10 (Reporte de Jugadas activa) x Sorteo', new_menuf10t_path %> </h4>
 	<h4> <%= link_to 'Reporte de Resultados Global x Fecha', new_menuadmrresultadoglobalt_path %> </h4>
 	<h4> <%= link_to 'Reporte de Resultados Global x Fecha x Supervisor', new_menuadmrresultadoglobalxsupervisort_path %> </h4>
+
+
+	<h4> <%= link_to 'Consultar Tickets Ganadores x Pagar', new_menuadmticketsganadoresxfechat_path %> </h4>
+
+	<% if user_signed_in? && ((session[:tipo_cliente] == "movil" || session[:tipo_cliente] == "desktop")) && (current_user.tipousuariot_id == 2) && (session[:terminal_autorizada] == true) %>
+		
+		<h4> <%= link_to "Edicion de Sucursal (Gpp, Supervisor, etc.)", manageuserbts_path %> 
+   			
+		</h4>
+
+   		<h4> <%= link_to "Editar mi usuario", edit_user_registration_path %> |
+   			<%= link_to "Crear Nueva Sucursal", new_user_registration_path %> 
+   			
+		</h4>
+
+		<h4> <%= link_to "Activacion/Reset de computador clientes", activacionclientets_path %></h4>
+		
+		
+
+  	<%end%>
 	
+
+
 	</br>
 
 	<h4 style="color:darkblue;"> *MONITOREO Y CONTROL DE QPT X SORTEO: </h4>
@@ -53,13 +75,16 @@
 
 	</br>
 
-	<h4 style="color:darkblue;"> *RESULTADOS: (No Disponible por ahora) </h4>
-	<h4> <%= link_to 'Resultados x Sucursal', new_menuposrventadiaactualt_path %> </h4>
-	<h4> <%= link_to 'Resultados x Grupo', new_menuposrventaxfechat_path %> </h4>
-	<h4> <%= link_to 'Resultados Global', new_menuposrventaxfechat_path %> </h4>
-	<h4> <%= link_to 'Resultados Condicional', new_menuposrventaxfechat_path %> </h4>
+	<!-- Esta parte no necesaria todavia. ok.
+		<h4 style="color:darkblue;"> *RESULTADOS: (No Disponible por ahora) </h4>
+		<h4> <%= link_to 'Resultados x Sucursal', new_menuposrventadiaactualt_path %> </h4>
+		<h4> <%= link_to 'Resultados x Grupo', new_menuposrventaxfechat_path %> </h4>
+		<h4> <%= link_to 'Resultados Global', new_menuposrventaxfechat_path %> </h4>
+		<h4> <%= link_to 'Resultados Condicional', new_menuposrventaxfechat_path %> </h4>
+	-->
                              
 <% end %>
+
 
 
 </br>
@@ -103,7 +128,11 @@
 
 <h4>Puedes cambiar de sorteo en cualquier momento, digitando: .01 ENTER (Nac.), .02 ENTER (Ganamas), Leidsa (.03), etc.</h4>
 
-<h4> 3 - Para imprimir el ticket, digitar dos puntos seguido del monto de efectivo recibido del cliente y ENTER. Ejemplo: si el cliente paga con 100 pesos digitar comando: ..100 ENTER. Se imprime el ticket y le muestra la cantidad a devolver al cliente, si le sobra.</h4>
+<h4> 3 - Para imprimir el ticket, digitar dos puntos seguido del monto de efectivo recibido del cliente y ENTER. Ejemplo: si el cliente paga con 100 pesos digitar comando: ..100 ENTER. Se imprime el ticket y le muestra la cantidad a devolver al cliente, si le sobra y listo.</h4>
+
+<h4>Tambien puedes realizar multiple jugadas (modo multiple) en una sola linea de comando, separadas por asterisco (*) y no tener que digitar (modo simple) una a una las jugadas. Ejempo: puedes hacer 3 jugadas en un solo comando: 02+10.01*20+10.01*0220+10.01 ENTER. Salen 3 jugadas en la Nacional: 02+10, 20+10 y el pale 0220+10. Puedes hacer varias jugadas de varios sorteos a la vez: 02+10.01*20+10.02*0220+10.03 ENTER. Saldria asi: 02+10 Nacional, 20+10 Ganamas y el pale 0220+10 en la QLeidsa.</h4>
+
+<h4>Tambien puedes repetir todo el grupo de jugadas ya digitadas de un sorteo a otro. Ejemplo: r01.03 ENTER repite todas las jugadas computadas de la Nacional(01) a la QLeidsa(03). Si fuera de la Ganamas a la Loteka seria: r02.07 ENTER y listo. Lo mismo para todas las demas. Lo puedes probar. Este programa es intuitivo, inteligente y facil de aprender. </h4>
 
 <h5> Para los comandos de reportes, pago y anulacion favor consultar el Menu.</h5>
 

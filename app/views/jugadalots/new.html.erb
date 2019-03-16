@@ -83,7 +83,7 @@
           <td><%= @n2 %></td>
           <td><%= @n3 %></td>
           <td>$<%= jugadat.monto %></td>
-          <td><%= jugadat.sorteot.nombre %></td>
+          <td><%= jugadat.sorteot.nombre %> (<%= jugadat.sorteot.sigla%>)</td>
          <!--  <td><%= link_to 'Show', jugadat %></td> -->
          <!--  <td><%= link_to 'Edit', edit_jugadalot_path(jugadat) %></td> -->
           <td><%= link_to 'Eliminar', jugadat, method: :delete%></td>
@@ -217,7 +217,7 @@
           <td><%= @n2 %></td>
           <td><%= @n3 %></td>
           <td>$<%= jugadat.monto %></td>
-          <td><%= jugadat.sorteot.abreviaturamovil %></td>
+          <td><%= jugadat.sorteot.abreviaturamovil %>(<%= jugadat.sorteot.sigla%>)</td>
          <!--  <td><%= link_to 'Show', jugadat %></td> -->
          <!--  <td><%= link_to 'Edit', edit_jugadalot_path(jugadat) %></td> -->
           <td><%= link_to 'X', jugadat, method: :delete%></td>

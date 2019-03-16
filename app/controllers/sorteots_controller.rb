@@ -42,15 +42,44 @@ class SorteotsController < ApplicationController
   # PATCH/PUT /sorteots/1.json
   def update
     respond_to do |format|
-      if @sorteot.update(sorteot_params)
-        format.html { redirect_to @sorteot, notice: 'Sorteot was successfully updated.' }
-        format.json { render :show, status: :ok, location: @sorteot }
-      else
-        format.html { render :edit }
-        format.json { render json: @sorteot.errors, status: :unprocessable_entity }
+      #verificar si se puede editar/abrir el sorteo para un nuevo dia o es del dia actual:
+      #if @sorteot.updated_at
+      
+      #Abrir el sorteo solo si esta cerrado y la fecha updated no fue cerrado hoy. o sea No se puede reabrir un sorteo cerrado en el mismo dia. Solo para un nuevo dia de venta. Esto solo se hara low level admin rails console. ok ted.
+      #Esta condicion es para que no se pueda reabrir el mismo dia.
+      if ( (@sorteot.abierto == "no") && (@sorteot.updated_at.to_date < Time.now.to_date) )
+        #grabar cambios
+        if @sorteot.update(sorteot_params)
+          format.html { redirect_to @sorteot, notice: "Sorteo actualizado correctamente." }
+          format.json { render :show, status: :ok, location: @sorteot }
+        else
+          format.html { render :edit }
+          format.json { render json: @sorteot.errors, status: :unprocessable_entity }
+        end
       end
+
+      #Esta condicion es para cerrarlo (actualizar condicion de "si" o de "no") si estaba abierto
+      if (@sorteot.abierto == "si")
+        # si esta abierto, que se actualice como abierto o como cerrado. Depende la opcion elegida por el usuario admin web babylot.
+        #grabar cambios
+        if @sorteot.update(sorteot_params)
+          format.html { redirect_to @sorteot, notice: "Sorteo actualizado correctamente." }
+          format.json { render :show, status: :ok, location: @sorteot }
+        else
+          format.html { render :edit }
+          format.json { render json: @sorteot.errors, status: :unprocessable_entity }
+        end
+      end
+
+      # Si esta cerado y la fecha en que se cerro o actualizo ese sorteo es igual o mayor que hoy, entonces no se puede reabrir, hay que esperar manana, ya que la fecha updated sera de ayer. (menor que la de hoy)
+      if ( (@sorteot.abierto == "no") && (@sorteot.updated_at.to_date >= Time.now.to_date) )
+        format.html { redirect_to @sorteot, notice: "X - Este sorteo ya fue cerrado por hoy.  No se puede reabrir. Debe esperar un nuevo dia o contactar al administrador." }
+      end
+     
     end
   end
+
+
 
   # DELETE /sorteots/1
   # DELETE /sorteots/1.json

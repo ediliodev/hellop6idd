@@ -42,7 +42,17 @@ class MenuposrventaxfechatsController < ApplicationController
     @dia2 = @dia2.to_date.tomorrow # + 1.day    #como en between simepre empieza al inicio del dia, o sea a la media noche, La fecha final le sumaremos un dia para que seal igual al final del dia elegido, que es igual al inicio del dia posterior al final deseado. O sea, desde inicio de A hasta inicio de C es igual a: Desde inicio de a hasta final de B. (Donde termina B empieza C) ok. Ted. Rails concole. ok.
 
 
-    @valor = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids ).sum(:monto)
+    #@valor es ventas
+    #Defino @objeto_array_ventas para no hacer dos consultas al ActiveRecord de @valor (sum) y de @cantidad_de_tickets_vendidos (count) ok ted.
+    @objeto_array_ventas = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids )
+   
+    @valor = @objeto_array_ventas.sum(:monto) 
+    @cantidad_de_tickets_vendidos = @objeto_array_ventas.count
+
+    @ganadores_cuadre = Ticketsganadorest.between_times(@dia1.to_date , @dia2).where(:sucursal => current_user.email.split('@')[0]).sum(:montoacobrar)
+
+    #Tickets pendientes de pago son Todos los tickets ganadores de ese rango de fecha no pagados.sumatoria
+    @cantidad_de_tickets_pendiente_de_pago = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si", :ganador => "si", :pago => nil).ids).count
 
     @dia1 = session[:fecha_venta_dia_1].values.join("-") # para el show dd-mm-aaaa
     @dia2 = session[:fecha_venta_dia_2].values.join("-") # para el show dd-mm-aaaa
@@ -94,6 +104,32 @@ class MenuposrventaxfechatsController < ApplicationController
     session[:fecha_venta_dia_1] = nil # Limpio la variable para evitar cookie oversize en el cliente.
     session[:fecha_venta_dia_2] = nil # Limpio la variable para evitar cookie oversize en el cliente.
   
+    
+    # Gererar cadena de impresion de este cuadre para version impresion movil:
+
+
+                       # @st_movil = ""
+
+                        @st_movil =   "CUADRE DE VENTAS"+ "@@"                        
+                        @st_movil +=  "Desde: " +  @dia1.to_s  + "@@"
+                        @st_movil +=  "Hasta: " +  @dia2.to_s  + "@@"
+                        @st_movil +=  "Sucursal: " + current_user.email.split("@")[0].to_s + "@@"
+                        @st_movil += "@@"
+                        @st_movil +=  "Total Ventas: $" + ActionController::Base.helpers.number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") + "@@"
+                        @st_movil +=  "[" + @cantidad_de_tickets_vendidos.to_s + " tickets]" + "@@"
+                        @st_movil +=  "Total Ganadores: $" +  ActionController::Base.helpers.number_to_currency(@ganadores_cuadre, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") + "@@"
+                        @st_movil +=  "Pdte.xPagar(tk): $" +  ActionController::Base.helpers.number_to_currency(@cantidad_de_tickets_pendiente_de_pago, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  + "@@"
+                        @st_movil += "@@"
+                        @st_movil +=  "BALACE TOTAL: $" +  ActionController::Base.helpers.number_to_currency((@valor.to_i - @ganadores_cuadre.to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".")  + "@@"
+                        @st_movil +=  "Impreso: " +  Time.now.strftime("%d/%m/%Y (%H:%M:%S)")  + "@@"
+                       
+
+                        #@id_valido_provisional_show_relleno_get_ted = Jugadalot.first.id 
+                        session[:st_movil] = @st_movil
+
+                        session[:esperar_ubicacion] = "si"
+                        # manejo y registro de ubucacion (session movil debe ser true, ok. entonces manda ubicacion gps el celular)
+
   end
 
 

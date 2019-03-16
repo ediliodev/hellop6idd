@@ -1,10 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Reporte de venta</h1>
+<h1 style="color:blue;">Cuadre de ventas</h1>
 <h2>Desde:  <%= @dia1.to_s %> </h2>
 <h2>Hasta:  <%= @dia2.to_s %> </h2>
 <h2>Sucursal:  <%= current_user.email.split("@")[0] %> </h2>
-<h2>Venta: $ <%= number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+<h2>Total Ventas: $ <%= number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %>  </h2>
+<h3>[<%=@cantidad_de_tickets_vendidos.to_s%> tickets]</h3>
+
+<h2>Total Ganadores: $<%= number_to_currency(@ganadores_cuadre, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+
+<h2>Pdte. x Pagar(tk): $<%= number_to_currency(@cantidad_de_tickets_pendiente_de_pago*1000, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+
+
+
+<h2 style="color:blue;" >Balance Total: $<%= number_to_currency((@valor.to_i - @ganadores_cuadre.to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %> </h2>
+
+
+
 <h3>Consultado el: <%= Time.now.strftime("%d/%m/%Y (%H:%M:%S)") %> </h3>
 
 
@@ -180,13 +192,33 @@ public class StarReceiptTest implements OutputCompleteListener, StatusUpdateList
    
     }
 
+    function imprime_movil(){
+    document.getElementById("este_movil").disabled = true;
+    
+    window.location.replace("http://192.168.0.123:3000/jugadalots/1000"); // show/1 pero si no existe puede dar error. Lo ideal es encontrar Jugadalot.last.id valido y hacer un show de ese. ok. ted.
+
+    
+    document.getElementById("este_movil").style.display = "none"; 
+   
+    }
+
   </script>
 
 
+<% if session[:tipo_cliente] == "desktop" %> 
+  <div class="seccion_boton_imprimir">
+    <button id="este"  type="button" onClick="imprime();">Imprimir</buttom> 
+  </div>
+<%end%>
 
-<div class="seccion_boton_imprimir">
-  <button id="este"  type="button" onClick="imprime();">Imprimir</buttom> 
-</div>
+<% if session[:tipo_cliente] == "movil" %>
+  <div class="seccion_boton_imprimir">
+    <button id="este_movil"  type="button" onClick="imprime_movil();">Imprimir Movil</buttom> 
+  </div>
+<%end %>
+
+
+
 
 
 

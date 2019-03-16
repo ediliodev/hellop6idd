@@ -9,10 +9,10 @@
 <table>
   <thead>
     <tr>
-     
       <th>Sucursal</th>
-      <th>Venta</th>
+      <th>Ventas</th>
       <th>Ganadores</th>
+      <th>PendxPagar</th>
       <th>Balance</th>
       <th colspan="3"></th>
     </tr>
@@ -22,9 +22,14 @@
     <% @menuadmrresultadoglobalts.each do |menuadmrresultadoglobalt| %>
       <tr>
        
-        <td><%= menuadmrresultadoglobalt.sucursal %></td>
-        <td><%= number_to_currency(menuadmrresultadoglobalt.venta, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
+        <td><%=menuadmrresultadoglobalt.sucursal %></td>
+        
+        <td><%=number_to_currency(menuadmrresultadoglobalt.venta, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
+        
         <td><%= number_to_currency(menuadmrresultadoglobalt.ganadores, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
+
+        <td><%= number_to_currency(menuadmrresultadoglobalt.pendientexpagar, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
+
         <td><%= number_to_currency(menuadmrresultadoglobalt.balance, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
        
       </tr>
@@ -35,12 +40,16 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
        </tr>
 
        <tr> 
           <td><b>T-> <%= @total_sucursales %></td>
           <td><b><%= number_to_currency(@total_ventas, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
           <td><b><%= number_to_currency(@total_ganadores, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
+
+          <td><b><%= number_to_currency(@total_pendientexpagar, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
+
           <td><b><%= number_to_currency(@total_balance, :unit => "$", :delimiter => ",", :precision => 0, :separator => ".") %></td>
 
        </tr>

@@ -44,6 +44,7 @@ class MenuadmrresultadoglobaltsController < ApplicationController
       @total_sucursales = 0
       @total_ventas = 0
       @total_ganadores = 0
+      @total_pendientexpagar = 0
       @total_balance = 0
       
       a=[] 
@@ -52,13 +53,15 @@ class MenuadmrresultadoglobaltsController < ApplicationController
           @line = Menuadmrresultadoglobalt.new # =>  Menuadmrresultadoglobalt ... venta: integer, ganadores: integer, balance: integer, created_at: datetime, updated_at: datetime)
           @line.sucursal = user.email.split("@")[0].to_s
           @line.venta = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:monto)
-          @line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:montoacobrar)
+          @line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si").ids ).sum(:montoacobrar)
+          @line.pendientexpagar = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si", :pago => nil).ids ).sum(:montoacobrar)          
           @line.balance = @line.venta - @line.ganadores
           a << @line
           
           @total_sucursales +=1
           @total_ventas += @line.venta
           @total_ganadores += @line.ganadores
+          @total_pendientexpagar  += @line.pendientexpagar
       end
     
       @menuadmrresultadoglobalts = a

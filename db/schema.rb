@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190220013243) do
+ActiveRecord::Schema.define(version: 20190315023052) do
 
   create_table "activacionclientets", force: :cascade do |t|
     t.string   "email"
@@ -334,10 +334,11 @@ ActiveRecord::Schema.define(version: 20190220013243) do
     t.integer  "n3"
     t.integer  "monto"
     t.string   "qpt"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "ticket_id"
     t.integer  "sorteot_id"
+    t.string   "comandojugada"
     t.index ["sorteot_id"], name: "index_jugadalots_on_sorteot_id"
     t.index ["ticket_id"], name: "index_jugadalots_on_ticket_id"
   end
@@ -358,6 +359,22 @@ ActiveRecord::Schema.define(version: 20190220013243) do
     t.datetime "updated_at",    null: false
     t.string   "modificadopor"
     t.boolean  "activo"
+    t.string   "telefono"
+    t.string   "sucursal"
+    t.string   "tipousuario"
+    t.string   "consorcio"
+    t.string   "sucursalbt"
+    t.string   "siglas"
+    t.string   "direccion"
+    t.string   "ciudad"
+    t.string   "provincia"
+    t.string   "zona"
+    t.string   "vendedor"
+    t.string   "contacto"
+    t.string   "supervisor"
+    t.string   "colector"
+    t.string   "socio"
+    t.string   "gppt"
   end
 
   create_table "mensajepiedepaginats", force: :cascade do |t|
@@ -374,8 +391,9 @@ ActiveRecord::Schema.define(version: 20190220013243) do
     t.integer  "venta"
     t.integer  "ganadores"
     t.integer  "balance"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "pendientexpagar"
   end
 
   create_table "menuadmrresultadoglobalxsupervisorts", force: :cascade do |t|
@@ -388,6 +406,14 @@ ActiveRecord::Schema.define(version: 20190220013243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "sucursal"
+  end
+
+  create_table "menuadmticketsganadoresxfechats", force: :cascade do |t|
+    t.string   "sucursal"
+    t.date     "desde"
+    t.date     "hasta"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "menuf10ts", force: :cascade do |t|

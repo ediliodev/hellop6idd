@@ -115,7 +115,7 @@
 
   <div class="field">
     <%= f.label :colectort %>
-    <%= f.select :colectort_id, Colectort.order(:nombre).collect{ |item|  [ item.nombre , item.id ] } %>     
+    <%= f.select :colectort_id, Colectort.order(:nombre).collect{ |item|  [ item.nombre + " " + item.apellido , item.id ] } %>     
   </div>
 
 

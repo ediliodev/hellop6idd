@@ -10,11 +10,23 @@ class ActivacionclientetsController < ApplicationController
   # GET /activacionclientets/1
   # GET /activacionclientets/1.json
   def show
+    # En la accion show aprovechamos para override y hacer el reset (nil) de cliente_id por primera vez a entrar/registrar:
+    @activacionclientet.clienteid = "nil"
+
+    if @activacionclientet.save
+      redirect_to activacionclientets_path, notice: "Cliente reseteado correctamente. OK. Sucursal: #{@activacionclientet.email}"  and return
+    else
+
+      redirect_to activacionclientets_path, notice: "X Error. No se pudo resetear el cliente: #{@activacionclientet.email}. Favor trate de nuevo o contacte al soporte tecnico."  and return
+
+    end
+
   end
 
   # GET /activacionclientets/new
   def new
-    @activacionclientet = Activacionclientet.new
+    redirect_to activacionclientets_path # ted esto para evitar creen una nueva entrada desde la web. provisional ok.. Que valla al index ok.
+    #@activacionclientet = Activacionclientet.new
   end
 
   # GET /activacionclientets/1/edit
@@ -54,9 +66,11 @@ class ActivacionclientetsController < ApplicationController
   # DELETE /activacionclientets/1
   # DELETE /activacionclientets/1.json
   def destroy
-    @activacionclientet.destroy
+#    redirect_to activacionclientets_path # ted esto para evitar que borren por la web. ok. Que valla al index. provisional ok.
+ 
+    #@activacionclientet.destroy
     respond_to do |format|
-      format.html { redirect_to activacionclientets_url, notice: 'Activacionclientet was successfully destroyed.' }
+      format.html { redirect_to activacionclientets_url, notice: 'Activacionclientes no se puede eliminar por esta via. Contacte el administrador.' } # ted esto para evitar que borren por la web
       format.json { head :no_content }
     end
   end
