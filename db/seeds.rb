@@ -9,12 +9,12 @@
 
 #Script para llenado de Manageuserbt con 2,000 usuarios para fines de requisitos de disenio solamente ok. ted.
 
-2000.times do |i|
-	clean_user = Manageuserbt.new
-	clean_user.email = "usergeneric#{i}@central.com"
-	clean_user.password = "******"
-	clean_user.save
-end
+#2000.times do |i|
+#	clean_user = Manageuserbt.new
+#	clean_user.email = "usergeneric#{i}@central.com"
+#	clean_user.password = "******"
+#	clean_user.save
+#end
 
 
 
