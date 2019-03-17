@@ -22,8 +22,7 @@
 
 
 <!--este parado con id= "jugadalot_id" es para el redirect de la impresion movil mas abajo. ok. ted. -->
-<p id="jugadalot_id" display = "none"><%Jugadalot.first.id%></p>
-
+<p id="jugadalot_id" style="visibility:hidden;"><%=Jugadalot.first.id%></p>
 
 
 <p id="data" style="display:none;" >
@@ -198,12 +197,14 @@ public class StarReceiptTest implements OutputCompleteListener, StatusUpdateList
    
     }
 
-    function imprime_movil(){
-    document.getElementById("este_movil").disabled = true;
-    var jugadalots_id = "" + document.getElementById("jugadalot_id").value();
-    
-    window.location.replace("http://192.168.0.123:3000/jugadalots/" + jugadalots_id); // show/1 pero si no existe puede dar error. Lo ideal es encontrar Jugadalot.last.id valido y hacer un show de ese. ok. ted.
 
+    function imprime_movil(){
+
+    document.getElementById("este_movil").disabled = true;
+    var jugadalots_id = "" + document.getElementById("jugadalot_id").innerHTML;
+    var destino = "http://192.168.0.123:3000/jugadalots/" + jugadalots_id;
+
+    window.location.replace(destino); // show/1 pero si no existe puede dar error. Lo ideal es encontrar Jugadalot.last.id valido y hacer un show de ese. ok. ted.
     
     document.getElementById("este_movil").style.display = "none"; 
    
