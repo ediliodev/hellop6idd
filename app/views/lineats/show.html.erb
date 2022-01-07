@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Coliseo:</strong>
+  <%= @lineat.coliseo %>
+
+
+  <strong>Bloque:</strong>
+  <%= @lineat.bloque %>
+
+  <strong>Pelea:</strong>
+  <%= @lineat.pelea %>
+</p>
+
+<p>
+  <strong>Azul:</strong>
+  <%= @lineat.azul %>
+
+  <strong>Mla:</strong>
+  <%= @lineat.mla %>
+
+  <strong>Tiempo:</strong>
+  <%= @lineat.tiempoml %>
+
+</p>
+
+
+<p>
+  <strong>Blanco:</strong>
+  <%= @lineat.blanco %>
+
+  <strong>Mlb:</strong>
+  <%= @lineat.mlb %>
+
+   <strong>Status:</strong>
+  <%= @lineat.status %>
+</p>
+
+
+
+<p>
+  <strong>Under:</strong>
+  <%= @lineat.oua %>
+
+  <strong>Over:</strong>
+  <%= @lineat.oub %>
+</p>
+
+
+<p>
+  <strong>Resultado:</strong>
+  <%= @lineat.resultado %>
+
+  <strong>Tiempofinalizado:</strong>
+  <%= @lineat.tiempofinalizado %>
+</p>
+
+<%= link_to 'Editar', edit_lineat_path(@lineat) %> |
+<%= link_to 'Back', lineats_path %>

@@ -22,7 +22,7 @@
      <!--  <th>N2</th> -->
      <!--  <th>N3</th> -->
       <% if  @tipo_cliente != "movil" %>
-        <th>Jugadas (qpt)</th>
+        <th></th>
       <%end%>
       
       <% if  @tipo_cliente == "movil" %>
@@ -43,8 +43,8 @@
         <!-- <td><%= form.number_field :n3, id: :jugadalot_n3,  min:0,  max: 99  %></td> -->
         <td> <%= form.text_field :qpt, id: :jugadalot_qpt , autofocus: true,  autocomplete: "off" %></td>
         <!-- <td><%= form.number_field :monto, id: :jugadalot_monto, min: 1 %></td> -->
-        <td><%= form.submit "Enviar" %></td>
-        <td> <button onclick="borrartodo()">Reset</button>  </td>
+        <td><%= form.submit ">" %></td>
+        <td> <button onclick="borrartodo()">X</button>  </td>
       </tr>
 
   </tbody>

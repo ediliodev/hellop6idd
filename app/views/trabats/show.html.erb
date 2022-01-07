@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @trabat.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @trabat.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_trabat_path(@trabat) %> |
+<%= link_to 'Back', trabats_path %>

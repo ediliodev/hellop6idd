@@ -1,0 +1,32 @@
+<%= form_for(controldepagogt) do |f| %>
+  <% if controldepagogt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(controldepagogt.errors.count, "error") %> prohibited this controldepagogt from being saved:</h2>
+
+      <ul>
+      <% controldepagogt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tipojugada %>
+    <%= f.text_field :tipojugada %>
+  </div>
+
+  <div class="field">
+    <%= f.label :limitexticket %>
+    <%= f.text_field :limitexticket %>
+  </div>
+
+  <div class="field">
+    <%= f.label :limiteglobal %>
+    <%= f.text_field :limiteglobal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Actualizar" %>
+  </div>
+<% end %>

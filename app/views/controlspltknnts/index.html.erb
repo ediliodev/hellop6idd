@@ -1,0 +1,66 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Control y Monitoreo de</h2>
+<h2>Super Pale Loteka-Nac.</h2>
+
+
+<table>
+  <thead>
+    <tr>
+     
+      <th>SPale:</th>
+      <th>Vendido</th>
+       <th>Limite</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controlspltknntsb.each do |controlpnnt| %>
+      <tr>
+        
+        <td><b><%= controlpnnt.siglas %></td>
+        <td>$<%= controlpnnt.vendida %></td>
+        <td>$<%= controlpnnt.limite %></td>
+        <td><%= link_to 'Show', controlpnnt %></td>
+        <td><%= link_to 'Edit', edit_controlspltknnt_path(controlpnnt) %></td>
+        <td><%= link_to 'Destroy', controlpnnt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h2>Ordenado por spales:</h2>
+
+
+<table>
+  <thead>
+    <tr>
+     
+      <th>SPale</th>
+      <th>Vendido</th>
+      <th>Limite</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controlspltknnts.each do |controlpnnt| %>
+      <tr>
+        
+        <td><b><%= controlpnnt.siglas %></td>
+        <td>$<%= controlpnnt.vendida %></td>
+        <td>$<%= controlpnnt.limite %></td>
+        <td><%= link_to 'Show', controlpnnt %></td>
+        <td><%= link_to 'Edit', edit_controlspltknnt_path(controlpnnt) %></td>
+        <td><%= link_to 'Destroy', controlpnnt, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<h1>Reporte de Tickets Ganadores x Pagar</h1>
+<h1>Reporte de Tickets Ganadores x Pagar.</h1>
 <h2>Desde: (<%= @dia1.to_s %>) Hasta: (<%= @dia2.to_s %>) </h2>
 
 
@@ -9,41 +9,27 @@
     <tr>
       <th>Sucursal</th>
       <th>Ticket</th>
-      <th>FechaProcesado</th>
-      <th>Jugada</th>
-      <th>Sorteo</th>
-      <th>FechaSorteo</th>
-      <th>Montoapostado</th>
-      <th>Montoacobrar</th>
-      <th>Grupoprocesado</th>
-      <th>Realizado</th>
-      <th colspan="3"></th>
+      <th>Parlay</th>
+       <th>Apostado</th>
+      <th>Acobrar</th>
     </tr>
   </thead>
 
   <tbody>
     <% @ticketsganadorestsxfechat.each do |ticketsganadorest| %>
       <tr>
-        <td><b><%= ticketsganadorest.sucursal %></td>
-        <td><%= ticketsganadorest.ticket.id %></td>        
-        <td><%= ticketsganadorest.ticket.updated_at.to_date %></td>
-        <td><%= ticketsganadorest.jugada %></td>
-        <td><%= ticketsganadorest.sorteo %></td>
-        <td><%= ticketsganadorest.fechasorteo %></td>
-        <td>$<%=ticketsganadorest.montoapostado %></td>
-        <td><b>$<%=ticketsganadorest.montoacobrar %></td>
-        <td><%= ticketsganadorest.grupoprocesado %></td>
-
-        <%if ( ticketsganadorest.ticket.latitud && ticketsganadorest.ticket.longitud ) %>
-        <td><%= link_to 'Location', "https://maps.google.com/?q=#{ticketsganadorest.ticket.latitud},#{ticketsganadorest.ticket.longitud}"%> </td>
-        <%else%>
-          <td>---</td>
-        <%end%>
-
+        <td><b><%= ticketsganadorest.user.sucursalbt %></td>
+        <td>[ <%=ticketsganadorest.id%> ]</td>        
+        <td><%=ticketsganadorest.parlay.to_s.upcase %></td>
+        
+        <td>$<%= Jugadalot.where(:ticket => ticketsganadorest.id).last.monto %></td>
+        
+        <td><b>$<%=ticketsganadorest.pagoreal %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
 
 <br>
 
@@ -51,7 +37,7 @@
 <% @array_id_tks_jugadas = [] %>
 
 <% @ticketsganadorestsxfechat.each do |ticketsganadorest| %>
-  <% @array_id_tks_jugadas << ticketsganadorest.ticket_id%>
+  <% @array_id_tks_jugadas << ticketsganadorest.id%>
   <% @array_id_tks_jugadas.uniq!%>
 <%end%>
 
@@ -60,7 +46,7 @@
 <% @suma_ticket_ganadores = 0%>
 
 <% @ticketsganadorestsxfechat.each do |ticketsganadorest| %>
-  <% @suma_ticket_ganadores += ticketsganadorest.montoacobrar.to_i%>
+  <% @suma_ticket_ganadores += ticketsganadorest.pagoreal.to_i%>
 <%end%>
 
 

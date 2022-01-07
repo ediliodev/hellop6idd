@@ -31,13 +31,13 @@ class MenuadmticketsganadoresxfechatsController < ApplicationController
     y, m, d = @dia2.to_s.split("-")
 
     if not (Date.valid_date? y.to_i, m.to_i, d.to_i) # sacado de link: https://stackoverflow.com/questions/2955830/how-to-check-if-a-string-is-a-valid-date
-      redirect_to "/menuadmticketsganadoresxfechats/new", notice: "Debe elegir una fecha final valida. Ej. favor verifiicar si el mes es de 30 o 31 dias." and return
+      redirect_to "/menuadmticketsganadoresxfechats/new", notice: "Debe elegir una fecha final valida. Ej. favor verificar si el mes es de 30 o 31 dias." and return
     end
 
     y, m, d = @dia1.to_s.split("-")
     
     if not (Date.valid_date? y.to_i, m.to_i, d.to_i) # sacado de link: https://stackoverflow.com/questions/2955830/how-to-check-if-a-string-is-a-valid-date
-      redirect_to "/menuadmticketsganadoresxfechats/new", notice: "Debe elegir una fecha de inicio valida. Ej. favor verifiicar si el mes es de 30 o 31 dias." and return
+      redirect_to "/menuadmticketsganadoresxfechats/new", notice: "Debe elegir una fecha de inicio valida. Ej. favor verificar si el mes es de 30 o 31 dias." and return
     end
 
     @dia2 = @dia2.to_date.tomorrow # + 1.day    #como en between simepre empieza al inicio del dia, o sea a la media noche, La fecha final le sumaremos un dia para que seal igual al final del dia elegido, que es igual al inicio del dia posterior al final deseado. O sea, desde inicio de A hasta inicio de C es igual a: Desde inicio de a hasta final de B. (Donde termina B empieza C) ok. Ted. Rails concole. ok.
@@ -45,7 +45,7 @@ class MenuadmticketsganadoresxfechatsController < ApplicationController
 
     #@valor = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids ).sum(:monto)
 
-    @ticketsganadorestsxfechat = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => [Ticket.where(:ganador => "si", :pago => nil).ids]).order(:sucursal)
+    @ticketsganadorestsxfechat = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:activo => "si", :ganador => "si", :pago => nil).ids]).order(:user_id) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
 
 
 

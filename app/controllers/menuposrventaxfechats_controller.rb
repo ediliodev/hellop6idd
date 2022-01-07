@@ -47,18 +47,41 @@ class MenuposrventaxfechatsController < ApplicationController
     @objeto_array_ventas = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids )
    
     @valor = @objeto_array_ventas.sum(:monto) 
-    @cantidad_de_tickets_vendidos = @objeto_array_ventas.count
 
-    @ganadores_cuadre = Ticketsganadorest.between_times(@dia1.to_date , @dia2).where(:sucursal => current_user.email.split('@')[0]).sum(:montoacobrar)
+    #@cantidad_de_tickets_vendidos = @objeto_array_ventas.count
+    #@cantidad_de_tickets_vendidos_virtual = Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id ).count.to_i - 1 #restar el ticket actual ok. 
+    @cantidad_de_tickets_vendidos_virtual = Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id )#
+
+    #contabilizar solo los impresos
+    @contador_tks_impresos_user = 0.to_i
+
+    @cantidad_de_tickets_vendidos_virtual.each do |ticket|
+        if not ticket.fechaimpresion.nil?
+            @contador_tks_impresos_user += 1.to_i # contamos tks impresos, no los virtuales que  se destryen o se quedan vacios sin imprimirse en session login logout ok.        
+        end
+    end
+    
+    @cantidad_de_tickets_vendidos = @contador_tks_impresos_user
+
+
+    #@ganadores_cuadre =  Ticketsganadorest.between_times(@dia1.to_date , @dia2).where(:sucursal => current_user.email.split('@')[0]).sum(:montoacobrar)
+    @ganadores_cuadre = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:ganador => "si").ids], :user_id => current_user.id ).sum(:pagoreal) # ordenar por usuario para luego hacer la r
+
+
 
     #Tickets pendientes de pago son Todos los tickets ganadores de ese rango de fecha no pagados.sumatoria
-    @cantidad_de_tickets_pendiente_de_pago = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si", :ganador => "si", :pago => nil).ids).count
+    #@cantidad_de_tickets_pendiente_de_pago = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si", :ganador => "si", :pago => nil).ids).count
+
+    @cantidad_de_tickets_pendiente_de_pago = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:ganador => "si", :pago => nil).ids], :user_id => current_user.id ).count
 
     @dia1 = session[:fecha_venta_dia_1].values.join("-") # para el show dd-mm-aaaa
     @dia2 = session[:fecha_venta_dia_2].values.join("-") # para el show dd-mm-aaaa
 
    # session[:fecha_venta_dia] = nil
-    
+
+
+
+
     @st = ""
     @font = "|2C" # Tamanio de las letras.
 

@@ -1,0 +1,219 @@
+<style type="text/css">
+	
+
+   
+
+    .button {
+       
+
+		background-color: #4CAF50; /* Green */
+		color: white;
+		padding: 15px 15px;
+        
+        border-radius: 15px;
+        -moz-border-radius: 15px;
+        -webkit-border-radius: 15px;
+        margin:5px
+    }
+    
+    .small-btn {
+    	 padding: 10px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin:10px
+
+ width: 50px;
+        height: 25px;
+       
+    }
+    
+    .medium-btn {
+    	 padding: 10px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin:10px
+         width: 70px;
+        height: 30px
+       
+    }
+    
+    .big-btn {
+    	 padding: 10px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin:10px
+         width: 90px;
+        height: 40px;
+        
+    }
+
+
+</style>
+
+<!-- 
+    <button class="button big-btn">55</button> 
+    <button class="button medium-btn">Tok</button> 
+    <button class="button small-btn">T88</button> 
+
+<script type="text/javascript">
+	document.body.addEventListener('touchmove', function (event) {
+    event.preventDefault();
+}, false);
+
+</script>
+
+-->
+
+
+<!-- Script resize winodws buttons csss js document css 
+-->
+
+<body onload="tamanio_botones()">  </body>
+
+<script type="text/javascript">
+   
+var userAgent1 = navigator.vendor;
+var userAgent2 = navigator.platform;
+
+
+function tamanio_botones(argument) {
+
+
+var userAgent1 = navigator.vendor;
+var userAgent2 = navigator.platform;
+
+ if( ( (/Apple|iPhone|iPod|iPad/.test(userAgent1) ) || (/Apple|iPhone|iPod|iPad/.test(userAgent2) ) ) && (!window.MSStream) ){
+    //return "iOS";  
+    if( (screen.width < 321) || (screen.height < 569) ) {
+    //iphone 6 screen size ok
+     document.getElementById("boton01").style.padding="12px 6px";
+     document.getElementById("boton02").style.padding="12px 6px";
+     document.getElementById("boton03").style.padding="12px 6px";
+     document.getElementById("boton04").style.padding="12px 6px";
+     document.getElementById("boton05").style.padding="12px 6px";
+     document.getElementById("boton06").style.padding="12px 6px";
+     document.getElementById("boton07").style.padding="12px 6px";
+     document.getElementById("boton08").style.padding="12px 6px";
+     document.getElementById("boton09").style.padding="12px 6px";
+     document.getElementById("boton10").style.padding="12px 6px";
+     document.getElementById("boton11").style.padding="12px 6px";
+     document.getElementById("boton12").style.padding="12px 6px";
+     document.getElementById("boton13").style.padding="12px 6px";
+     document.getElementById("boton14").style.padding="12px 6px";
+     document.getElementById("boton15").style.padding="12px 7px";
+     document.getElementById("boton16").style.padding="12px 6px";
+     document.getElementById("boton17").style.padding="12px 6px";
+     document.getElementById("boton18").style.padding="12px 6px";
+     document.getElementById("boton19").style.padding="12px 6px";
+     document.getElementById("boton20").style.padding="12px 6px";
+     document.getElementById("boton21").style.padding="12px 5px";
+
+    }else{
+	     document.getElementById("boton01").style.padding="13px 13px";
+	     document.getElementById("boton02").style.padding="13px 13px";
+	     document.getElementById("boton03").style.padding="13px 13px";
+	     document.getElementById("boton04").style.padding="13px 13px";
+	     document.getElementById("boton05").style.padding="13px 13px";
+	     document.getElementById("boton06").style.padding="13px 13px";
+	     document.getElementById("boton07").style.padding="13px 13px";
+	     document.getElementById("boton08").style.padding="13px 13px";
+	     document.getElementById("boton09").style.padding="13px 13px";
+	     document.getElementById("boton10").style.padding="13px 13px";
+		 document.getElementById("boton11").style.padding="13px 13px";
+	     document.getElementById("boton12").style.padding="13px 13px";
+	     document.getElementById("boton13").style.padding="13px 13px";
+	     document.getElementById("boton14").style.padding="13px 13px";
+	     document.getElementById("boton15").style.padding="13px 14px";
+	     document.getElementById("boton16").style.padding="13px 13px";
+	     document.getElementById("boton17").style.padding="13px 13px";
+	     document.getElementById("boton18").style.padding="13px 13px";
+	     document.getElementById("boton19").style.padding="13px 13px";
+	     document.getElementById("boton20").style.padding="13px 13px";
+	     document.getElementById("boton21").style.padding="13px 12px";
+    }
+
+ } // fin del if condition del detector de iphones ok.
+
+} // fin de la funcion
+															
+	
+	
+
+
+</script>
+
+
+	<div class="botonera">
+		<button id="boton01" class="button" type="button" onclick=num1();>1</button> 
+		<button id="boton02" class="button" type="button" onclick=num2();>2</button> 
+		<button id="boton03" class="button" type="button" onclick=num3();>3</button> 
+		<button id="boton04" class="button" type="button" onclick=num4();>4</button> 
+		<button id="boton05" class="button" type="button" onclick=num5();>5</button> 
+		<button id="boton06" class="button" type="button" onclick=num6();>6</button> 
+		<button id="boton07" class="button" type="button" onclick=num7();>7</button> 
+		
+		
+		<button id="boton08" class="button" type="button" onclick=num8();>8</button> 
+		<button id="boton09" class="button" type="button" onclick=num9();>9</button>
+		<button id="boton20" style="color:darkred;" class="button" type="button" onclick=num_cuanto_paga();>?</button> 
+
+		<button id="boton19" style="color:darkred;" class="button" type="button" onclick=num_A();>A</button> 
+		<button id="boton11" style="color:darkred;" class="button" type="button" onclick=num_c();>C</button> 
+		<button id="boton12" style="color:darkred;" class="button" type="button" onclick=num_p();>P</button> 
+		<button id="boton10" class="button" type="button" style="background-color: lightgreen; color:black;" onclick=num0();>0</button> 
+		
+		
+	
+	</br>	
+		
+		<button id="boton13"   style="background-color:blue;   color:darkred" class="button" type="button" onclick=num_azul();>*</button> 
+		<button id="boton14"   style="background-color:white;  color:black" class="button" type="button" onclick=num_blanco();>*</button> 
+		<button id="boton15"   style="background-color:lightgray; color:black" class="button" type="button" onclick=num_mas();><b>+</button> 
+		<button id="boton16"   style="background-color:lightgray; color:black" class="button" type="button" onclick=num_menos();><b>--</button> 
+	    <button id="boton21"   class="button" type="button" onclick=num_clear_input();><</button> 
+		<button id="boton17"   style="background-color:darkorange; color:darkblue;" class="button" type="button" onclick=num_dinero();>$</button> 
+	    <button id="boton18"   style="background-color:orange; color:darkblue;"  class="button" onclick="document.forms[0].submit()">OK</button> <!-- sacado de este link: https://stackoverflow.com/questions/32737894/js-how-to-submit-form-onclick-and-send-submit-button -->
+		
+		
+
+	</div>
+
+
+
+<script type="text/javascript">
+	function num0(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "0";	}
+	function num1(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "1";	}
+	function num2(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "2";	}
+	function num3(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "3";	}
+	function num4(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "4";	}
+	function num5(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "5";	}
+	function num6(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "6";	}
+	function num7(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "7";	}
+	function num8(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "8";	}
+	function num9(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "9";	}
+
+	function num_mas(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "+";	}
+	function num_dinero(argument) { document.getElementById("jugadalot_qpt").value =  "..";	}
+	function num_cuanto_paga(argument) { document.getElementById("jugadalot_qpt").value =  ".";}
+	function num_A(argument) { document.getElementById("jugadalot_qpt").value = "/at";	}
+	function num_clr(argument) { document.getElementById("jugadalot_qpt").value =  "";	}
+
+	function num_menos(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "-";	}
+	function num_c(argument) { document.getElementById("jugadalot_qpt").value =  "/ct";	}
+	function num_p(argument) { document.getElementById("jugadalot_qpt").value =  "/pt";	}
+
+	function num_azul(argument)   { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "01"; }
+	function num_blanco(argument) { document.getElementById("jugadalot_qpt").value =  document.getElementById("jugadalot_qpt").value + "02"; }
+	
+	function num_clear_input(argument) { 
+		document.getElementById("jugadalot_qpt").value = "";
+		//aprovechar y setear la pantalla un poco mas para ipho10 en casod e ser necesario aqui por ahora misma tecla de limpiar ok.
+		document.getElementById("seteo_div_width").style= "width: 110%";
+	}
+
+
+
+</script>

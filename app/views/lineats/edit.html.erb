@@ -1,0 +1,18 @@
+<h1>Editar Linea</h1>
+<p id="notice"><%= notice || @mensajeb %></p>
+
+
+<%= render 'form', lineat: @lineat %>
+
+
+<p id="notice"><%= notice %></p>
+
+<% if notice %>
+<p>NO SALGA DE ESTA SECCION SIN COMPLETAR LOS RESULTADOS CORRECTAMENTE PARA EVITAR ERRORES DE PROCESAMIENTO. USTED DEBE COMPUTAR CINTA GANADORA Y TIEMPO DE FINALIZACION PARA ACUTALIZAR LOS RESULTADOS CORRECTAMENTE, DE LO CONTRARIO FAVOR CONTACTAR SOPORTE. GRACIAS.</p>
+<% end %>
+
+<!-- Ocultar back hasta que compute ganadores correctamente-->
+<% if not notice %>
+<%= link_to 'Show', @lineat %> |
+<%= link_to 'Back', lineats_path %>
+<% end %>

@@ -1,378 +1,306 @@
-<% if  session[:tipo_cliente] != "movil" %>
 
 
-<p id="notice"><%= notice %></p>
 
-<p id="notice"><%= notice %></p>
+<body onload="ocultar_features_si_iphone()">  </body>
 
 
-<p style="display:none;"> Valor de stt es: # checked  </p>
 
-<p id="base64" style="display:none;"  >
+<style type="text/css">
+  
 
-// StarReceiptTest.java
-// This file contains sample code illustrating how to use the POSPrinter class to
-// control your Star printer.  The basic printing and status querying mechanisms
-// are used here.  For more advanced usage of the POSPrinter class, see the 
-// JavaPOS specification.
+    .buttontk {
+       
 
-// usage instructions - Windows
-// 1. compile from command line - javac -classpath jpos113-controls.jar;jcl.jar StarReceiptTest.java
-// 2. execute from command line - java -classpath .;starjavapos.jar;stario.jar;jpos113-controls.jar;jcl.jar;xercesimpl.jar;xml-apis.jar StarReceiptTest
-
-// usage instructions - Linux 32bit
-// 1. compile from command line - javac -classpath jpos113-controls.jar:jcl.jar StarReceiptTest.java
-// 2. execute from command line - java -classpath .:starjavapos.jar:stario.jar:commandemulator.jar:jpos113-controls.jar:jcl.jar:xercesimpl.jar:xml-apis.jar StarReceiptTest
-
-// usage instructions - Linux 64bit
-// 1. compile from command line - javac -classpath jpos113-controls.jar:jcl.jar StarReceiptTest.java
-// 2. execute from command line - java -classpath .:starjavapos.jar:stario.jar:jpos113-controls.jar:jcl.jar:xercesimpl.jar:xml-apis.jar StarReceiptTest
-
-// usage instructions - Mac OS X
-// 1. compile from command line - javac -classpath jpos113-controls.jar:jcl.jar StarReceiptTest.java
-// 2. execute from command line - java -classpath .:starjavapos.jar:stario.jar:jpos113-controls.jar:jcl.jar:xercesimpl.jar:xml-apis.jar StarReceiptTest
-
-// NOTE: CHANGE THE PRINTER NAME IN THE printer.open STATEMENT BELOW TO MATCH YOUR CONFIGURED DEVICE NAME
-
-import jpos.JposConst;
-import jpos.JposException;
-import jpos.POSPrinter;
-import jpos.POSPrinterConst; 
-
-import jpos.events.ErrorEvent;
-import jpos.events.ErrorListener;
-import jpos.events.OutputCompleteEvent;
-import jpos.events.OutputCompleteListener;
-import jpos.events.StatusUpdateEvent;
-import jpos.events.StatusUpdateListener;
-import jpos.util.JposPropertiesConst;
-
-public class StarReceiptTest implements OutputCompleteListener, StatusUpdateListener, ErrorListener {
-
-  public void outputCompleteOccurred(OutputCompleteEvent event) {
-    System.out.println("OutputCompleteEvent received: time = "
-        + System.currentTimeMillis() + " output id = "
-        + event.getOutputID());
-  }
-
-  public void statusUpdateOccurred(StatusUpdateEvent event) {
-    System.out.println("StatusUpdateEvent : status id = " + event.getStatus());
-  }
-
-  public void errorOccurred(ErrorEvent event) {
-    System.out.println("ErrorEvent received: time = "
-        + System.currentTimeMillis() + " error code = "
-        + event.getErrorCode() + " error code extended = "
-        + event.getErrorCodeExtended());
-
-    try {
-      Thread.sleep(1000);
-    } catch (Exception e) {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    margin:5px
+    text-align: left;
     }
 
-    event.setErrorResponse(JposConst.JPOS_ER_RETRY);
-  }
 
-  public void runTest(String[] args) {
-    /*
-     * If you want to place the jpos.xml file elsewhere on your local file
-     * system then uncomment the following line and specify the full path to
-     * jpos.xml.
-     * 
-     * If you want to place the jpos.xml file on a webserver for access over
-     * the internet then uncomment the second System.setProperty line below
-     * and specify the full URL to jpos.xml.
-     */
-    System.setProperty( JposPropertiesConst.JPOS_POPULATOR_FILE_PROP_NAME, "jpos.xml");
-    // System.setProperty(JposPropertiesConst.JPOS_POPULATOR_FILE_URL_PROP_NAME, "http://some-where-remote.com/jpos.xml");
-
-    // constants defined for convenience sake (could be inlined)
-    String ESC = ((char) 0x1b) + "";
-    String LF = ((char) 0x0a) + "";
-    String SPACES = "                                                                      ";
-
-    // instantiate a new jpos.POSPrinter object
-    POSPrinter printer = new POSPrinter();
-
-    try {
-      // register for asynchronous OutputCompleteEvent notification
-      printer.addOutputCompleteListener(this);
-
-      // register for asynchronous StatusUpdateEvent notification
-      printer.addStatusUpdateListener(this);
-
-      // register for asynchronous ErrorEvent notification
-      printer.addErrorListener(this);
-
-      // open the printer object according to the entry names defined in jpos.xml
-      printer.open("Star TSP100 Cutter (TSP143)");
-
-      // claim exclusive usage of the printer object
-      printer.claim(1);
-
-      // enable the device for input and output
-      printer.setDeviceEnabled(true);
-
-      printer.setAsyncMode(true);
-
-      // set map mode to metric - all dimensions specified in 1/100mm units
-      printer.setMapMode(POSPrinterConst.PTR_MM_METRIC); // unit = 1/100 mm - i.e. 1 cm = 10 mm = 10 * 100 units
-
-      do {
-        // register for asynchronous StatusUpdateEvent notification
-        // see the JavaPOS specification for details on this
-
-        // printer.checkHealth(JposConst.JPOS_CH_EXTERNAL);
-//        printer.checkHealth(JposConst.JPOS_CH_INTERACTIVE);
-
-        // check if the cover is open
-        if (printer.getCoverOpen() == true) {
-          System.out.println("printer.getCoverOpen() == true");
-
-          // cover open so do not attempt printing
-          break;
-        }
-
-        // check if the printer is out of paper
-        if (printer.getRecEmpty() == true) {
-          System.out.println("printer.getRecEmpty() == true");
-
-          // the printer is out of paper so do not attempt printing
-          break;
-        }
-
-        // being a transaction
-        // transaction mode causes all output to be buffered
-        // once transaction mode is terminated, the buffered data is
-        // outputted to the printer in one shot - increased reliability
-        printer.transactionPrint(POSPrinterConst.PTR_S_RECEIPT, POSPrinterConst.PTR_TP_TRANSACTION);
-
-  //      if (printer.getCapRecBitmap() == true) {
-  //        // print an image file
-  //        try {
-  //          printer.printBitmap(POSPrinterConst.PTR_S_RECEIPT, "star.gif", POSPrinterConst.PTR_BM_ASIS, POSPrinterConst.PTR_BM_CENTER);
-  //        } catch (JposException e) {
-  //          if (e.getErrorCode() != JposConst.JPOS_E_NOEXIST) {
-  //            // error other than file not exist - propogate it
-  //            throw e;
-  //          }
-  //          // image file not found - ignore this error & proceed
-  //        }
-  //      }
-
-        // call printNormal repeatedly to generate out receipt the following
-        // JavaPOS-POSPrinter control code sequences are used here
-        // ESC + "|cA" -> center alignment
-        // ESC + "|4C" -> double high double wide character printing
-        // ESC + "|bC" -> bold character printing
-        // ESC + "|uC" -> underline character printing
-        // ESC + "|rA" -> right alignment
-
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|4C" + ESC + "|bC" + "- <%= session[:consorcio] %> -" + LF);
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|bC" + "  <%= session[:telefono] %> " + " - ( <%= session[:siglas] %> ) " + LF);
-            
-       // printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|bC" + "054-555-5555" + LF);
-
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|uC" + "Ticket:" + " <%= session[:ticket] %> " + "- Serial:" + "  <%= session[:serial] %> "  + LF);
-
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA"  + "Impreso y valido para hoy: <%= session[:hora_impresion] %> " + LF);
-
-        <%= Impresiont.find(session[:jugadas_impresa_index].to_i).jugadas.to_s %>
-
-
-
-
-// klkklkklk
-  printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|2C" + ESC + "|bC" + "" + LF);  // Hacer un espacio antes del Total.
-  printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|2C" + ESC + "|bC" + "TOTAL: $<%= session[:total_impreso] %> " + LF);
-
-
-
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|uC" + "Qnty Unit Tx Description" +
-//            SPACES.substring(0, printer.getRecLineChars() - "Qnty Unit Tx Description".length()) + LF);
-//
-//       
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, "   1  830    Soba Noodles" + LF);
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, "   1  830    Soba Noodles" + LF);
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, LF);
-
-
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|rA" + ESC + "|bC" + "Total:     2184" + LF);
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|rA" + ESC + "|bC" + "Change:      16" + LF);
-//        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, LF);
-
-
-        if (printer.getCapRecBarCode() == true) {
-          // print a Code 3 of 9 barcode with the data "123456789012" encoded
-          // the 10 * 100, 60 * 100 parameters below specify the barcode's
-          // height and width in the metric map mode (1cm tall, 6cm wide)
-          printer.printBarCode(POSPrinterConst.PTR_S_RECEIPT, "<%= session[:ticket] %>", POSPrinterConst.PTR_BCS_Code39,
-              10 * 100, 60 * 100, POSPrinterConst.PTR_BC_CENTER, POSPrinterConst.PTR_BC_TEXT_NONE);
-        }
-
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA" + ESC + "|uC" + "TK:" + "<%= session[:ticket] %>" + " - S/N:" + "<%= session[:serial] %> "  + LF);
-
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA"  + "<%= session[:mensaje1] %> " + LF);
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|cA"  + "<%= session[:mensaje2] %> " + LF);
-
-
-
-        // the ESC + "|100fP" control code causes the printer to execute
-        // a paper cut after feeding to the cutter position
-        printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "|100fP");
-
-        // terminate the transaction causing all of the above buffered
-        // data to be sent to the printer
-        printer.transactionPrint(POSPrinterConst.PTR_S_RECEIPT, POSPrinterConst.PTR_TP_NORMAL);
-
-        System.out.println("Async transaction print submited: time = "
-            + System.currentTimeMillis() + " output id = " + printer.getOutputID());
-
-        // exit our printing loop
-      } while (false);
-    } catch (JposException e) {
-      // display any errors that come up
-      e.printStackTrace();
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      // close the printer object
-      if (printer.getState() != JposConst.JPOS_S_CLOSED) {
-        try {
-          while (printer.getState() != JposConst.JPOS_S_IDLE) {
-            Thread.sleep(0);
-          }
-
-          printer.close();
-        } catch (Exception e) {
-        }
-      }
-    }
-
-    System.out.println("StarReceiptTest finished.");
-  }
-
-  public static void main(String[] args) {
-    new StarReceiptTest().runTest(args);
-  }
-}
- 
-
-  
-  
-  
-</p>
-
-<p id="flag"> </p>
-
-
-  <script type="text/javascript">
-
-  function imprime(){
-    
-    var ststst = document.getElementById("base64").innerHTML;
-    //var x = parseInt(document.getElementById("flag").innerHTML;
-    //var x = 77 ;
-    //if ( x == 77 )
-    app.pcData(ststst, "ticket");
-    //document.getElementById("flag").innerHTML = "34"; 
-    //document.getElementById("base64").innerHTML="99";
-    //else
-    //return;
-    }
-  </script>
+</style>
 
 
 
 
 <script type="text/javascript">
-/*
-  function saludar(){
-    alert("saludos");
-
-    }
-*/
-</script>
-
-<script>  
-//window.setTimeout(alert("88"), 8000 ); 
-//window.setInterval(saludar(), 2000);
- </script>
+   
+var userAgent1 = navigator.vendor;
+var userAgent2 = navigator.platform;
 
 
+function ocultar_features_si_iphone(argument) {
 
+// document.getElementById("ocultar_div1_si_iphone").style="display:none";
+var userAgent1 = navigator.vendor;
+var userAgent2 = navigator.platform;
 
-<h3 style="display:none;" > <p id="message"><%= Time.now %></p> </h3>
-
-<p style="display:none;"> <a href="#" onclick="app.exit()" > Salir de la plataforma desde Rails </a></p>
-
-
-<buttom style="display:none;" id="este" onclick="imprime()">((Boton - Imprimir))</buttom> </br>
-
-
-<script type="text/javascript">
-
-function avisar() {
-  setTimeout(function(){  
-    //alert("avisando desde evento parrafo");
+ if( ( (/Apple|iPhone|iPod|iPad/.test(userAgent1) ) || (/Apple|iPhone|iPod|iPad/.test(userAgent2) ) ) && (!window.MSStream) ){
+    //return "iOS";  
+    document.getElementById("ocultar_div1_si_iphone").style="display:none";
+    document.getElementById("detalles_usuario").style="display:none";
+    document.getElementById("footer_div_ok").style="display:none";
+    document.getElementById("tamano_ticket").style="font-size: 17px";
     
-    document.getElementById("este").click();
-    document.getElementById("este").innerHTML = "botonN";
-    //window.location.replace("https://www.google.com");
-
-    window.location.replace("http://172.28.2.228:3000/jugadalots/new");
-    
-    } , 0000);
-  
-
-  //document.getElementById("este").click();
-
-
-  //alert("avisando desde evento parrafo");
-  //document.getElementByClassName("clase8")[0].click();
-  //document.getElementById("este").click();
+ }
   }
 
 </script>
 
-<iframe id="parrafo01" style="display:none;" onload="avisar()" </iframe>  <!-- No brorrar el onload hace el redirect ok. -->
+
+<div id="ocultar_div1_si_iphone"> 
+    <button class="button" type="button" onclick="PrintElemConTabla('div_a_imprimir')" style="color:white;background-color:blue; height:35px;">  LocalPrintTK </button> 
 
 
-<%end%>
+    <button class="button" type="button" onclick="copy_ticket('div_a_imprimir')" style="color:white;background-color:darkgreen; height:35px;">  AndroidPrinTK </button> 
+
+</div>
+
+
+<% if  session[:tipo_cliente] == "movil" || true %>
 
 
 
-<% if  session[:tipo_cliente] == "movil" %>
-    
-    
-   <body onload="onload();"> 
 
-    <h2>Procesando impresion...</h2>
+<div id="div_a_imprimir" >
 
-    <p id="impresion_movil"><%= session[:st_movil]  %> </p>
+   <!--  <p id="impresion_movil"><%= session[:st_movil]  %> </p> -->
+
+<h4 id="tamano_ticket">
+  <%= session[:consorcio]  %> (<%= session[:siglas] %>)</br></br>
+  <%= session[:telefono] %> </br></br>
+  <%= session[:hora_impresion].to_s[0..9] %> </br></br>
+  <%= session[:hora_impresion].to_s[11..19] %></br></br> 
+  
+  <%= session[:ticket]%>+<%=session[:serial]%> </br></br>
    
 
-   <script type="text/javascript"> 
+<%= session[:parlay_count_nombre].to_s.upcase %> 
+</br>
+<%  @jugadalots = Jugadalot.where(:ticket_id => session[:jugadalots_get_tk_id].to_i) || [] %>
 
-       var textbox; 
 
-      
+  <table>
+    <thead>
+      <tr>
+        <th style="font-size: 75%;">PC</th>
+        
+        <th style="font-size: 80%;">Jugada</th>
+        <th style="font-size: 80%;">Apuesta</th>
+        <th style="font-size: 80%;">ML</th>
+        
+        
+      </tr>
+    </thead>
 
-       function onload() {  
-         //  textbox = document.getElementById('impresion_movil').value; 
-           showAndroidToast();
-           window.location.replace("http://192.168.0.123:3000/jugadalots/new");
-       } 
+    <tbody>      
+      <% @jugadalots.each do |jugadat| %>
+      <% if jugadat.n1 == nil  %>
+      <% @n1 = "*" %>
+      <% elsif jugadat.n1.to_i < 10  %>
+      <% @n1 = "0" + jugadat.n1.to_s %>
+      <% else %>
+      <% @n1 = jugadat.n1.to_s %>
+      <% end %>
 
-         function showAndroidToast(toast) { 
-           textbox = document.getElementById('impresion_movil').innerHTML; 
-           Android.showToast(textbox); 
-       } 
+      <% if jugadat.n2 == nil  %>
+      <% @n2 = "*" %>
+      <% elsif jugadat.n2.to_i < 10  %>
+      <% @n2 = "0" + jugadat.n2.to_s %>
+      <% else %>
+      <% @n2 = jugadat.n2.to_s %>
+      <% end %>
 
-      
+      <% if jugadat.n3 == nil  %>
+      <% @n3 = "*" %>
+      <% elsif jugadat.n3.to_i < 10  %>
+      <% @n3 = "0" + jugadat.n3.to_s %>
+      <% else %>
+      <% @n3 = jugadat.n3.to_s %>
+      <% end %>
 
-   </script> 
+        <tr>
+
+        <% @linea_pelea =  Lineat.today.where(:pelea => jugadat.pelea.to_i).first || nil %>
+
+        <td style="font-size: 70%; color: darkblue"><b> <%=jugadat.pelea.to_i%>-<%=@linea_pelea.coliseo.to_s[1..1]%></td>
+       <!--  <td style="text-align: center;"><b><%= jugadat.apuestacinta %></td> -->
+        
+          
+        <%if @linea_pelea != nil %>
+
+          <%if ( (jugadat.apuestacinta.to_s == "-") || (jugadat.apuestacinta.to_s == "+") ) %>
+            
+            <%if ( (jugadat.apuestacinta.to_s == "-")  ) %>
+              <td style="font-size: 70%;"><%= "T.menos-" %></td>
+            <%end%>
+
+            <%if ( (jugadat.apuestacinta.to_s == "+")  ) %>
+              <td style="font-size: 70%;" ><%= "T.mas+" %></td>
+            <%end%>
+
+          <%end%>
+
+
+          <%if (jugadat.apuestacinta.to_s == "azul") %>
+              <td style="font-size: 65%;" ><%=@linea_pelea.azul.to_s[0..7]%></td>
+          <%end%>
+
+          <%if (jugadat.apuestacinta.to_s == "blanco") %>
+              <td style="font-size: 65%;" ><%=@linea_pelea.blanco.to_s[0..7]%></td>
+          <%end%>
+
+        <%else%>
+
+          <td style="font-size: 65%;" > A vs B </td>
+
+        <%end%>
+
+
+          
+
+          <%if ( ( (jugadat.apuestacinta == "-" )|| (jugadat.apuestacinta == "+")) && (@linea_pelea != nil) ) %>
+             <td style="font-size: 70%; text-align: left;"><%= jugadat.apuestacinta %><%=@linea_pelea.tiempoml%></td>
+          <%else%>
+              <td style="font-size: 70%; text-align: left;"><%= jugadat.apuestacinta %></td>
+          <%end%>
+
+          
+
+          <td style="font-size: 70%" ><%= jugadat.ml %></td>
+          
+        </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+
+
+
+</br>
+
+  Apostado:....$ <%= session[:apostado_tk] %></br></br>
+  Ganacia :.....$ <%= session[:ganancia_tk] %></br></br>
+  <b>A COBRAR:...$ <%= session[:acobrar_tk]  %></br></br>
+
+  <% session[:hora_impresion] %></br> 
+  
+  Buena Suerte!</br></br>
+  <%=session[:ticket]%>+<%=session[:serial]%> </br>
+
+<button class="buttontk" onclick="location.href='../jugadalots/new';"></button>
+<button class="buttontk" onclick="aumentar_font_mediano1();" style="background-color: orange;"></button>
+<button class="buttontk" onclick="aumentar_font_mediano2();" style="background-color: darkorange;"></button>
+<button class="buttontk" onclick="aumentar_font_mediano3();" style="background-color: darkred;"></button>
+<button class="buttontk" onclick="aumentar_font_grande();" style="background-color: red;"></button>
+
+
+</h4>
+
+
+
+<script type="text/javascript">
+  
+  function retornar_inicio(argument) {
+    // body...
+    //history.back();
+   ///onclick="location.href='../jugadalots/new';"
+  }
+
+  function aumentar_font_mediano1(argument) {
+    // body...
+    document.getElementById("tamano_ticket").style="font-size: 19px";
+  }
+
+  function aumentar_font_mediano2(argument) {
+    // body...
+    document.getElementById("tamano_ticket").style="font-size: 23px";
+  }
+
+  function aumentar_font_mediano3(argument) {
+    // body...
+    document.getElementById("tamano_ticket").style="font-size: 26px";
+  }
+
+
+  function aumentar_font_grande(argument) {
+    // body...
+    //alert('klk');
+    document.getElementById("tamano_ticket").style="font-size: 28px";
+  }
+ 
+  function PrintElemConTabla(elem)
+  {
+      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+      mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+      mywindow.document.write('</head><body >');
+    //  mywindow.document.write('<h1>' + document.title  + '</h1>');
+      mywindow.document.write(document.getElementById(elem).innerHTML);
+      mywindow.document.write('</body></html>');
+
+      mywindow.document.close(); // necessary for IE >= 10
+      mywindow.focus(); // necessary for IE >= 10*/
+
+      mywindow.print();
+      mywindow.close();
+
+      return true;
+  }  
+
+// esta funcion de copiar fue sacada de este link: https://stackoverflow.com/questions/36639681/how-to-copy-text-from-a-div-to-clipboard
+function copy_ticket(containerid) {
+  if (document.selection) {
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("copy");
+  } else if (window.getSelection) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById(containerid));
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    alert("MovilPrint Ready Ok.")
+  }
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+   
+
+
+
 
 
 
 <%end%>
+
+                        
+

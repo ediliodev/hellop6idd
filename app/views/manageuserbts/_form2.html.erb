@@ -11,7 +11,7 @@
   </div>
 
 
-  <div class="field">
+  <div class="field" style="display: none">
       <%= f.label :gppt_id %>
       <%= f.select :gppt, Gppt.order(:nombre).collect{ |item|  [item.nombre, item.id] }, :selected => @real_user_edit.gppt_id %>  
   </div>

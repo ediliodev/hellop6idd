@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Coliseos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coliseots.each do |coliseot| %>
+      <tr>
+        <td><%= coliseot.nombre %></td>
+        <td><%= coliseot.descripcion %></td>
+        <td><%= link_to 'Show', coliseot %></td>
+        <td><%= link_to 'Edit', edit_coliseot_path(coliseot) %></td>
+        <td><%= link_to 'Destroy', coliseot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo Coliseo', new_coliseot_path %>

@@ -1,0 +1,175 @@
+<%= form_for(lineat) do |f| %>
+  <% if lineat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lineat.errors.count, "error") %> prohibited this lineat from being saved:</h2>
+
+      <ul>
+      <% lineat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<table>
+  <tr> 
+    <td>
+      <%= f.label :coliseo %>
+      <% if(lineat.status == 'cerrada') %>
+        <%= f.text_field :coliseo, readonly: true %>
+      <%else %>
+         <%= f.select :coliseo, Coliseot.all.order(:nombre).collect{ |item|  [ "" + item.nombre , item.nombre ] }, :selected => lineat.coliseo, :include_blank => true %> 
+      <%end%>
+
+   </td>
+    <td>
+      <%= f.label :bloque %>
+      <% if(lineat.status == 'cerrada') %>
+        <%= f.text_field :bloque, readonly: true %>
+      <%else %>
+        <%= f.text_field :bloque %>
+      <%end%>      
+      
+   </td>
+    <td>  
+      <%= f.label :pelea %>
+     <% if(lineat.status == 'cerrada') %>
+        <%= f.text_field :pelea, readonly: true %>
+      <%else %>
+        <%= f.text_field :pelea %>
+      <%end%>
+   </td>
+
+  </tr>
+
+  <tr> </tr>
+  <tr> </tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+
+  <tr> 
+      <td>
+       <%= f.label :azul.to_s %>
+       <% if(lineat.status == 'cerrada') %>
+          <%= f.text_field :azul, readonly: true %>
+      <%else %>
+         
+          <%= f.select :azul, Trabat.all.order(:nombre).collect{ |item|  [ "" + item.nombre , item.nombre ] }, :selected => lineat.azul, :include_blank => true %> 
+  
+      <%end%>   
+     </td>
+
+      <td>
+        <%= f.label :mla %>
+         <% if(lineat.status == 'cerrada') %>
+             <%= f.text_field :mla, readonly: true %>
+        <%else %>
+         <%= f.text_field :mla %>
+        <%end%>   
+     </td>
+
+     <td>
+        <%= f.label "Tiempo" %>
+        <% if(lineat.status == 'cerrada') %>
+             <%= f.text_field :tiempoml, readonly: true %>
+        <%else %>
+         <%= f.text_field :tiempoml %>
+        <%end%> 
+     </td>
+  </tr>
+
+  <tr> 
+      <td>
+       <%= f.label :blanco %>
+       <% if(lineat.status == 'cerrada') %>
+             <%= f.text_field :blanco, readonly: true %>
+        <%else %>
+           <%= f.select :blanco, Trabat.all.order(:nombre).collect{ |item|  [ "" + item.nombre , item.nombre ] }, :selected => lineat.blanco, :include_blank => true %> 
+        <%end%> 
+     </td>
+
+      <td>
+        <%= f.label :mlb %>
+        <% if(lineat.status == 'cerrada') %>
+             <%= f.text_field :mlb, readonly: true %>
+        <%else %>
+         <%= f.text_field :mlb %>
+        <%end%> 
+     </td>
+     <td>
+      
+       <%= f.label :status %>
+       <!-- NO permitir abrir peleas luego de estar cerrada  -->
+       <% if(lineat.status == 'cerrada') %>
+          <%= f.select :status, options_for_select([ ['Cerrada', 'cerrada']], :selected => lineat.status, :include_blank => true) %>
+      <%else%>
+            <%= f.select :status, options_for_select([ ['Abierta' ,'abierta'], ['Cerrada', 'cerrada'] ], :selected => lineat.status, :include_blank => true) %>
+      <%end%>
+
+     </td>
+  </tr>
+  
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  <tr></tr>
+  
+  <tr> 
+      
+      <td>
+       <%= f.label "Under" %>
+       <% if(lineat.status == 'cerrada') %>
+             <%= f.text_field :oua, readonly: true %>
+        <%else %>
+         <%= f.text_field :oua %>
+        <%end%> 
+     </td>
+
+      <td>
+       <%= f.label "Over" %>
+       <% if(lineat.status == 'cerrada') %>
+             <%= f.text_field :oub, readonly: true %>
+        <%else %>
+         <%= f.text_field :oub %>
+        <%end%> 
+     </td>
+
+  </tr>
+
+
+</table>
+
+</br>
+
+<div style="color:red" class="actions">
+   >>>> <%= f.submit "Crear o Actualizar Pelea"   %> <<<<
+</div>
+
+</br>
+
+
+<table>
+  <tr>
+    <td>
+      <%= f.label :resultado %>
+      <%= f.select :resultado, options_for_select([['' ,''],['Azul Ganador' ,'azul'], ['Blanco Ganador', 'blanco'], ['Tabla', 'empate'], ['Nula', 'nula']], :selected => lineat.resultado, :include_blank => true) %>
+
+    </td>
+    <td>
+       <%= f.label :tiempofinalizado %>
+       <%= f.text_field :tiempofinalizado %>
+    </td>
+  </tr>
+</table>
+
+
+ 
+<% end %>

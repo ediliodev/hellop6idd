@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BabyLot</title>
+    <title>GFFSPORT</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,8 +11,10 @@
 
   </head>
 
-  <body>
-
+  <body style="background-color: #ffdad8">
+    <% #f9c5c5 %>
+    <% #b5ebf2 %>
+    
 
 <!--Mensaje de error de login o demas gema Devise ted ok -->
 	
@@ -37,44 +39,48 @@
   	
   </script>
 
-<div id="detalles_usuario">
 
-  <% if user_signed_in? && (session[:tipo_cliente] != "movil") %>
-    Logged in as <strong><%= current_user.email %> - </strong>.
-    <%= link_to "Salir", destroy_user_session_path, method: :delete %>
-  <% else if not user_signed_in? %>
+  <div id="detalles_usuario">
+
+    <% if user_signed_in? && (session[:tipo_cliente] != "movil") %>
+
+<button class="buttontk" onclick="location.href='../jugadalots/new';"><b> < </b></button>
+<button class="buttontk"><b> <%=link_to 'MENU', menuts_path %></b> </button>
+<button class="buttontk"><b> <%=link_to 'LN', '../lineatprints'%></b> </button>
+
+<button class="buttontk"><b> <%=current_user.email.split("@")[0][0..8]%></b> </button>
+
+
+
+
+
+
+
+      
+      <button class="buttontk" onclick="location.href='../jugadalots/new';"><b><%= link_to "X", destroy_user_session_path, method: :delete %></b></button>
+      
+    <% else if not user_signed_in? %>
+     
+      <%= link_to "Login", new_user_session_path %>
+      <%end%>
+    <% end %>
+
+
+
+
+  </div>
+
+  <%= yield %>
    
-    <%= link_to "Login", new_user_session_path %>
-    <%end%>
-  <% end %>
-
-    <!-- 
-      <% if user_signed_in? && (session[:tipo_cliente] == "desktop") && (current_user.tipousuariot_id == 2) && (session[:terminal_autorizada] == true) %>
-       | <%= link_to 'Editar', edit_user_registration_path %> |
-       <%= link_to "Nueva Suc.", new_user_registration_path %> |
-       <%= link_to "Inicio", root_path %> 
-      <%end%>
-
-      <% if user_signed_in? && (session[:tipo_cliente] == "movil") && (current_user.tipousuariot_id == 2) && (session[:terminal_autorizada] == true) %>
-       | <%= link_to 'Editar', edit_user_registration_path %> |
-       <%= link_to "Nueva Suc.", new_user_registration_path %> |
-       <%= link_to "Inicio", root_path %> 
-      <%end%>
-
-    -->
-
-
-</div>
-
-
-
-
-    <%= yield %>
-
+  <div id="footer_div_ok">
+    
     <footer>
     </br>
+    
      <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >INICIO</button> 
     </footer>
+
+  </div>
 
   </body>
 

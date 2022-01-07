@@ -1,0 +1,95 @@
+
+<h2>Detalles del Ticket Consultado:</h2>
+
+<h3>
+  Ticket:     [ <%= @ticket_id.to_s.upcase  %> ]</br>
+  Parlay:       <%= @parlay_tk_consultado.to_s.upcase %> </br>
+  MontoTk:      <%= @monto_tk  %> </br>
+  PosiblePago:  <%= @posible_pago_tk %> </br>
+  Activo:       <%= @activo.to_s.upcase %> </br>
+  Ganador:    [ <%= @ganador.to_s.upcase %> ] </br>
+  Pago?:        <%= @pago.to_s.upcase %>  </br>
+  Sucursal:     <%= @sucursal.to_s.upcase %> </br>
+  Fecha impreso:<%= @fecha_impresion.to_s[0..19] %> </br>
+  </br>
+
+  <% if @st.to_s != "" %>
+  <%= @st %>
+  <%end%>
+
+  </br>
+  
+</h3>
+
+
+<h3>Jugadas del Ticket:</h3>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pelea</th>
+        <th>A</th>
+        <th>A vs B</th>
+        <th>Apuesta</th>
+        <th>ML</th>
+         <th></th>
+        
+      </tr>
+    </thead>
+
+    <tbody>      
+      <% @jugadalots.reverse_each do |jugadat| %>
+  		<% if jugadat.n1 == nil  %>
+  		<% @n1 = "*" %>
+  		<% elsif jugadat.n1.to_i < 10  %>
+  		<% @n1 = "0" + jugadat.n1.to_s %>
+  		<% else %>
+  		<% @n1 = jugadat.n1.to_s %>
+  		<% end %>
+
+  		<% if jugadat.n2 == nil  %>
+  		<% @n2 = "*" %>
+  		<% elsif jugadat.n2.to_i < 10  %>
+  		<% @n2 = "0" + jugadat.n2.to_s %>
+  		<% else %>
+  		<% @n2 = jugadat.n2.to_s %>
+  		<% end %>
+
+  		<% if jugadat.n3 == nil  %>
+  		<% @n3 = "*" %>
+  		<% elsif jugadat.n3.to_i < 10  %>
+  		<% @n3 = "0" + jugadat.n3.to_s %>
+  		<% else %>
+  		<% @n3 = jugadat.n3.to_s %>
+  		<% end %>
+
+        <tr>
+          <td style="color: darkblue"><b> <%= jugadat.pelea.to_i  %></td>
+          <td style="text-align: center;"><b><%= jugadat.apuestacinta %></td>
+          
+          <% @linea_pelea =  Lineat.today.where(:pelea => jugadat.pelea.to_i).first || nil %>
+<%if @linea_pelea != nil %>
+  <td><%= @linea_pelea.azul %>(<%=@linea_pelea.mla%>) vs <%=@linea_pelea.blanco%>(<%=@linea_pelea.mlb%>) </td>
+<%else%>
+  <td> A vs B </td>
+<%end%>
+          
+
+          <%if ( ( (jugadat.apuestacinta == "-" )|| (jugadat.apuestacinta == "+")) && (@linea_pelea != nil) ) %>
+             <td style="text-align: center;"><%= jugadat.apuestacinta %><%=@linea_pelea.tiempoml%></td>
+          <%else%>
+              <td style="text-align: center;"><%= jugadat.apuestacinta %></td>
+          <%end%>
+
+          
+
+          <td><%= jugadat.ml %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+  </table>
+
+

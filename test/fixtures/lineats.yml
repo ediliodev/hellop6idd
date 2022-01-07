@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  coliseo: MyString
+  bloque: MyString
+  pelea: MyString
+  azul: MyString
+  blanco: MyString
+  mla: MyString
+  mlb: MyString
+  tiempoml: MyString
+  oua: MyString
+  oub: MyString
+  status: MyString
+  resultado: MyString
+  tiempofinalizado: MyString
+
+two:
+  coliseo: MyString
+  bloque: MyString
+  pelea: MyString
+  azul: MyString
+  blanco: MyString
+  mla: MyString
+  mlb: MyString
+  tiempoml: MyString
+  oua: MyString
+  oub: MyString
+  status: MyString
+  resultado: MyString
+  tiempofinalizado: MyString

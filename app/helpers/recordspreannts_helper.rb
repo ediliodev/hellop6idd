@@ -1,0 +1,2 @@
+module RecordspreanntsHelper
+end

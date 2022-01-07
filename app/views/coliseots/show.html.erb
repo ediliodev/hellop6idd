@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @coliseot.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @coliseot.descripcion %>
+</p>
+
+<%= link_to 'Edit', edit_coliseot_path(@coliseot) %> |
+<%= link_to 'Back', coliseots_path %>

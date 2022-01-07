@@ -58,6 +58,11 @@ class GanadorestsController < ApplicationController
       
       @grupo_procesado_datetime = @grupo_procesado_datetime.strftime("%d/%m/%y - %H:%M:%S").to_s
 
+    
+    #Ejecuto normal siempre y cuando no sea un super pale. (Ya que el super pale no computa quinielas ni tripletas) De lo contrario, es un sp, salto el bloque y sigo debajo del if end condition. ok. ted.
+
+    if (@sorteo.to_i != 13 && @sorteo.to_i != 14  && @sorteo.to_i != 17 )
+
       #procesar los ganadores de: QUINIELA, PALE Y TRIPLETAS DE ESE SORTEOOOOO OK TED.
       #quinielas:
       encontrar_y_procesar_ganadores_quiniela(@sorteo, @fecha.to_date, @primero, 1 , @grupo_procesado) # Computar ganadores quinielas con el primer premio  - params a enviar:  sorteot , fecha , numero_segun_cardinalidad , cardinalidad 
@@ -83,21 +88,33 @@ class GanadorestsController < ApplicationController
       #computar resultados en base a ganadores y gpp de cada ticket de cada sucursal. klk.
       #procesar ganadores en ese sorteo de esa fecha en la tabla de ganadores de ese sorteo o global?
 
-      
       #resetear la disponibilidad en la DB en base al modelo de ese sorteo ingresado.
       #resetar control q, p, t, y sp (pdte) para que esten dispobible todos para la proxima apertura del sorteo.
       @model_control_q = @modelo_actual.modelocontrolq.classify.constantize
       @model_control_q.update_all("vendida = 0"); # reseteo la disponibiliadad de quinielas de ese sorteo. (01-Nacional Noche).
 
-       @model_control_p = @modelo_actual.modelocontrolp.classify.constantize
-       @model_control_p.update_all("vendida = 0");
+      @model_control_p = @modelo_actual.modelocontrolp.classify.constantize
+      @model_control_p.update_all("vendida = 0");
 
-       @model_control_t = @modelo_actual.modelocontrolt.classify.constantize
-       @model_control_t.update_all("vendida = 0");
+      @model_control_t = @modelo_actual.modelocontrolt.classify.constantize
+      @model_control_t.update_all("vendida = 0");
 
-       #Listo para volver a venter q, p y t para la proxima apertura de ese sorteo.
+      #Listo para volver a venter q, p y t para la proxima apertura de ese sorteo.
 
+    end
+
+    # verifico aqui si es super pale para procesar esta parte:
+    if (@sorteo.to_i == 13 || @sorteo.to_i == 14  || @sorteo.to_i == 17 )
+
+      #Usamos la misa logica de pales pero ahora para sp ok ted.
+      encontrar_y_procesar_ganadores_pale(@sorteo, @fecha.to_date, @primero, @segundo, "sp" , @grupo_procesado) 
+      @model_control_p = @modelo_actual.modelocontrolp.classify.constantize
+      @model_control_p.update_all("vendida = 0");
+
+    end
+      
       redirect_to "/ganadorests/new", notice: "Procesado correctamente #{@grupo_procesado_datetime}. OK." + " El Grupo procesado es: " +  @grupo_procesado and return 
+    
     else
       redirect_to "/ganadorests/new", notice: "X No se pudo completar el proceso. Favor contactar soporte tecnico de inmediato. " and return 
     end
@@ -329,6 +346,10 @@ def encontrar_y_procesar_ganadores_pale sorteot , fecha , n1 , n2 , cardinalidad
 
       if cardinalidad == "p23"
           @factor_multipicativo_gpp = ticket.ticket.user.gppt.p23
+      end
+
+      if cardinalidad == "sp"
+          @factor_multipicativo_gpp = ticket.ticket.user.gppt.sp
       end
 
       montoapostado *  @factor_multipicativo_gpp.to_i

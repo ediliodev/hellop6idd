@@ -1,0 +1,2 @@
+class Lineatprint < ApplicationRecord
+end

@@ -1,0 +1,42 @@
+<%= form_for(controlspltknnt) do |f| %>
+  <% if controlspltknnt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(controlspltknnt.errors.count, "error") %> prohibited this controlspltknnt from being saved:</h2>
+
+      <ul>
+      <% controlspltknnt.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :n1 %>
+    <%= f.number_field :n1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :n2 %>
+    <%= f.number_field :n2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :siglas %>
+    <%= f.text_field :siglas %>
+  </div>
+
+  <div class="field">
+    <%= f.label :limite %>
+    <%= f.number_field :limite %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendida %>
+    <%= f.number_field :vendida %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

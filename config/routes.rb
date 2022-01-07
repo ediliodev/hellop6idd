@@ -1,5 +1,20 @@
 Rails.application.routes.draw do
 
+  resources :lineatprints
+  resources :controldepagogts
+  resources :lineats
+  get '/procesar_resultados', to: 'lineats#procesar_resultados'
+  get '/tkconsultado', to: 'jugadalots#tkconsultado'
+  
+
+  resources :trabats
+  resources :coliseots
+  resources :recordspltknnts
+  resources :recordspreannts
+  resources :recordspleinnts
+  resources :controlspltknnts
+  resources :controlspreannts
+  resources :controlspleinnts
   resources :menuadmticketsganadoresxfechats
   resources :activacionclientets
   resources :menuf10ts

@@ -13,15 +13,17 @@ class MenuposrventadiaactualtsController < ApplicationController
     @dia = session[:fecha_venta_dia].values.join("-") # para el show dd-mm-aaaa
    # session[:fecha_venta_dia] = nil
     
-    @venta_sorteo_nacional_noche =  Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "01") ).sum(:monto)
-    @venta_sorteo_ganamas =         Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "02") ).sum(:monto)
-    @venta_sorteo_leidsa =          Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "03") ).sum(:monto)
-    @venta_sorteo_real =            Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "04") ).sum(:monto)
-    @venta_sorteo_nyn =             Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "05") ).sum(:monto)
-    @venta_sorteo_nyt =             Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "06") ).sum(:monto)
-    @venta_sorteo_loteka =          Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "07") ).sum(:monto)
+    @venta_sorteo_nacional_noche =  [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "01") ).sum(:monto)
+    @venta_sorteo_ganamas =         [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "02") ).sum(:monto)
+    @venta_sorteo_leidsa =          [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "03") ).sum(:monto)
+    @venta_sorteo_real =            [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "04") ).sum(:monto)
+    @venta_sorteo_nyn =             [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "05") ).sum(:monto)
+    @venta_sorteo_nyt =             [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "06") ).sum(:monto)
+    @venta_sorteo_loteka =          [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "07") ).sum(:monto)
 
-
+    @venta_sorteo_spleinnt =        [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "13") ).sum(:monto)
+    @venta_sorteo_spreannt =        [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "14") ).sum(:monto)
+    @venta_sorteo_spltknnt =        [] # Jugadalot.by_day(@dia).where(:ticket_id => Ticket.by_day(@dia).where(:user_id => current_user.id , :activo => "si").ids, :sorteot_id => Sorteot.where(:sigla => "17") ).sum(:monto)
 
     #Esto para evitar que el consorcio y los datos del reporte (Header Titulo, telefono..) no salgan en blanco si el usuario genera el reporte luego de un logout-login y sorteros cerrados o no hace / imprime tickets de jutagadas. Reasigno el valor de las variables de session :consorio, etc..
      @consorcio_interno = Consorciot.where(:id => current_user.consorciot_id.to_i).first # Provisional, hasta que arreglemos la relacion has_many entre User y modelo Consorciot. ok ted. 
@@ -72,6 +74,14 @@ class MenuposrventadiaactualtsController < ApplicationController
     @data = "LKA:$" + ActionController::Base.helpers.number_to_currency(@venta_sorteo_loteka.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")
     @st += "printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "  + %Q{"#{@font}"} + " + " +  %Q{ " #{@data}"} + " + LF);"
 
+    @data = "SPLeiN:$" + ActionController::Base.helpers.number_to_currency(@venta_sorteo_spleinnt.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")
+    @st += "printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "  + %Q{"#{@font}"} + " + " +  %Q{ " #{@data}"} + " + LF);"
+
+    @data = "SPReaN:$" + ActionController::Base.helpers.number_to_currency(@venta_sorteo_spreannt.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")
+    @st += "printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "  + %Q{"#{@font}"} + " + " +  %Q{ " #{@data}"} + " + LF);"
+
+    @data = "SPLtkN:$" + ActionController::Base.helpers.number_to_currency(@venta_sorteo_spltknnt.to_s, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")
+    @st += "printer.printNormal(POSPrinterConst.PTR_S_RECEIPT, ESC + "  + %Q{"#{@font}"} + " + " +  %Q{ " #{@data}"} + " + LF);"
 
 
     #@data = "Venta: $" + @valor.to_s # number_to_currency(@valor, :unit => "", :delimiter => ",", :precision => 0, :separator => ".")

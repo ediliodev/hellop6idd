@@ -43,9 +43,10 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
 
       
       @total_sucursales = 0
-      @total_ventas = 0
-      @total_ganadores = 0
-      @total_balance = 0
+      @total_ventas = 0.to_i
+      @total_ganadores = 0.to_i
+      @total_balance = 0.to_i
+      @total_pendientexpagar = 0.to_i
       
       a=[] 
 
@@ -56,15 +57,24 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
           @line = Menuadmrresultadoglobalxsupervisort.new # =>  Menuadmrresultadoglobalxsupervisort objetc.
           @line.sucursal = user.email.split("@")[0].to_s
           @line.venta = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:monto)
-          @line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:montoacobrar)
+         
+          #@line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:montoacobrar)
+          @line.ganadores =  Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids]).sum(:pagoreal) # ordenar por usuario para luego hacer la r         
+
+         # @line.pendientexpagar = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+           @line.pendientexpagar = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+
           @line.balance = @line.venta - @line.ganadores
           a << @line
           
           @total_sucursales +=1
-          @total_ventas += @line.venta
-          @total_ganadores += @line.ganadores
+          @total_ventas += @line.venta.to_i
+          @total_ganadores += @line.ganadores.to_i
+          @total_pendientexpagar  += @line.pendientexpagar.to_i
       end
     
+
+
       @menuadmrresultadoglobalxsupervisorts = a
      
       @total_balance = @total_ventas - @total_ganadores

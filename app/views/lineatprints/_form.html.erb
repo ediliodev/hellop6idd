@@ -1,0 +1,82 @@
+<%= form_for(lineatprint) do |f| %>
+  <% if lineatprint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lineatprint.errors.count, "error") %> prohibited this lineatprint from being saved:</h2>
+
+      <ul>
+      <% lineatprint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :coliseo %>
+    <%= f.text_field :coliseo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bloque %>
+    <%= f.text_field :bloque %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pelea %>
+    <%= f.text_field :pelea %>
+  </div>
+
+  <div class="field">
+    <%= f.label :azul %>
+    <%= f.text_field :azul %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mla %>
+    <%= f.text_field :mla %>
+  </div>
+
+  <div class="field">
+    <%= f.label :blanco %>
+    <%= f.text_field :blanco %>
+  </div>
+
+  <div class="field">
+    <%= f.label :mlb %>
+    <%= f.text_field :mlb %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time %>
+    <%= f.text_field :time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :under %>
+    <%= f.text_field :under %>
+  </div>
+
+  <div class="field">
+    <%= f.label :over %>
+    <%= f.text_field :over %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.text_field :status %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ganador %>
+    <%= f.text_field :ganador %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tfinal %>
+    <%= f.text_field :tfinal %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

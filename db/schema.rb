@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190315023052) do
+ActiveRecord::Schema.define(version: 20220105175051) do
 
   create_table "activacionclientets", force: :cascade do |t|
     t.string   "email"
@@ -52,6 +52,13 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "coliseots", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "consorciots", force: :cascade do |t|
     t.string   "nombre"
     t.string   "abreviatura"
@@ -65,6 +72,14 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.string   "descripcion"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "controldepagogts", force: :cascade do |t|
+    t.string   "tipojugada"
+    t.string   "limitexticket"
+    t.string   "limiteglobal"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "controlpgmts", force: :cascade do |t|
@@ -193,7 +208,37 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "controlspleinnts", force: :cascade do |t|
+    t.integer  "n1"
+    t.integer  "n2"
+    t.string   "siglas"
+    t.integer  "limite"
+    t.integer  "vendida"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "controlspltknnts", force: :cascade do |t|
+    t.integer  "n1"
+    t.integer  "n2"
+    t.string   "siglas"
+    t.integer  "limite"
+    t.integer  "vendida"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "controlspnnts", force: :cascade do |t|
+    t.integer  "n1"
+    t.integer  "n2"
+    t.string   "siglas"
+    t.integer  "limite"
+    t.integer  "vendida"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "controlspreannts", force: :cascade do |t|
     t.integer  "n1"
     t.integer  "n2"
     t.string   "siglas"
@@ -339,8 +384,51 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.integer  "ticket_id"
     t.integer  "sorteot_id"
     t.string   "comandojugada"
+    t.string   "pelea"
+    t.string   "apuestacinta"
+    t.string   "ml"
+    t.string   "posiblepago"
+    t.string   "acierto"
+    t.string   "resultado"
+    t.string   "pagoreal"
     t.index ["sorteot_id"], name: "index_jugadalots_on_sorteot_id"
     t.index ["ticket_id"], name: "index_jugadalots_on_ticket_id"
+  end
+
+  create_table "lineatprints", force: :cascade do |t|
+    t.string   "coliseo"
+    t.string   "bloque"
+    t.string   "pelea"
+    t.string   "azul"
+    t.string   "mla"
+    t.string   "blanco"
+    t.string   "mlb"
+    t.string   "time"
+    t.string   "under"
+    t.string   "over"
+    t.string   "status"
+    t.string   "ganador"
+    t.string   "tfinal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lineats", force: :cascade do |t|
+    t.string   "coliseo"
+    t.string   "bloque"
+    t.string   "pelea"
+    t.string   "azul"
+    t.string   "blanco"
+    t.string   "mla"
+    t.string   "mlb"
+    t.string   "tiempoml"
+    t.string   "oua"
+    t.string   "oub"
+    t.string   "status"
+    t.string   "resultado"
+    t.string   "tiempofinalizado"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "loteriats", force: :cascade do |t|
@@ -403,9 +491,10 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.integer  "venta"
     t.integer  "ganadores"
     t.integer  "balance"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "sucursal"
+    t.string   "pendientexpagar"
   end
 
   create_table "menuadmticketsganadoresxfechats", force: :cascade do |t|
@@ -612,6 +701,28 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.index ["ticket_id"], name: "index_recordqreats_on_ticket_id"
   end
 
+  create_table "recordspleinnts", force: :cascade do |t|
+    t.integer  "ticket_id"
+    t.integer  "n1"
+    t.integer  "n2"
+    t.string   "siglas"
+    t.integer  "monto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_recordspleinnts_on_ticket_id"
+  end
+
+  create_table "recordspltknnts", force: :cascade do |t|
+    t.integer  "ticket_id"
+    t.integer  "n1"
+    t.integer  "n2"
+    t.string   "siglas"
+    t.integer  "monto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_recordspltknnts_on_ticket_id"
+  end
+
   create_table "recordspnnts", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "n1"
@@ -621,6 +732,17 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ticket_id"], name: "index_recordspnnts_on_ticket_id"
+  end
+
+  create_table "recordspreannts", force: :cascade do |t|
+    t.integer  "ticket_id"
+    t.integer  "n1"
+    t.integer  "n2"
+    t.string   "siglas"
+    t.integer  "monto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_recordspreannts_on_ticket_id"
   end
 
   create_table "recordtgmts", force: :cascade do |t|
@@ -774,6 +896,8 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.string   "pagadopor"
     t.string   "latitud"
     t.string   "longitud"
+    t.string   "parlay"
+    t.string   "pagoreal"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
@@ -796,6 +920,13 @@ ActiveRecord::Schema.define(version: 20190315023052) do
     t.string   "descripcion"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "trabats", force: :cascade do |t|
+    t.string   "nombre"
+    t.string   "descripcion"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|

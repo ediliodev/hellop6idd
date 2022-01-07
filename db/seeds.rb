@@ -287,3 +287,38 @@
 
 
 #-------------------------------------------------------------------------------------------
+
+
+
+
+# D - SCRIPT PARA LLENADO DISPONIBILIDAD DE TODOS LOS SUPERPALES JUNTOS: SP LEIDSA/REAL/LOTEKA - NACIONAL:
+
+#controlspleinnt
+#controlspreannt
+#controlspltknnt
+
+[ "controlspleinnt", "controlspreannt", "controlspltknnt" ].each do |modelo|
+	
+		 modelo = modelo.capitalize.classify.constantize
+
+		 100.times do |n1|
+
+			n1_sigla = (n1.to_i < 10 )? ("0" + n1.to_s) : n1.to_s
+
+			n1.upto(99) do |n2|
+				n2_sigla = (n2.to_i < 10 )? ("0" + n2.to_s) : n2.to_s
+
+				#procesar insercion de combinacione y disponibiliad de superpales (en este caso dejaremos la variable de abajo como pale, pero sabemos que estamos populando los modelos de super pales ok ted.):
+				pale = modelo.new
+				pale.n1 = n1
+				pale.n2 = n2
+				pale.siglas = n1_sigla + "-" + n2_sigla
+				pale.limite = 100
+				pale.vendida = 0
+				pale.save
+
+			end
+
+		 end
+end
+

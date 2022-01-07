@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Control de Lineas y Resultados</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Coliseo</th>
+      <th>Bloque</th>
+      <th>Pelea</th>
+      <th>Azul</th>
+      <th>MLA</th>
+      <th></th>
+      <th>Blanco</th>
+      <th>MLB</th>
+      <th>Time</th>
+      <th>Under</th>
+      <th>Over</th>
+      <th>Status</th>
+      <th>Ganador</th>
+      <th>TFinal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lineats.each do |lineat| %>
+      <tr>
+        <td><%= lineat.coliseo %></td>
+        <td><%= lineat.bloque %></td>
+        <td style="color: red"><%= lineat.pelea %></td>
+        <td style="color: blue"><%= lineat.azul %></td>
+        <td style="color: blue"><%= lineat.mla %></td>
+        <td>vs</td>
+        <td style="color: purple"><%= lineat.blanco %></td>
+        <td><%= lineat.mlb %></td>
+        <td style="color: darkblue"><%= lineat.tiempoml %></td>
+        <td><%= lineat.oua %></td>
+        <td><%= lineat.oub %></td>
+        <!--Cambiar de color peleas abiertas, de color rojo ok: -->
+        <%if (lineat.status.to_s.upcase == "ABIERTA")%>
+          <td style="color: red"><%= lineat.status.to_s.upcase %></td>
+        <%else%>
+          <td style="color: darkblue"><%= lineat.status.to_s.upcase %></td>
+        <%end%>
+        
+        <td style="color: darkgreen"><%= lineat.resultado.to_s.upcase %></td>
+        <td style="color: darkgreen"><%= lineat.tiempofinalizado %></td>
+        <td><% link_to 'Show', lineat %></td>
+        <td><%= link_to 'Editar', edit_lineat_path(lineat) %></td>
+        <td><% link_to 'Destroy', lineat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+<%= button_to "+ Agregar Peleas ML", new_lineat_path, method: :get %>
+
+</br>
+
+<%= button_to "PROCESAR RESULTADOS", "/procesar_resultados", method: :get %>
+
+<% link_to 'PROCESAR RESULTADOS', "/procesar_resultados" %>
+
+</br>
+
+<%= link_to '<< MENU', menuts_path %>
+

@@ -1,0 +1,2 @@
+class Controlspltknnt < ApplicationRecord
+end

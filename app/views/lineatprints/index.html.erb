@@ -1,0 +1,287 @@
+</br>
+
+
+<body onload="ocultar_user_si_iphone();">  </body>
+
+<button class="button" type="button" onclick="Impresion_linea_iphone();PrintElemConTabla('div_a_imprimir');" style="color:white;background-color:blue; height:35px;">Imprimir Linea </button> 
+
+<button class="button" type="button" onclick="Impresion_resultados_iphone();PrintElemConTabla('div_a_imprimir_resultados');" style="color:white;background-color:blue; height:35px;">  Resultados </button> 
+
+<button class="button" type="button" onclick="location.href='../jugadalots/new';"  style="color:white;background-color:green; height:35px;"> <--</button> 
+
+
+
+
+
+<div id="seccion_general" style="display:true ">
+  
+
+    <p id="notice"><%= notice %></p>
+
+    <h1>L&iacutenea y Resultados</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Coliseo</th>
+          <th>Bloque</th>
+          <th>Pelea</th>
+          <th>Azul</th>
+          <th>Mla</th>
+          <th></th>
+          <th>Blanco</th>
+          <th>Mlb</th>
+          <th>Time</th>
+          <th>Under</th>
+          <th>Over</th>
+          <th>Status</th>
+          <th>Ganador</th>
+          <th>Tfinal</th>
+          
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @lineatprints.each do |lineatprint| %>
+          <tr>
+            <td><%= lineatprint.coliseo %></td>
+            <td><%= lineatprint.bloque %></td>
+            <td style="color: red" ><%= lineatprint.pelea %></td>
+            <td style="color: blue" ><%= lineatprint.azul %></td>
+            <td style="color: blue" ><%= lineatprint.mla %></td>
+            <td>vs</td>
+            <td style="color: purple" ><%= lineatprint.blanco %></td>
+            <td style="color: purple" ><%= lineatprint.mlb %></td>
+            <td><%= lineatprint.tiempoml %></td>
+            <td><%= lineatprint.oua %></td>
+            <td><%= lineatprint.oub %></td>
+            <td><%= lineatprint.status %></td>
+            <td><%= lineatprint.resultado %></td>
+            <td><%= lineatprint.tiempofinalizado %></td>
+            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+</div>  <!-- fin del div seccion general -->
+
+<!-- 
+</br>
+<h2>***************************************************</h2>
+<h2> (( LINEA ML )) 
+<button class="button" type="button" onclick="PrintElemConTabla('div_a_imprimir')" style="color:white;background-color:blue; height:35px;">  Imprimir Linea </button> </h2>
+-->
+
+
+<div id="div_a_imprimir" style="display:none ">
+    <h2> (( G.Bet ))</h2>
+   
+    <h4> L&iacutenea de hoy: <%=Date.today.to_s.split("-").reverse.join("-")%>.   
+
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center;">Col</th>
+          <th style="text-align: center;">Blq</th>
+          <th style="text-align: center;">PL</th>
+          <th>Traba</th>
+          <th>ML</th>
+          <th>Tiempo</th>
+          <!-- <th>o/u</th> -->
+        </tr>
+      </thead>
+
+ <!--  lineatprint.coliseo.to_s[0..2] -->
+
+      <tbody>
+        <% @lineatprints.each do |lineatprint| %>
+
+            <tr><td style="text-align: center;"><%= " " %></td></tr>
+
+            <% if lineatprint.status == "abierta"   %>
+              <tr>
+                <td> 
+                  <% if lineatprint.coliseo == "Santiago" %>
+                     <%= "SG"%>
+                  <%end%>
+                  <% if lineatprint.coliseo == "STo. Dgo." %>
+                     <%= "SD"%>
+                  <%end%>
+
+                  <% if lineatprint.coliseo == "SFM" %>
+                     <%= "SF"%>
+                  <%end%>
+                </td>
+
+                
+                <td><%= lineatprint.bloque %></td>
+                <td style="color: red" ><b><%= lineatprint.pelea %></td>
+                <td style="color: blue" ><%= lineatprint.azul.to_s[0..7] %> <br> <%= lineatprint.blanco.to_s[0..7] %> </td>
+                <td style="color: blue; text-align: center;" ><b><%= lineatprint.mla %> <br> <%= lineatprint.mlb %> </td> 
+                <td style="text-align: center;"> <%= lineatprint.tiempoml %></td>
+
+               <!--  <td><%= lineatprint.oua %> <br> <%= lineatprint.oub %> </td> -->
+
+              </tr>
+
+              <tr><td style="text-align: center;"><%= " " %></td></tr>
+              
+              <tr><td style="text-align: center;"><%= " " %></td></tr>
+
+            <% end %>     
+        <% end %>
+
+      </tbody>
+
+    </table>
+    </h4>
+
+</div>
+
+
+
+  
+<!-- 
+</br>
+<h2>***************************************************</h2>
+<h2> (( RESULTADOS )) 
+<button class="button" type="button" onclick="PrintElemConTabla('div_a_imprimir_resultados')" style="color:white;background-color:blue; height:35px;">  Imprimir Resultados </button>  </h2>
+-->
+
+<div id="div_a_imprimir_resultados" style="display:none ">
+    <h2> (( G.Bet ))</h2>
+   
+    <h4> Resultados: <%=Date.today.to_s.split("-").reverse.join("-")%>. 
+
+
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align: center;">Col</th>
+          <th style="text-align: center;">Blq</th>
+          <th style="text-align: center;">PL</th>
+          <th>Traba</th>
+          <th>Gan&oacute</th>
+          <th>Tfinal</th>
+          <!-- <th>o/u</th> -->
+        </tr>
+      </thead>
+
+ <!--  lineatprint.coliseo.to_s[0..2] -->
+
+      <tbody>
+        <% @lineatprints.each do |lineatprint| %>
+
+             <tr><td style="text-align: center;"><%= " " %></td></tr>
+
+              <tr>
+                <td> 
+                  <% if lineatprint.coliseo == "Santiago" %>
+                     <%= "SG" %>
+                  <%end%>
+                  <% if lineatprint.coliseo.to_s.upcase == "STo. Dgo.".upcase %>
+                     <%= "SD" %>
+                  <%end%>
+
+                  <% if lineatprint.coliseo == "SFM" %>
+                     <%= "SF" %>
+                  <%end%>
+                </td>
+
+                
+                <td><%= lineatprint.bloque %></td>
+                <td style="color: red" ><b><%= lineatprint.pelea %></td>
+                <td style="color: blue" ><%= lineatprint.azul.to_s[0..7] %> <br> <%= lineatprint.blanco.to_s[0..7] %> </td>
+                <td style="color: blue; text-align: center;" ><b><%= lineatprint.resultado %> </td> 
+                <td style="text-align: center;"><%= lineatprint.tiempofinalizado %></td>
+
+               <!--  <td><%= lineatprint.oua %> <br> <%= lineatprint.oub %> </td> -->
+
+              </tr>
+              <tr><td style="text-align: center;"><%= " " %></td></tr>
+              <tr><td style="text-align: center;"><%= " " %></td></tr>
+
+            
+        <% end %>
+
+      </tbody>
+
+    </table>
+    </h4> 
+
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  function Impresion_linea_iphone(argument) {
+    document.getElementById("detalles_usuario").style="display:none";
+    // body...
+    document.getElementById("div_a_imprimir").style = "display:true";
+
+    document.getElementById("seccion_general").style = "display:none";
+    document.getElementById("div_a_imprimir_resultados").style = "display:none";
+  }
+
+  function Impresion_resultados_iphone(argument) {
+    // body...
+    document.getElementById("detalles_usuario").style="display:none";
+    document.getElementById("div_a_imprimir_resultados").style = "display:true";
+    document.getElementById("div_a_imprimir").style =  "display:none";
+    document.getElementById("seccion_general").style = "display:none";
+  }
+
+
+  
+
+  function PrintElemConTabla(elem)
+  {
+      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+      mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+      mywindow.document.write('</head><body >');
+    //  mywindow.document.write('<h1>' + document.title  + '</h1>');
+      mywindow.document.write(document.getElementById(elem).innerHTML);
+      mywindow.document.write('</body></html>');
+
+      mywindow.document.close(); // necessary for IE >= 10
+      mywindow.focus(); // necessary for IE >= 10*/
+
+      mywindow.print();
+      mywindow.close();
+
+      return true;
+  }  
+
+
+</script>
+
+
+<script type="text/javascript">
+   
+var userAgent1 = navigator.vendor;
+var userAgent2 = navigator.platform;
+
+
+function ocultar_user_si_iphone(argument) {
+
+// document.getElementById("ocultar_div1_si_iphone").style="display:none";
+var userAgent1 = navigator.vendor;
+var userAgent2 = navigator.platform;
+
+ if( ( (/Apple|iPhone|iPod|iPad/.test(userAgent1) ) || (/Apple|iPhone|iPod|iPad/.test(userAgent2) ) ) && (!window.MSStream) ){
+    //return "iOS";  
+    document.getElementById("detalles_usuario").style="display:none";
+    
+ }
+  }
+
+</script>

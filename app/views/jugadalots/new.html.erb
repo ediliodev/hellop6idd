@@ -1,57 +1,68 @@
 
 <% if  @tipo_cliente == "desktop" %>
 
-  <h3 id="banca" style="color:darkblue;"> Sucursal:  <%= current_user.siglas%> - user: <%= current_user.email%> </h3>
+<!-- 
+  <h3 id="banca" style="color:darkblue;"> SUCURSAL: (( <%= current_user.siglas%> ))</h3>
+-->
 
-  <%= link_to 'Menu', menuts_path %>
-  <%= link_to 'Calculadora', '../menuts/calculadora' %>
+<div id="seteo_div_width" style="width: 100%">
+  
+.
+  <%= render 'botonera'  %>
+  <% render 'reloj'  %>
 
-  <%= render 'reloj'  %>
 
-  <% unless session[:loteria_manual] == nil %>
-  <h4>Sorteo actual: <%= session[:loteria_manual] %> - <%= session[:loteria_manual_nombre] %></h4>
-  <% end %>
-
-  <% unless session[:ticket_id] == nil %>
-  <h5>Ticket actual:  <%= session[:ticket_id] %> </h5>
-  <% end %>
 
 
   <%= render 'form1', jugadalot: @jugadalot %>
 
 
   <div id="jugadas">
-  	<p id="notice"><%= notice %></p>
 
-  <% unless @total == 0 %>  
-  <h2>Total: $ <%= number_to_currency(@total, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2> <!-- sacado de apidock.com number_to_currency example ok ted. -->
+    <%if @jugadalots.size > 0 %>
+        <%if @jugadalots.all.count > 0 %>
+          <% mensaje =  "(" + @jugadalots.all.count.to_s + ") " + notice.to_s %>
+        <%else%>
+          <% mensaje =  notice %>
+        <%end%>
+
+      	<h4 style="text-align: left;" id="notice"><%= mensaje %></h4>
+    
+    <%else%>
+    
+        <% mensaje =  notice.to_s %>
+        <h4 style="text-align: left;" id="notice"><%= mensaje %></h4>
+    
+    <%end%>
+
+
+  <% unless true # no quiero nada de esto por ahora ok true mandatorio ted ok. @total == 0 %>  
+      <h2>Total apostado: $ <%= number_to_currency(@total, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2> <!-- sacado de apidock.com number_to_currency example ok ted. -->
+      <% end %>
+
+      <% unless @efectivo_recibido == nil || true  %>  <!--no mostrar por ahora ok -->
+      <h2>DEVUELTA: $ <%= number_to_currency((@efectivo_recibido - session[:total_tk_viejo].to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+      <h2>Recibido: $ <%= number_to_currency(@efectivo_recibido , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
+      <h2>Total: $ <%= number_to_currency(session[:total_tk_viejo], :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
   <% end %>
 
-  <% unless @efectivo_recibido == nil  %>
-  <h2>DEVUELTA: $ <%= number_to_currency((@efectivo_recibido - session[:total_tk_viejo].to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
-  <h2>Recibido: $ <%= number_to_currency(@efectivo_recibido , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
-  <h2>Total: $ <%= number_to_currency(session[:total_tk_viejo], :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
-
-  <% end %>
 
 
   <table>
     <thead>
       <tr>
-        <!-- <th>Ticket</th> -->
-        <th>QPT</th>
-        <th>N1</th>
-        <th>N2</th>
-        <th>N3</th>
-        <th>-Monto-</th>
-        <th>Sorteo</th>
-        <th colspan="3"></th>
+        <th>Pelea</th>
+        <th>A</th>
+        <th>A vs B</th>
+        <th>Apuesta</th>
+        <th>ML</th>
+         <th></th>
+        
       </tr>
     </thead>
 
-    <tbody>
+    <tbody>      
       <% @jugadalots.reverse_each do |jugadat| %>
-
   		<% if jugadat.n1 == nil  %>
   		<% @n1 = "*" %>
   		<% elsif jugadat.n1.to_i < 10  %>
@@ -77,156 +88,37 @@
   		<% end %>
 
         <tr>
+          <td style="color: darkblue"><b> <%= jugadat.pelea.to_i  %></td>
+          <td style="text-align: center;"><b><%= jugadat.apuestacinta %></td>
           
-          <td><%= jugadat.qpt %>-></td>
-          <td><%= @n1 %></td>
-          <td><%= @n2 %></td>
-          <td><%= @n3 %></td>
-          <td>$<%= jugadat.monto %></td>
-          <td><%= jugadat.sorteot.nombre %> (<%= jugadat.sorteot.sigla%>)</td>
-         <!--  <td><%= link_to 'Show', jugadat %></td> -->
-         <!--  <td><%= link_to 'Edit', edit_jugadalot_path(jugadat) %></td> -->
-          <td><%= link_to 'Eliminar', jugadat, method: :delete%></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-
+          <% @linea_pelea =  Lineat.today.where(:pelea => jugadat.pelea.to_i).first || nil %>
+<%if @linea_pelea != nil %>
+  <td><%= @linea_pelea.azul %>(<%=@linea_pelea.mla%>) vs <%=@linea_pelea.blanco%>(<%=@linea_pelea.mlb%>) </td>
+<%else%>
+  <td> A vs B </td>
 <%end%>
-
-
-
-
-
-
-<% if  @tipo_cliente == "movil" %>
-
-<!-- Seccion vista movil -->
-<script type="text/javascript">
-  document.getElementById('detalles_usuario').innerHTML = "";
-</script>
-
-<div class="klk">
- <button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/new" + "\'" + ";"%> >INICIO</button> 
-
- <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "" + "\'" + ";"%> >MENU / AYUDA</button>
-
- <!-- No funciona en produccion esto, puede ser por cancan ability model la accion del resource menuts#ayudacomando hay que permitirla y probar. Ver error en rails /log/production.logs. ok ted. comentar.
- <button class="button" type="button" onclick= <%= "location.href=" + "\'" + menuts_path.to_s + "/ayudacomando" + "\'" + ";"%> >AYUDA</button> 
--->
-
-<button class="button" type="button" onclick= <%= "location.href=" + "\'" + jugadalots_path.to_s + "/salirmanualmente" + "\'" + ";"%> >EXIT</button> 
-
-
-
-
-
-</div>
-
- 
-
-  <div class="klk">
-    
-    <h4 style="color:darkblue;"> (( SUCURSAL: <%= current_user.siglas%> )) </h4>
-  </div>
-
-
-  <%= render 'relojmovil'  %>
-
-  <% unless session[:loteria_manual] == nil %>
-  <h4>Sorteo actual: <%= session[:loteria_manual] %> - <%= session[:loteria_manual_nombre] %></h4>
-  <% end %>
-
-  <%if @mostrar_coordenadas %>
-    
-    <h3>Ubicacion  es..:  <%= @ubicacion  %> </h3>
-
-    <% @mostrar_coordenadas = false %> <!--No mostrar hasta una nueva coordenada -->
-  
-  <%end%>
-
-  <% unless session[:ticket_id] == nil %>
-  <!-- <h5>Ticket actual:  <%= session[:ticket_id] %> </h5> -->
-  <% end %>
-
-
-  <%= render 'form1', jugadalot: @jugadalot %>
-
-
-  <div id="jugadas">
-    <p id="notice"><%= notice %></p>
-
-  <% unless @total == 0 %>  
-  <h2>Total: $ <%= number_to_currency(@total, :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2> <!-- sacado de apidock.com number_to_currency example ok ted. -->
-  <% end %>
-
-  <% unless @efectivo_recibido == nil  %>
-  <h2>DEVUELTA: $ <%= number_to_currency((@efectivo_recibido - session[:total_tk_viejo].to_i), :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
-  <h2>Recibido: $ <%= number_to_currency(@efectivo_recibido , :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
-  <h2>Total: $ <%= number_to_currency(session[:total_tk_viejo], :unit => "", :delimiter => ",", :precision => 0, :separator => ".") %></h2>
-
-  <% end %>
-
-
-  <table>
-    <thead>
-      <tr>
-        <!-- <th>Ticket</th> -->
-        <th>QPT</th>
-        <th>N1</th>
-        <th>N2</th>
-        <th>N3</th>
-        <th>-$-</th>
-        <th>Sorteo</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @jugadalots.reverse_each do |jugadat| %>
-
-      <% if jugadat.n1 == nil  %>
-      <% @n1 = "*" %>
-      <% elsif jugadat.n1.to_i < 10  %>
-      <% @n1 = "0" + jugadat.n1.to_s %>
-      <% else %>
-      <% @n1 = jugadat.n1.to_s %>
-      <% end %>
-
-      <% if jugadat.n2 == nil  %>
-      <% @n2 = "*" %>
-      <% elsif jugadat.n2.to_i < 10  %>
-      <% @n2 = "0" + jugadat.n2.to_s %>
-      <% else %>
-      <% @n2 = jugadat.n2.to_s %>
-      <% end %>
-
-      <% if jugadat.n3 == nil  %>
-      <% @n3 = "*" %>
-      <% elsif jugadat.n3.to_i < 10  %>
-      <% @n3 = "0" + jugadat.n3.to_s %>
-      <% else %>
-      <% @n3 = jugadat.n3.to_s %>
-      <% end %>
-
-        <tr>
           
-          <td><%= jugadat.qpt %>-></td>
-          <td><%= @n1 %></td>
-          <td><%= @n2 %></td>
-          <td><%= @n3 %></td>
-          <td>$<%= jugadat.monto %></td>
-          <td><%= jugadat.sorteot.abreviaturamovil %>(<%= jugadat.sorteot.sigla%>)</td>
-         <!--  <td><%= link_to 'Show', jugadat %></td> -->
-         <!--  <td><%= link_to 'Edit', edit_jugadalot_path(jugadat) %></td> -->
-          <td><%= link_to 'X', jugadat, method: :delete%></td>
+
+          <%if ( ( (jugadat.apuestacinta == "-" )|| (jugadat.apuestacinta == "+")) && (@linea_pelea != nil) ) %>
+             <td style="text-align: center;"><%= jugadat.apuestacinta %><%=@linea_pelea.tiempoml%></td>
+          <%else%>
+              <td style="text-align: center;"><%= jugadat.apuestacinta %></td>
+          <%end%>
+
+          
+
+          <td><%= jugadat.ml %></td>
+          <td><%= link_to 'x', jugadat, method: :delete%></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
 <%end%>
+
+
+
+
 
 
 
@@ -243,6 +135,7 @@
 
 
 
+</div>
 
 
 

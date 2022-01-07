@@ -9,7 +9,7 @@ class Ability
        #   if User.last.tipousuariot.tipo_usuario == "venta"
 
         can :manage, :all 
-        cannot [:create,:update,:destroy], [Loteriat, Sorteot, Menut, Ticketsganadorest,Controlpnnt,Controlqnnt,Controltnnt  ,Controlspnnt ,Controlqgmt  ,Controlpgmt  ,Controltgmt  ,Controlqleit ,Controlpleit ,Controltleit ,Controlqreat ,Controlpreat ,Controltreat ,Controlqnytt ,Controlpnytt ,Controltnytt ,Controlqnynt ,Controlpnynt ,Controltnynt ,Controlqltkt ,Controlpltkt ,Controltltkt ]
+       # cannot [:create,:update,:destroy], [Loteriat, Sorteot, Menut, Ticketsganadorest,Controlpnnt,Controlqnnt,Controltnnt  ,Controlspnnt ,Controlqgmt  ,Controlpgmt  ,Controltgmt  ,Controlqleit ,Controlpleit ,Controltleit ,Controlqreat ,Controlpreat ,Controltreat ,Controlqnytt ,Controlpnytt ,Controltnytt ,Controlqnynt ,Controlpnynt ,Controltnynt ,Controlqltkt ,Controlpltkt ,Controltltkt ]
         cannot [:update,:destroy], [Menuposrventadiaactualt, Menuposrventaxfechat, Menuadmrresultadoglobalt, Menuadmrresultadoglobalxsupervisort, Menuf10t]
         #No aparecieron estos modelos arriba: Menupostanularticket, Menupostconsultarticket, Menupostpagarticket,Menuposccuadrediaactualt,Menuposccuadreotrodiat
         #Eliminado manual mientras tanto: Menuposrventadiaactualt menuposrventaxfechat
@@ -103,6 +103,8 @@ class Ability
           can [:read,:update], Controlqltkt 
           can [:read,:update], Controlpltkt 
           can [:read,:update], Controltltkt
+          can :manage, Lineatprint
+          can :manage, Menut
 
        end # end del (if user.tipousuariot_id == 3)
     
