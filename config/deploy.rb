@@ -4,6 +4,7 @@ lock "~> 3.10.2"
 
 set :application, "megamillion"
 set :repo_url, "git@github.com:ediliodev/hellop6idd.git"
+#set :repo_url, "https://github.com:ediliodev/hellop6idd.git"
 #set :repo_url, "git@example.com:me/my_repo.git"
 
 set :deploy_to, '/home/deploy/megamillion'
