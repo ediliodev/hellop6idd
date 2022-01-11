@@ -57,7 +57,8 @@ gem 'devise', git: 'https://github.com/plataformatec/devise' #, ref: '88e9a85'
 gem 'cancancan', '~> 2.0'
 
 # Gema para reportes en el active record. Mejor manejo del timepo y  rango de fechas.
-gem 'by_star', git: "git://github.com/radar/by_star" # sacado de la web www.ryanbigg.com/206/03/workin-wtih-date-ranges-in-active-record  okt ted.
+#gem 'by_star', git: "git://github.com/radar/by_star" # sacado de la web www.ryanbigg.com/206/03/workin-wtih-date-ranges-in-active-record  okt ted.
+gem 'by_star', git: "https://github.com/radar/by_star.git" 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
