@@ -52,7 +52,7 @@ gem 'mini_magick'
 
 #Agregar la gema devise para el manejo de usuarios ted. part II.
 #gem 'devise'
-gem 'devise', git: 'https://github.com/heartcombo/devise' #, ref: '88e9a85'
+gem 'devise', git: 'https://github.com/plataformatec/devise' #, ref: '88e9a85'
 #Agregar la gema de Cancancan Authorization gem ok ted.
 gem 'cancancan', '~> 2.0'
 
