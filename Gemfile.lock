@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/radar/by_star
-  revision: 422c06ec1ea8ce633aca014a4403fbac92630057
-  specs:
-    by_star (3.0.0)
-      activesupport (> 3)
-
-GIT
   remote: https://github.com/plataformatec/devise
   revision: 4656e96d9ebd3947ceee27e698aee76393dc578f
   specs:
@@ -15,6 +8,13 @@ GIT
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: https://github.com/radar/by_star.git
+  revision: f3412a7ffb015df7ced6aa662a53a53e081611a0
+  specs:
+    by_star (4.0.0)
+      activesupport (>= 3.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -237,4 +237,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.2
+   1.17.3
