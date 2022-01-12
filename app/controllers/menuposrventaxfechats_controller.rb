@@ -46,7 +46,7 @@ class MenuposrventaxfechatsController < ApplicationController
     #Defino @objeto_array_ventas para no hacer dos consultas al ActiveRecord de @valor (sum) y de @cantidad_de_tickets_vendidos (count) ok ted.
     @objeto_array_ventas = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids )
    
-    @valor = @objeto_array_ventas.sum(:monto) 
+    @valor = @objeto_array_ventas.sum(:monto.to_i) 
 
     #@cantidad_de_tickets_vendidos = @objeto_array_ventas.count
     #@cantidad_de_tickets_vendidos_virtual = Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id ).count.to_i - 1 #restar el ticket actual ok. 
@@ -65,7 +65,7 @@ class MenuposrventaxfechatsController < ApplicationController
 
 
     #@ganadores_cuadre =  Ticketsganadorest.between_times(@dia1.to_date , @dia2).where(:sucursal => current_user.email.split('@')[0]).sum(:montoacobrar)
-    @ganadores_cuadre = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:ganador => "si").ids], :user_id => current_user.id ).sum(:pagoreal) # ordenar por usuario para luego hacer la r
+    @ganadores_cuadre = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:ganador => "si").ids], :user_id => current_user.id ).sum(:pagoreal.to_i) # cating to_i porque el postgres lo requiere ok, ordenar por usuario para luego hacer la r
 
 
 

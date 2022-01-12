@@ -52,14 +52,14 @@ class MenuadmrresultadoglobaltsController < ApplicationController
       User.all.order(:email).each do |user| # en un furuto: User.where(:tipousuario => 'ventas')...etc
           @line = Menuadmrresultadoglobalt.new # =>  Menuadmrresultadoglobalt ... venta: integer, ganadores: integer, balance: integer, created_at: datetime, updated_at: datetime)
           @line.sucursal = user.email.split("@")[0].to_s
-          @line.venta = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:monto)
+          @line.venta = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:monto.to_i)
           
           #@line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si").ids ).sum(:montoacobrar)
-          @line.ganadores = Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids]).sum(:pagoreal) # ordenar por usuario para luego hacer la r
+          @line.ganadores = Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids]).sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la r
 
 
           #@line.pendientexpagar = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si", :pago => nil).ids ).sum(:montoacobrar)          
-          @line.pendientexpagar             = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+          @line.pendientexpagar             = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
 
           @line.balance = @line.venta - @line.ganadores
           a << @line
