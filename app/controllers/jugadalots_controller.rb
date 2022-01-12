@@ -81,10 +81,6 @@ class JugadalotsController < ApplicationController
     @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
 
 
-    # LINEA PROVISIONAL DEBAJO
-    # redirect_to "/jugadalots/activar", notice: "Bienvenido, Favor configure el printer para continuar. Si no puede pasar de esta pantalla, favor contactar a la central para verificar si su terminal esta activada. Gracias." and return 
-    # redirect_to "/jugadalots/activar", notice: "Error: Debe activar su terminal, favor contactar la Central. Cierre y abra la aplicacion nuevamente o Reconfigure el printer para obviar este mensaje." and return 
-
     
     #parde de jugadalot activar eliminado provisiona ok prod gff test 1 ok
       
