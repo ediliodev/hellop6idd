@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #Hacer que el user se auntetique por devise antes de ejecutar cualquier controlador por ahora (sin excep :show.. ) ok
-  before_action :authenticate_user!
+ # before_action :authenticate_user!
 
 #config.to_prepare do
 #  Devise::SessionsController.skip_before_action :verificar_permisos
