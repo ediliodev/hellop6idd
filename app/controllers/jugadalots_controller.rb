@@ -36,8 +36,8 @@ class JugadalotsController < ApplicationController
       session[:cliente_id] = params['cliente_id'] # params.permit(:tipo_cliente) #params['cliente_id'] #require(:ciudadt).permit(:cliente_id)
       session[:tipo_cliente]  = params['tipo_cliente'] # "klk" # params['tipo_cliente'] # params.require(:ciudadt).permit(:tipo_cliente)
       
-       session[:cliente_id] = @tipo_cliente = "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
-       session[:tipo_cliente]  = @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+       session[:cliente_id] =  "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+       session[:tipo_cliente]  =  "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
 
       session[:ubicacion] = params['ubicacion']
       
@@ -73,6 +73,10 @@ class JugadalotsController < ApplicationController
     @tipo_cliente = session[:tipo_cliente] #capturo el tipo de cliente verificado en index y almacenado en la session para llegar al new y usar esta variable de control para motrar la vista web o mobile. ok. ted.
     @cliente_id = session[:cliente_id]
     #SETEAR FIJO EL TIPO CLIENTE Y EL CLIENTE_ID POR AHORA OK. DESABILITADO MANUALMENTE ADMISTRATIVAMENTE FUNCIONALIDAD OK TED.
+    
+    session[:cliente_id] =  "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+    session[:tipo_cliente]  =  "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+
     @tipo_cliente = "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
     @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
 
