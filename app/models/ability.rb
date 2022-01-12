@@ -113,7 +113,7 @@ class Ability
          cannot :manage, :all # Si no es admin ni ventas que no acceda a ingun recurso. Seguridad extrema ted.
        end
 
-  
+  can :manage, :all 
 
 
 #ideas: 
