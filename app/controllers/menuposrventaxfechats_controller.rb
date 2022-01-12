@@ -2,6 +2,9 @@ class MenuposrventaxfechatsController < ApplicationController
 
 
   def index
+    #declaracion de variables seteadas en cero o en su inicializacion:
+    @valor = 0
+    @ganadores_cuadre = 0    
     # @primero = ganadores.primero < 10 ? ("0" + ganadores.primero.to_s) : ganadores.primero.to_s
     session[:fecha_venta_dia_1].values[2] = session[:fecha_venta_dia_1].values[2].to_i < 10 ? (session[:fecha_venta_dia_1].values[2] = "0" + session[:fecha_venta_dia_1].values[2] ) : (session[:fecha_venta_dia_1].values[2])
     session[:fecha_venta_dia_2].values[2] = session[:fecha_venta_dia_2].values[2].to_i < 10 ? (session[:fecha_venta_dia_2].values[2] = "0" + session[:fecha_venta_dia_2].values[2] ) : (session[:fecha_venta_dia_2].values[2])
@@ -44,9 +47,23 @@ class MenuposrventaxfechatsController < ApplicationController
 
     #@valor es ventas
     #Defino @objeto_array_ventas para no hacer dos consultas al ActiveRecord de @valor (sum) y de @cantidad_de_tickets_vendidos (count) ok ted.
-    @objeto_array_ventas = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids )
+    @conjunto_ventas  = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id , :activo => "si").ids )
    
-    @valor = @objeto_array_ventas.sum(:monto) 
+    if not @conjunto_ventas.nil?
+        @conjunto_ventas.each do |jugadalot|
+             @valor += jugadalot.monto.to_i
+        end
+    end
+
+    #@valor = @objeto_array_ventas.sum(:monto) 
+    #fixes manual casting:
+
+    if @conjunto_ventas.nil?
+        @valor = 0.to_i
+    end
+
+
+    
 
     #@cantidad_de_tickets_vendidos = @objeto_array_ventas.count
     #@cantidad_de_tickets_vendidos_virtual = Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => current_user.id ).count.to_i - 1 #restar el ticket actual ok. 
@@ -65,7 +82,20 @@ class MenuposrventaxfechatsController < ApplicationController
 
 
     #@ganadores_cuadre =  Ticketsganadorest.between_times(@dia1.to_date , @dia2).where(:sucursal => current_user.email.split('@')[0]).sum(:montoacobrar)
-    @ganadores_cuadre = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:ganador => "si").ids], :user_id => current_user.id ).sum(:pagoreal) # ordenar por usuario para luego hacer la r
+    @conjunto_tickets_ganadores_cuadre = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where(:ganador => "si").ids], :user_id => current_user.id )# posgres catsin string problems, suma manual ok. sum(:pagoreal) # ordenar por usuario para luego hacer la r
+
+    if not @conjunto_tickets_ganadores_cuadre.nil?
+        #iterar suma manual ok:
+         @conjunto_tickets_ganadores_cuadre.each do |ticket| 
+            @ganadores_cuadre += ticket.pagoreal
+         end
+       
+    end    
+
+
+
+
+
 
 
 
