@@ -86,7 +86,7 @@ class JugadalotsController < ApplicationController
     # redirect_to "/jugadalots/activar", notice: "Error: Debe activar su terminal, favor contactar la Central. Cierre y abra la aplicacion nuevamente o Reconfigure el printer para obviar este mensaje." and return 
 
     
-    if  not( @chekeado = session[:chekeado]) # && session[:ya_chekeado] != 'si') # si no se ha chekeado en la session, chekearlo!!
+    if  false # por ahora ok first prod deployment gff not( @chekeado = session[:chekeado]) # && session[:ya_chekeado] != 'si') # si no se ha chekeado en la session, chekearlo!!
 
       if (current_user && @tipo_cliente && @cliente_id)  
         @equipo_existe = Activacionclientet.where(:email => current_user.email).first #.nil? 
@@ -123,7 +123,7 @@ class JugadalotsController < ApplicationController
             session[:chekeado] = nil # ok ted.
           end
      
-       else
+        else
         @tipo_cliente =  @cliente_id = nil # Para que no le permita el view de venta. (Le Sale el otro view de no venta.. ok ted.)
        # session[:ya_chekeado] = 'si'
         redirect_to "/jugadalots/activar", notice: "Bienvenido! Favor configure el printer para continuar. [Presione el boton rojo BABYLOT 2.0 y luego el azul PROBAR IMPRESION]... o contacte a la Central para verificar su activacion. Gracias." and return 
