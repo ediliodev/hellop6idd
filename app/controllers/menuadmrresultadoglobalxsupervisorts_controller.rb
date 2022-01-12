@@ -56,13 +56,63 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
       User.where(:supervisort_id => @supervisor_object.id ).order(:email).each do |user| # en un furuto: User.where(:tipousuario => 'ventas')...etc
           @line = Menuadmrresultadoglobalxsupervisort.new # =>  Menuadmrresultadoglobalxsupervisort objetc.
           @line.sucursal = user.email.split("@")[0].to_s
-          @line.venta = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:monto.to_i)
+          
+          @conjunto_elementos = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ) # eliminamos .sum (:monto) poruqe postgres no sume stings ok
+           #realizaremos la sumatoria manual porque postgres no suma string:
+
+          if not @conjunto_elementos.nil?
+
+             @conjunto_elementos.each do | jugada |
+              @line.venta += jugada.monto.to_i # sumatoria manual de los montos de esas jugadas ok.  
+             end
+
+          end
+
+
+          
          
           #@line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:montoacobrar)
-          @line.ganadores =  Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids]).sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la r         
+          @conjunto_elementos_tickets =  Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids])# manual por error de postgres sting ok .sum(:pagoreal) # ordenar por usuario para luego hacer la r         
+
+           if not @conjunto_elementos_tickets.nil? 
+
+             @conjunto_elementos_tickets.each do | ticket |
+              @line.ganadores += ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
+             end
+
+          end
+
+
+
+
+
+
 
          # @line.pendientexpagar = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
-           @line.pendientexpagar = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+           @conjunto_elementos_pdtes_x_pagar = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]) # manual por el srror de posgtres string ok sum(:pagoreal) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+
+
+           if not @conjunto_elementos_pdtes_x_pagar.nil?
+
+             @conjunto_elementos_pdtes_x_pagar.each do | ticket |
+               @line.pendientexpagar += ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
+             end
+
+          end
+
+
+          #control manual de errores operando con nil elements
+          if @line.venta.nil?
+            @line.venta = 0
+          end
+
+          if @line.ganadores.nil?
+            @line.ganadores = 0
+          end
+
+
+
+
 
           @line.balance = @line.venta - @line.ganadores
           a << @line
