@@ -52,14 +52,64 @@ class MenuadmrresultadoglobaltsController < ApplicationController
       User.all.order(:email).each do |user| # en un furuto: User.where(:tipousuario => 'ventas')...etc
           @line = Menuadmrresultadoglobalt.new # =>  Menuadmrresultadoglobalt ... venta: integer, ganadores: integer, balance: integer, created_at: datetime, updated_at: datetime)
           @line.sucursal = user.email.split("@")[0].to_s
-          @line.venta = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids ).sum(:monto.to_i)
+         
+           @listado_jugadas = Jugadalot.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si").ids )# suma manual por el casting de postgres srtin sum error ok .sum(:monto.to_i)
+           
+           if not @listado_jugadas.nil?
+             @listado_jugadas.each do |jugada|
+               @line.venta += jugada.monto.to_i
+             end
+           end
+
+           
+
           
-          #@line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si").ids ).sum(:montoacobrar)
-          @line.ganadores = Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids]).sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la r
+         #@line.ganadores = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si").ids ).sum(:montoacobrar)
+         @listado_ganadores = Ticket.between_times(@dia1.to_date , @dia2 ).where( :user_id => user.id, :id => [Ticket.where(:ganador => "si").ids])# postgress casting srting sum error ok .sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la r
+       
+         if not @listado_ganadores.nil?
+           @listado_ganadores.each do |ticket|
+            @line.ganadores += ticket.pagoreal.to_i
+           end
+         end
+
+
+
+
+
 
 
           #@line.pendientexpagar = Ticketsganadorest.between_times(@dia1.to_date , @dia2 ).where(:ticket_id => Ticket.between_times(@dia1.to_date , @dia2 ).where(:user_id => user.id , :activo => "si", :ganador => "si", :pago => nil).ids ).sum(:montoacobrar)          
-          @line.pendientexpagar             = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids]).sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+          @listado_pendiente_x_pagar             = Ticket.between_times(@dia1.to_date , @dia2 ).where(:id => [Ticket.where( :user_id => user.id, :activo => "si", :ganador => "si", :pago => nil).ids])# .sum(:pagoreal.to_i) # ordenar por usuario para luego hacer la referencia a la sucursal tambien ok
+
+                 
+         if not @listado_pendiente_x_pagar.nil?
+           @listado_pendiente_x_pagar.each do |ticket|
+            @line.pendientexpagar   += ticket.pagoreal.to_i
+           end 
+         end
+
+
+
+
+
+
+
+
+          #manual casting setting nil to 0 for math opetarion ok ted:
+          if @line.venta.nil?
+            @line.venta = 0.to_i
+          end
+
+          if @line.ganadores.nil?
+            @line.ganadores = 0.to_i
+          end
+
+          if @line.pendientexpagar.nil?
+            @line.pendientexpagar= 0.to_i
+          end
+
+          
 
           @line.balance = @line.venta - @line.ganadores
           a << @line
