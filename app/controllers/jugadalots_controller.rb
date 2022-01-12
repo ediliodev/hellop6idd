@@ -85,51 +85,6 @@ class JugadalotsController < ApplicationController
     # redirect_to "/jugadalots/activar", notice: "Bienvenido, Favor configure el printer para continuar. Si no puede pasar de esta pantalla, favor contactar a la central para verificar si su terminal esta activada. Gracias." and return 
     # redirect_to "/jugadalots/activar", notice: "Error: Debe activar su terminal, favor contactar la Central. Cierre y abra la aplicacion nuevamente o Reconfigure el printer para obviar este mensaje." and return 
 
-    
-    if  false # por ahora ok first prod deployment gff not( @chekeado = session[:chekeado]) # && session[:ya_chekeado] != 'si') # si no se ha chekeado en la session, chekearlo!!
-
-      if (current_user && @tipo_cliente && @cliente_id)  
-        @equipo_existe = Activacionclientet.where(:email => current_user.email).first #.nil? 
-
-        if @equipo_existe.nil?
-          @registro_nuevo_equipo = Activacionclientet.new
-          @registro_nuevo_equipo.email = current_user.email
-          @registro_nuevo_equipo.clienteid = @cliente_id
-          @registro_nuevo_equipo.tipocliente = @tipo_cliente
-          @registro_nuevo_equipo.save
-        end
-
-         if not @equipo_existe.nil? # si existe, comparamos 
-          
-            if (@equipo_existe.clienteid == @cliente_id) && (@equipo_existe.tipocliente == @tipo_cliente)
-              session[:chekeado] = "chekeado"
-            end
-
-            if (@equipo_existe.clienteid == "nil") # reset, crearlo. Lo de "nil" es porque el atribuo es del tipo string. ok provisional ted.
-              @equipo_existe.email = current_user.email
-              @equipo_existe.clienteid = @cliente_id
-              @equipo_existe.tipocliente = @tipo_cliente
-              @equipo_existe.save
-              session[:chekeado] = "chekeado"
-            end
-
-            if (@equipo_existe.clienteid != @cliente_id) || (@equipo_existe.tipocliente != @tipo_cliente)
-              session[:chekeado] = nil
-              session[:terminal_autorizada] = false
-              redirect_to "/jugadalots/activar", notice: "Error: Su terminal no esta autorizada. Favor contactar a la Central para su reset." and return 
-            end
-
-          else # si no se cumple alguna condicion de "if not @equipo_existe.nil?" entonces nil default.
-            session[:chekeado] = nil # ok ted.
-          end
-     
-        else
-        @tipo_cliente =  @cliente_id = nil # Para que no le permita el view de venta. (Le Sale el otro view de no venta.. ok ted.)
-       # session[:ya_chekeado] = 'si'
-        redirect_to "/jugadalots/activar", notice: "Bienvenido! Favor configure el printer para continuar. [Presione el boton rojo BABYLOT 2.0 y luego el azul PROBAR IMPRESION]... o contacte a la Central para verificar su activacion. Gracias." and return 
-       end
-
-    end
       
     @jugadalot = Jugadalot.new
     # @jugadalots = Jugadalot.all Para mostrar todas las jugadas, solo queremos las de un ticket id especifico.
