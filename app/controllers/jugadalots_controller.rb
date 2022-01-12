@@ -9,6 +9,13 @@ class JugadalotsController < ApplicationController
   def activar
    # flash[:notice] = "klkkkk"
    
+    session[:cliente_id] =  "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+    session[:tipo_cliente]  =  "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+
+    @tipo_cliente = "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+    @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+    session[:chekeado] = "chekeado"
+    
    if (session[:terminal_autorizada] == false)
      sign_out(current_user) 
    end
