@@ -69,6 +69,6 @@ class ConsorciotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def consorciot_params
-      params.require(:consorciot).permit(:nombre, :abreviatura, :telefono)
+      params.require(:consorciot).permit(:nombre, :abrebiatura, :telefono)
     end
 end
