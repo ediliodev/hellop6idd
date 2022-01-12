@@ -128,7 +128,7 @@ class JugadalotsController < ApplicationController
         else
         @tipo_cliente =  @cliente_id = nil # Para que no le permita el view de venta. (Le Sale el otro view de no venta.. ok ted.)
        # session[:ya_chekeado] = 'si'
-        redirect_to "/jugadalots/activar", notice: "Bienvenido! Favor configure el printer para continuar. [Presione el boton rojo BABYLOT 2.0 y luego el azul PROBAR IMPRESION]... o contacte a la Central para verificar su activacion. Gracias." and return 
+        redirect_to "/jugadalots/activar", notice: "Bienvenido44! Favor configure el printer para continuar. [Presione el boton rojo BABYLOT 2.0 y luego el azul PROBAR IMPRESION]... o contacte a la Central para verificar su activacion. Gracias." and return 
        end
 
     end
