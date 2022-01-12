@@ -36,8 +36,8 @@ class JugadalotsController < ApplicationController
       session[:cliente_id] = params['cliente_id'] # params.permit(:tipo_cliente) #params['cliente_id'] #require(:ciudadt).permit(:cliente_id)
       session[:tipo_cliente]  = params['tipo_cliente'] # "klk" # params['tipo_cliente'] # params.require(:ciudadt).permit(:tipo_cliente)
       
-        @tipo_cliente = "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
-        @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+       session[:cliente_id] = @tipo_cliente = "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
+       session[:tipo_cliente]  = @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
 
       session[:ubicacion] = params['ubicacion']
       
