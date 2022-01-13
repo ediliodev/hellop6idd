@@ -160,7 +160,7 @@
   <tr>
     <td>
       <%= f.label :resultado %>
-      <%= f.select :resultado, options_for_select([['' ,''],['Azul Ganador' ,'azul'], ['Blanco Ganador', 'blanco'], ['Tabla', 'empate'], ['Nula', 'nula']], :selected => lineat.resultado, :include_blank => true) %>
+      <%= f.select :resultado, options_for_select([['' ,''],['Azul Ganador' ,'azul'], ['Blanco Ganador', 'blanco'], ['Tabla', 'empate'], ['Nula', 'empate']], :selected => lineat.resultado, :include_blank => true) %>
 
     </td>
     <td>
