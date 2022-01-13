@@ -72,6 +72,9 @@ class MenuadmrresultadoglobaltsController < ApplicationController
        
          if not @listado_ganadores.nil?
            @listado_ganadores.each do |ticket|
+            if @line.ganadores.nil?
+              @line.ganadores = 0 # first time loop avoid nil += no metho class error ok.
+            end
             @line.ganadores += ticket.pagoreal.to_i
            end
          end
@@ -88,6 +91,10 @@ class MenuadmrresultadoglobaltsController < ApplicationController
                  
          if not @listado_pendiente_x_pagar.nil?
            @listado_pendiente_x_pagar.each do |ticket|
+            if @line.pendientexpagar.nil?
+              @line.pendientexpagar = 0 # fist time lopp if nil cero ok. ted.
+              
+            end
             @line.pendientexpagar   += ticket.pagoreal.to_i
            end 
          end

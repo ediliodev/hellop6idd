@@ -101,8 +101,8 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
            if not @conjunto_elementos_pdtes_x_pagar.nil?
 
              @conjunto_elementos_pdtes_x_pagar.each do | ticket |
-              if line.pendientexpagar.nil? #evitar erro de suma nil+= no es un metodo de nil ok la primera vez que entra al loop
-                line.pendientexpagar = 0
+              if @line.pendientexpagar.nil? #evitar erro de suma nil+= no es un metodo de nil ok la primera vez que entra al loop
+                @line.pendientexpagar = 0
               end
 
                @line.pendientexpagar += ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
