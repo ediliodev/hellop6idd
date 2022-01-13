@@ -15,7 +15,7 @@ class JugadalotsController < ApplicationController
     @tipo_cliente = "desktop" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
     @cliente_id =   "123" # SETEADO MANUAL ADMINISTRATIVAMENTE OK TED.
     session[:chekeado] = "chekeado"
-    
+
    if (session[:terminal_autorizada] == false)
      sign_out(current_user) 
    end
@@ -1359,7 +1359,21 @@ class JugadalotsController < ApplicationController
 
     #acabo de conseguir el limite global de ese parlay en curso, ahora buscar la sumatoria de todos las jugadalots.posiblepago de los ticket activo de hoy y ver si no sbobrepara ese limiet ok
     t_ids = Ticket.today.where(:activo => "si", :parlay => tipo_jugada.to_s ).ids # todos los ticket actio de hoy con ese parlay ok
-    @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay  = Jugadalot.where(:ticket_id => t_ids).sum(:posiblepago).to_i
+     
+     @listado_jugadas_a_sumar = Jugadalot.where(:ticket_id => t_ids)# POstgres casting sum string error ok..sum(:posiblepago).to_i
+     
+     if not @listado_jugadas_a_sumar.nil?
+      @listado_jugadas_a_sumar.each do |jugada|
+         @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay += jugada.posiblepago.to_i
+      end
+     end
+
+     if @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay.nil?
+         @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay = 0 #seteo e inicializacion manual ok.
+     end
+     
+
+
     #Sumar posible pago de esas jugadas de cada ticket parlay ok.
     #@sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay = 0
     #t.each do |ticket|
