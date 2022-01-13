@@ -13,16 +13,11 @@
 <% if current_user.tipousuariot_id == 2  %>
     <p></p>
 	<h4 style="color:darkblue;"> *ADMINISTRACION Y REPORTES: </h4>
-	<h4> <% link_to 'Sorteos - (Abrir | Cerrar)', sorteots_path %> </h4>
 	<h4> <%= link_to 'Control de Lineas-Peleas y Resultados', lineats_path %> </h4>
-	<h4> <% link_to 'Insertar NUMEROS GANADORES', new_ganadorest_path %> </h4>
-	<h4> <% link_to 'Generar F10 (Reporte de Jugadas activa) x Sorteo', new_menuf10t_path %> </h4>
 	<h4> <%= link_to 'Reporte de Resultados Global x Fecha', new_menuadmrresultadoglobalt_path %> </h4>
 	<h4> <%= link_to 'Reporte de Resultados Global x Fecha x Supervisor', new_menuadmrresultadoglobalxsupervisort_path %> </h4>
-
-
 	<h4> <%= link_to 'Consultar Tickets Ganadores x Pagar', new_menuadmticketsganadoresxfechat_path %> </h4>
-	<h4> <%= link_to 'Controlar Limites de Pago (Max Win)', controldepagogts_path %> </h4>
+	<h4> <%= link_to 'Control de Trabas', trabats_path %> </h4>
 
     
 
@@ -31,7 +26,7 @@
 	    <!--Mostrar esta parte solo para usuario especificado ok -->
 
 	    <p></p>
-		<h4 style="color:darkblue;"> *CONTROL DE USUARIO: </h4>
+		<h4 style="color:darkblue;"> *CONTROL DE USUARIO Y SISTEMA: </h4>
 
 		<h4> <%= link_to "Edicion de Sucursal (Pwd, Supervisor, etc.)", manageuserbts_path %> 
    			
@@ -43,7 +38,9 @@
 		</h4>
 
 		<h4> <%= link_to "Activacion/Reset de computador clientes", activacionclientets_path %></h4>
-		
+		<h4> <%= link_to 'Controlar Limites de Pago (Max Win)', controldepagogts_path %> </h4>
+        <h4> <%= link_to 'Control de Coliseots', coliseots_path %> </h4>
+
 		
 
   	<%end%>
