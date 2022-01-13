@@ -1408,8 +1408,18 @@ class JugadalotsController < ApplicationController
 
     t_ids = Ticket.today.where(:activo => "si").ids # todos los ticket actio de hoy con ese parlay ok
     
-    @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global  = Jugadalot.where(:ticket_id => t_ids).sum(:posiblepago).to_i
-
+     @listado_sumatoria_posible_pago =  Jugadalot.where(:ticket_id => t_ids)# postrges casting erro string ok .sum(:posiblepago).to_i
+     
+     if not @listado_sumatoria_posible_pago.nil?
+        @listado_sumatoria_posible_pago.each do |jugada|
+          @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global += jugada.posiblepago.to_i
+        end
+       
+     end
+     
+     if @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global.nil?
+        @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global = 0 # seteo manual a 0 si es nil ok
+     end
 
     #Sumar posible pago de esas jugadas de cada ticket parlay ok.
 #    @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global = 0
@@ -1433,8 +1443,20 @@ class JugadalotsController < ApplicationController
 
   def suma_posible_pago_parlay(parlay_count)
     tickets = Ticket.today.ids 
-    jugadas = Ticket.today.where(:parlay => parlay_count).sum(:pagoreal)
-    
+
+    listado_a_sumar = Ticket.today.where(:parlay => parlay_count)# postgres error casting sum string ok .sum(:pagoreal)
+    if not listado_a_sumar.nil?
+      listado_a_sumar.each do |ticket|
+        jugadas += ticket.pagoreal
+      end 
+    end
+
+    if jugadas.nil?
+      jugadas = 0
+    else
+      jugadas  # retornar valor sumado manualmente por el problema del casting sum string postgres
+    end
+
   end
 
 
