@@ -57,7 +57,10 @@ class MenuadmrresultadoglobaltsController < ApplicationController
            
            if not @listado_jugadas.nil?
              @listado_jugadas.each do |jugada|
-               @line.venta += jugada.monto.to_i
+              if @line.venta.nil? #evitar erro de suma nil+= no es un metodo de nil ok la primera vez que entra al loop
+                @line.venta = 0
+              end
+              @line.venta += jugada.monto.to_i
              end
            end
 

@@ -63,6 +63,9 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
           if not @conjunto_elementos.nil?
 
              @conjunto_elementos.each do | jugada |
+              if @line.venta.nil? #evitar erro de suma nil+= no es un metodo de nil ok la primera vez que entra al loop
+                @line.venta = 0
+              end
               @line.venta += jugada.monto.to_i # sumatoria manual de los montos de esas jugadas ok.  
              end
 
@@ -77,6 +80,9 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
            if not @conjunto_elementos_tickets.nil? 
 
              @conjunto_elementos_tickets.each do | ticket |
+              if @line.ganadores.nil? #evitar erro de suma nil+= no es un metodo de nil ok la primera vez que entra al loop
+                @line.ganadores = 0
+              end
               @line.ganadores += ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
              end
 
@@ -95,6 +101,10 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
            if not @conjunto_elementos_pdtes_x_pagar.nil?
 
              @conjunto_elementos_pdtes_x_pagar.each do | ticket |
+              if line.pendientexpagar.nil? #evitar erro de suma nil+= no es un metodo de nil ok la primera vez que entra al loop
+                line.pendientexpagar = 0
+              end
+
                @line.pendientexpagar += ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
              end
 
