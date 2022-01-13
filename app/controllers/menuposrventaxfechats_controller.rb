@@ -87,7 +87,7 @@ class MenuposrventaxfechatsController < ApplicationController
     if not @conjunto_tickets_ganadores_cuadre.nil?
         #iterar suma manual ok:
          @conjunto_tickets_ganadores_cuadre.each do |ticket| 
-            @ganadores_cuadre += ticket.pagoreal
+            @ganadores_cuadre =  @ganadores_cuadre.to_i + ticket.pagoreal.to_i
          end
        
     end    
