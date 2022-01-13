@@ -95,7 +95,7 @@ class LineatsController < ApplicationController
       if  not lineat_params[:tiempofinalizado].empty? # si no esta vacio, trae algo.
         minutos = @lineat.tiempofinalizado.split(".")[0].to_i
         segundos = @lineat.tiempofinalizado.split(".")[1].to_i
-        if (minutos > 59) || (segundos > 59 ) 
+        if (minutos > 59.to_i) || (segundos > 59.to_i ) 
           redirect_to :back, notice: "X Error: Digitacion de tiempo finalizado invalido." and return          
         end
       end
