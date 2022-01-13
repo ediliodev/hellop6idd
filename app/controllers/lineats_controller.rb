@@ -18,15 +18,20 @@ class LineatsController < ApplicationController
 
   # GET /lineats/new
   def new
-    @lineat = Lineat.new
-    @linealast = Lineat.last # esto para cargar una prelinea anterior de pelea y colieo last ok test
-    @lineat.pelea = @linealast.pelea.to_i + 1
-    @lineat.coliseo = @linealast.coliseo
-    @lineat.bloque = @linealast.bloque
-    @lineat.tiempoml = @linealast.tiempoml
-    @lineat.oua = @linealast.oua
-    @lineat.oub = @linealast.oub
+     @lineat = Lineat.new
+    
+     @linealast = Lineat.last 
 
+    if not @linealast.empty? # primera linea creada exita?
+      @linealast = Lineat.last 
+      @lineat.pelea = @linealast.pelea.to_i + 1
+      @lineat.coliseo = @linealast.coliseo
+      @lineat.bloque = @linealast.bloque
+      @lineat.tiempoml = @linealast.tiempoml
+      @lineat.oua = @linealast.oua
+      @lineat.oub = @linealast.oub  
+    end
+    
   end
 
   # GET /lineats/1/edit
