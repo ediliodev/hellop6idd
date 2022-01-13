@@ -105,7 +105,7 @@ class MenuadmrresultadoglobalxsupervisortsController < ApplicationController
                 @line.pendientexpagar = 0
               end
 
-               @line.pendientexpagar += ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
+               @line.pendientexpagar = @line.pendientexpagar.to_i + ticket.pagoreal.to_i # sumatoria manual de los montos de esas jugadas ok.  
              end
 
           end
