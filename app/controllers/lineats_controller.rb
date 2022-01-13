@@ -22,7 +22,7 @@ class LineatsController < ApplicationController
     
      @linealast = Lineat.last 
 
-    if not @linealast.empty? # primera linea creada exita?
+    if not @linealast.nil? # primera linea creada exita?
       @linealast = Lineat.last 
       @lineat.pelea = @linealast.pelea.to_i + 1
       @lineat.coliseo = @linealast.coliseo
