@@ -1315,6 +1315,7 @@ class JugadalotsController < ApplicationController
 
 
   def excede_control_de_pago_x_ticket_x_parlay(last_tickect_current_user, entrada) # define el monto maximo a sacar por parlay, ej. pago max para tripletas, cuartetas etc.. no por ticket sino por tipo de ticket parlay ok
+    @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay = 0 # inicializacion de variable de sumatoria en cero ok.
     #verificar tipo de parlay de ese ticket:
     parlay_count = Jugadalot.where(:ticket_id => last_tickect_current_user).count
     #parlay_count
@@ -1368,11 +1369,7 @@ class JugadalotsController < ApplicationController
       end
      end
 
-     if @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay.nil?
-         @sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay = 0 #seteo e inicializacion manual ok.
-     end
      
-
 
     #Sumar posible pago de esas jugadas de cada ticket parlay ok.
     #@sumatoria_posible_pago_todos_tickets_de_hoy_ese_parlay = 0
@@ -1401,6 +1398,7 @@ class JugadalotsController < ApplicationController
 
 
   def excede_control_de_pago_global()
+    @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global = 0 # inicializacionn de variable sumatoria en cero ok
     #La idea aqui es verificar si la sumatoria de posible pago de todas las jugadas de todos los tipos de tickets activos de hoy no excede el limite globar de riesgo del sistema ok
         
     #limite GLOBAL = 1 ADMINISTRATIVO OK Y TIPOJUGADA TAMBIEN MANUAL = GLOBAL OK TED. POPULATE IT IN DATABASE PRODUCTION OK:
@@ -1417,10 +1415,7 @@ class JugadalotsController < ApplicationController
        
      end
      
-     if @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global.nil?
-        @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global = 0 # seteo manual a 0 si es nil ok
-     end
-
+     
     #Sumar posible pago de esas jugadas de cada ticket parlay ok.
 #    @sumatoria_posible_pago_todos_tickets_de_hoy_todos_parlay_global = 0
 #    t.each do |ticket|
@@ -1443,6 +1438,7 @@ class JugadalotsController < ApplicationController
 
   def suma_posible_pago_parlay(parlay_count)
     tickets = Ticket.today.ids 
+    jugadas = 0 # por sicaso. inicializacion de variable de sumatoria en cero ok.
 
     listado_a_sumar = Ticket.today.where(:parlay => parlay_count)# postgres error casting sum string ok .sum(:pagoreal)
     if not listado_a_sumar.nil?
@@ -1450,12 +1446,8 @@ class JugadalotsController < ApplicationController
         jugadas += ticket.pagoreal
       end 
     end
-
-    if jugadas.nil?
-      jugadas = 0
-    else
-      jugadas  # retornar valor sumado manualmente por el problema del casting sum string postgres
-    end
+    
+    jugadas  #retorna el valor de jugadas ok.
 
   end
 
