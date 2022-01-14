@@ -93,9 +93,9 @@ class LineatsController < ApplicationController
 
       #verificar si tiempofinalizado tiene algun valor para guardar, si es asi, verificar que minutos y segundos sean correctos <60 ok
       if  not lineat_params[:tiempofinalizado].empty? # si no esta vacio, trae algo.
-        minutos = @lineat.tiempofinalizado.split(".")[0].to_i
-        segundos = @lineat.tiempofinalizado.split(".")[1].to_i
-        if (minutos > 61.to_i) || (segundos > 61.to_i ) 
+        minutos =  lineat_params[:tiempofinalizado].split(".")[0].to_i
+        segundos = lineat_params[:tiempofinalizado].split(".")[1].to_i
+        if (minutos.to_i > 59.to_i) || (segundos.to_i > 59.to_i ) 
           redirect_to :back, notice: "X Error: Digitacion de tiempo finalizado invalido." and return          
         end
       end
@@ -122,7 +122,7 @@ class LineatsController < ApplicationController
             @lineat.status = "cerrada"
             @lineat.resultado = "" # esto para evitar ganador azul sin timepo por ejemplo ok.
             @lineat.save
-            redirect_to :back, notice: "X Error: Resultado sin tiempo de finalizacion. Nota: para TABLA y NULA completar tiempofinalizado con 10.00min" and return
+            redirect_to :back, notice: "X Error: Resultado sin tiempo de finalizacion. Nota: para TABLA o NULA completar tiempofinalizado con 10.00 min" and return
           end
 
           @lineat.status = "cerrada"
