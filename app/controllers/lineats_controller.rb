@@ -253,7 +253,7 @@ class LineatsController < ApplicationController
       if not @todas_las_jugadas_a_procesar_a_menos_tiempo.empty? # si existen, actualizar como aciertos positivos
         @todas_las_jugadas_a_procesar_a_menos_tiempo.each do |jugadalot|
           #verificar condicion a menos tiempo antes de marcar como acierto positivo: 
-          if ( (tiempofinalizado.to_i < tiempoml.to_i) && (linea_enterrada.resultado != "nula") && ( linea_enterrada.resultado != "tabla" ) ) # Y que la pelea no sea nula ni tabla condirerar tambien.
+          if ( (tiempofinalizado.to_f < tiempoml.to_f) && (linea_enterrada.resultado != "nula") && ( linea_enterrada.resultado != "tabla" ) ) # Y que la pelea no sea nula ni tabla condirerar tambien.
             jugadalot.acierto = "positivo"
             if not jugadalot.save 
               flag_procesamiento_ok = false # algun error guandando registro
@@ -278,7 +278,7 @@ class LineatsController < ApplicationController
       if not @todas_las_jugadas_a_procesar_a_mas_tiempo.empty? # si existen, actualizar como aciertos positivos
         @todas_las_jugadas_a_procesar_a_mas_tiempo.each do |jugadalot|
           #verificar condicion a mas tiempo antes de marcar como acierto positivo: 
-         if ( (tiempofinalizado.to_i > tiempoml.to_i) && (linea_enterrada.resultado != "nula") && ( linea_enterrada.resultado != "tabla" ) ) # Y que la pelea no sea nula ni tabla condirerar tambien.
+         if ( (tiempofinalizado.to_f > tiempoml.to_f) && (linea_enterrada.resultado != "nula") && ( linea_enterrada.resultado != "tabla" ) ) # Y que la pelea no sea nula ni tabla condirerar tambien.
           jugadalot.acierto = "positivo"
           if not jugadalot.save 
             flag_procesamiento_ok = false # algun error guandando registro
