@@ -7,14 +7,14 @@
   MontoTk:      <%= @monto_tk  %> </br>
   PosiblePago:  <%= @posible_pago_tk %> </br>
   Activo:       <%= @activo.to_s.upcase %> </br>
-  Ganador:    [ <%= @ganador.to_s.upcase %> ] </br>
+  <b>Ganador:    [ <%= @ganador.to_s.upcase %> ] </b> </br>
   Pago?:        <%= @pago.to_s.upcase %>  </br>
   Sucursal:     <%= @sucursal.to_s.upcase %> </br>
   Fecha impreso:<%= @fecha_impresion.to_s[0..19] %> </br>
   </br>
 
   <% if @st.to_s != "" %>
-  <%= @st %>
+  <h3 style="background-color: yellow"><%= @st %> </h3>
   <%end%>
 
   </br>
