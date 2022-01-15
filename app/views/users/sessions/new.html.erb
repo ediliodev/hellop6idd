@@ -7,12 +7,12 @@
 
 
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %> <button onclick="completar_dominio()">@</button>
+        <h3 onclick="completar_dominio()"> Email (@)</h3> 
+        <%= f.email_field :email, autofocus: true %> 
       </div>
 
       <div class="field">
-        <%= f.label :password %><br />
+       <h3> <%= f.label :password %> </h3>
         <%= f.password_field :password, autocomplete: "off" %>
       </div>
 
@@ -56,7 +56,7 @@
     } //  fin del st.length > 0
     
   } // fin de la funcion
-  
+
   
 </script>
 
