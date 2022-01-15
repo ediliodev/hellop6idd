@@ -8,7 +8,7 @@
 
       <div class="field">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.email_field :email, autofocus: true %> <button onclick="completar_dominio()">@</button>
       </div>
 
       <div class="field">
@@ -30,4 +30,33 @@
 
 </div>
 
+<script type="text/javascript">
+
+  function completar_dominio(argument) {
+    // body...
+    //document.getElementById("user_email").
+    var st = "";
+    var autocompletar_dominio = "si";
+    st = document.getElementById("user_email").value;
+    //alert(st);
+    if ( st.length > 0) {
+      //verificar si ya tiene arrroba
+      for (var i = 0; i < st.length; i++) {
+        if (st[i] == '@' ){
+          document.getElementById("user_email").value =  "";
+          autocompletar_dominio = "no";
+
+        }
+      } //fin del loop for
+
+      if (autocompletar_dominio == "si") {
+        document.getElementById("user_email").value =  document.getElementById("user_email").value + "@central.com";    
+      }
+      
+    } //  fin del st.length > 0
+    
+  } // fin de la funcion
+  
+  
+</script>
 
