@@ -111,9 +111,10 @@ class Ability
 
        if  (user.tipousuariot_id != 2) && (user.tipousuariot_id != 3)
          cannot :manage, :all # Si no es admin ni ventas que no acceda a ingun recurso. Seguridad extrema ted.
+         can :manage, Session 
        end
 
-  can :manage, :all #
+  #can :manage, :all #
 
 
 #ideas: 
