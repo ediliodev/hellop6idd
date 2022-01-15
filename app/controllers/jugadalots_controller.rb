@@ -74,7 +74,7 @@ class JugadalotsController < ApplicationController
       @t_id = request_ticket_id()
       session[:ticket_id] = @t_id
 
-      redirect_to "/jugadalots/new", notice: "Ej. 01 |Azul|Blanco|+|-| (OK).  Monto: ($) 100 (OK). " and return 
+      redirect_to "/jugadalots/new", notice: "Ej. 01 |Azul|Blanco|+|-| (OK). ($) 100 (OK)." and return 
     end
     # -------------------------------------------------------------------
 
