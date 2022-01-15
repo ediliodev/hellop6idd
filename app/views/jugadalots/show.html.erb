@@ -72,7 +72,10 @@ var userAgent2 = navigator.platform;
 
 <h4 id="tamano_ticket">
   <%= session[:consorcio]  %> (<%= session[:siglas] %>)</br></br>
-  <%= session[:telefono] %> </br></br>
+  <% if session[:telefono].to_s.size > 1%>
+     <%= session[:telefono] %> </br></br>
+  <%end%>
+
   <%= session[:hora_impresion].to_s[0..9] %> </br></br>
   <%= session[:hora_impresion].to_s[11..19] %></br></br> 
   
