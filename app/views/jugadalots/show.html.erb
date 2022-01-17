@@ -1,7 +1,7 @@
 
 
 
-<body onload="ocultar_features_si_iphone()">  </body>
+<body onload="ocultar_features_si_iphone();ocultar_menu_solo() ">  </body>
 
 
 
@@ -14,9 +14,9 @@
     background-color: #4CAF50; /* Green */
     color: white;
     padding: 4px 10px;
-    border-radius: 15px;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
+    border-radius: 45px;
+    -moz-border-radius: 45px;
+    -webkit-border-radius: 45px;
     margin:5px
     text-align: left;
     }
@@ -53,225 +53,301 @@ var userAgent2 = navigator.platform;
 
 
 <div id="ocultar_div1_si_iphone"> 
-    <button class="button" type="button" onclick="PrintElemConTabla('div_a_imprimir')" style="color:white;background-color:blue; height:35px;">  LocalPrintTK </button> 
+    <button class="button" type="button" onclick="aumentar_font_este_div();PrintElemConTabla('div_a_imprimir_pc')" style="color:white;background-color:blue; height:25px;">Print</button> 
+
+      <button class="button" type="button" onclick="ocultar_todo_menu()" style="color:white;background-color:blue; height:25px;">A</button> 
 
 
-    <button class="button" type="button" onclick="copy_ticket('div_a_imprimir')" style="color:white;background-color:darkgreen; height:35px;">  AndroidPrinTK </button> 
+  
+    <button class="button" type="button" onclick="aumentar_font_este_div();copy_ticket('div_a_imprimir_pc')"  style="color:white;background-color:blue; height:25px;">B</button> 
+
+    <button class="button" type="button" onclick="aumentar_font_este_div();copy_ticket('div_a_imprimir')"  style="color:white;background-color:blue; height:25px;">C</button> 
 
 </div>
 
 
-<% if  session[:tipo_cliente] == "movil" || true %>
 
 
 
 
 <div id="div_a_imprimir" >
 
-   <!--  <p id="impresion_movil"><%= session[:st_movil]  %> </p> -->
+       <!--  <p id="impresion_movil"><%= session[:st_movil]  %> </p> -->
 
-<h4 id="tamano_ticket">
-  <%= session[:consorcio]  %> (<%= session[:siglas] %>)</br></br>
-  <% if session[:telefono].to_s.size > 1%>
-     <%= session[:telefono] %> </br></br>
-  <%end%>
+    <h4 id="tamano_ticket">
+      <%= session[:consorcio]  %> (<%= session[:siglas] %>)</br></br>
+      <% if session[:telefono].to_s.size > 1%>
+         <%= session[:telefono] %> </br></br>
+      <%end%>
 
-  <%= session[:hora_impresion].to_s[0..9] %> </br></br>
-  <%= session[:hora_impresion].to_s[11..19] %></br></br> 
-  
-  <%= session[:ticket]%>+<%=session[:serial]%> </br></br>
-   
+      <%= session[:hora_impresion].to_s[0..9] %> </br></br>
+      <%= session[:hora_impresion].to_s[11..19] %></br></br> 
+      
+      <%= session[:ticket]%>+<%=session[:serial]%> </br></br>
+       
 
-<%= session[:parlay_count_nombre].to_s.upcase %> 
-</br>
-<%  @jugadalots = Jugadalot.where(:ticket_id => session[:jugadalots_get_tk_id].to_i) || [] %>
+    <%= session[:parlay_count_nombre].to_s.upcase %> 
+    </br>
+    <%  @jugadalots = Jugadalot.where(:ticket_id => session[:jugadalots_get_tk_id].to_i) || [] %>
 
 
-  <table>
-    <thead>
-      <tr>
-        <th style="font-size: 75%;">PC</th>
-        
-        <th style="font-size: 80%;">Jugada</th>
-        <th style="font-size: 80%;">Apuesta</th>
-        <th style="font-size: 80%;">ML</th>
-        
-        
-      </tr>
-    </thead>
-
-    <tbody>      
-      <% @jugadalots.each do |jugadat| %>
-      <% if jugadat.n1 == nil  %>
-      <% @n1 = "*" %>
-      <% elsif jugadat.n1.to_i < 10  %>
-      <% @n1 = "0" + jugadat.n1.to_s %>
-      <% else %>
-      <% @n1 = jugadat.n1.to_s %>
-      <% end %>
-
-      <% if jugadat.n2 == nil  %>
-      <% @n2 = "*" %>
-      <% elsif jugadat.n2.to_i < 10  %>
-      <% @n2 = "0" + jugadat.n2.to_s %>
-      <% else %>
-      <% @n2 = jugadat.n2.to_s %>
-      <% end %>
-
-      <% if jugadat.n3 == nil  %>
-      <% @n3 = "*" %>
-      <% elsif jugadat.n3.to_i < 10  %>
-      <% @n3 = "0" + jugadat.n3.to_s %>
-      <% else %>
-      <% @n3 = jugadat.n3.to_s %>
-      <% end %>
-
-        <tr>
-
-        <% @linea_pelea =  Lineat.today.where(:pelea => jugadat.pelea.to_i).first || nil %>
-
-        <td style="font-size: 70%; color: darkblue"><b> <%=jugadat.pelea.to_i%>-<%=@linea_pelea.coliseo.to_s[1..1]%></td>
-       <!--  <td style="text-align: center;"><b><%= jugadat.apuestacinta %></td> -->
-        
-          
-        <%if @linea_pelea != nil %>
-
-          <%if ( (jugadat.apuestacinta.to_s == "-") || (jugadat.apuestacinta.to_s == "+") ) %>
+      <table>
+        <thead>
+          <tr>
+            <th style="font-size: 75%;">PC</th>
             
-            <%if ( (jugadat.apuestacinta.to_s == "-")  ) %>
-              <td style="font-size: 70%;"><%= "T.menos-" %></td>
+            <th style="font-size: 80%;">Jugada</th>
+            <th style="font-size: 80%;">Apuesta</th>
+            <th style="font-size: 80%;">ML</th>
+            
+            
+          </tr>
+        </thead>
+
+        <tbody>      
+          <% @jugadalots.each do |jugadat| %>
+          <% if jugadat.n1 == nil  %>
+          <% @n1 = "*" %>
+          <% elsif jugadat.n1.to_i < 10  %>
+          <% @n1 = "0" + jugadat.n1.to_s %>
+          <% else %>
+          <% @n1 = jugadat.n1.to_s %>
+          <% end %>
+
+          <% if jugadat.n2 == nil  %>
+          <% @n2 = "*" %>
+          <% elsif jugadat.n2.to_i < 10  %>
+          <% @n2 = "0" + jugadat.n2.to_s %>
+          <% else %>
+          <% @n2 = jugadat.n2.to_s %>
+          <% end %>
+
+          <% if jugadat.n3 == nil  %>
+          <% @n3 = "*" %>
+          <% elsif jugadat.n3.to_i < 10  %>
+          <% @n3 = "0" + jugadat.n3.to_s %>
+          <% else %>
+          <% @n3 = jugadat.n3.to_s %>
+          <% end %>
+
+            <tr>
+
+            <% @linea_pelea =  Lineat.today.where(:pelea => jugadat.pelea.to_i).first || nil %>
+
+            <td style="font-size: 85%; color: darkblue"><b><%=jugadat.pelea.to_i%>-<%=@linea_pelea.coliseo.to_s[1..1]%> </td>
+           <!--  <td style="text-align: center;"><b><%= jugadat.apuestacinta %></td> -->
+            
+              
+            <%if @linea_pelea != nil %>
+
+              <%if ( (jugadat.apuestacinta.to_s == "-") || (jugadat.apuestacinta.to_s == "+") ) %>
+                
+                <%if ( (jugadat.apuestacinta.to_s == "-")  ) %>
+                  <td style="font-size: 90%;"><%= "T.menos-" %></td>
+                <%end%>
+
+                <%if ( (jugadat.apuestacinta.to_s == "+")  ) %>
+                  <td style="font-size: 90%;" ><%= "T.mas+" %></td>
+                <%end%>
+
+              <%end%>
+
+
+              <%if (jugadat.apuestacinta.to_s == "azul") %>
+                  <td style="font-size: 90%;" ><%=@linea_pelea.azul.to_s[0..5]%></td>
+              <%end%>
+
+              <%if (jugadat.apuestacinta.to_s == "blanco") %>
+                  <td style="font-size: 90%;" ><%=@linea_pelea.blanco.to_s[0..5]%></td>
+              <%end%>
+
+            <%else%>
+
+              <td style="font-size: 90%;" > A vs B </td>
+
             <%end%>
 
-            <%if ( (jugadat.apuestacinta.to_s == "+")  ) %>
-              <td style="font-size: 70%;" ><%= "T.mas+" %></td>
+
+              
+
+              <%if ( ( (jugadat.apuestacinta == "-" )|| (jugadat.apuestacinta == "+")) && (@linea_pelea != nil) ) %>
+                 <td style="font-size: 90%; text-align: left;"><%= jugadat.apuestacinta %><%=@linea_pelea.tiempoml%></td>
+              <%else%>
+                  <td style="font-size: 90%; text-align: left;"><%= jugadat.apuestacinta %></td>
+              <%end%>
+
+              
+
+              <td style="font-size: 85%" ><%= jugadat.ml %></td>
+              
+            </tr>
+
+          <% end %>
+        </tbody>
+      </table>
+
+
+
+    </br>
+
+      Apostado:....$ <%= session[:apostado_tk] %></br></br>
+      Ganacia :.....$ <%= session[:ganancia_tk] %></br></br>
+      <b>A COBRAR:..$ <%= session[:acobrar_tk]  %></br></br>
+
+      <% session[:hora_impresion] %></br> 
+      
+      Buena Suerte!</br></br>
+      <%=session[:ticket]%>+<%=session[:serial]%> </br>
+
+    <button class="buttontk" onclick="location.href='../jugadalots/new';"></button>
+    <button class="buttontk" onclick="aumentar_font_mediano1();" style="background-color: orange;"></button>
+    <button class="buttontk" onclick="aumentar_font_mediano2();" style="background-color: darkorange;"></button>
+    <button class="buttontk" onclick="aumentar_font_mediano3();" style="background-color: darkred;"></button>
+    <button class="buttontk" onclick="aumentar_font_grande();" style="background-color: red;"></button>
+
+
+    </h4>
+
+
+ </div>
+
+
+
+
+<div id="div_a_imprimir_pc" style="visibility: hidden;" >
+
+  
+
+    <h4 id="tamano_ticket_pc">
+      <%= session[:consorcio]  %> (<%= session[:siglas] %>)</br>
+      <% if session[:telefono].to_s.size > 1%>
+         <%= session[:telefono] %> </br>
+      <%end%>
+
+      <%= session[:hora_impresion].to_s[0..9] %> </br>
+      <%= session[:hora_impresion].to_s[11..19] %></br>
+      
+      <%= session[:ticket]%>+<%=session[:serial]%> </br>
+       
+
+    <%= session[:parlay_count_nombre].to_s.upcase %> 
+    </br>
+    <%  @jugadalots = Jugadalot.where(:ticket_id => session[:jugadalots_get_tk_id].to_i) || [] %>
+
+
+      <table>
+        <thead>
+          <tr>
+            <th style="font-size: 90%;">P-C</th>
+            
+            <th style="font-size: 90%;">Jugada</th>
+            <th style="font-size: 90%;">Apuesta</th>
+            <th style="font-size: 90%;">ML</th>
+            
+            
+          </tr>
+        </thead>
+
+        <tbody>      
+          <% @jugadalots.each do |jugadat| %>
+          <% if jugadat.n1 == nil  %>
+          <% @n1 = "*" %>
+          <% elsif jugadat.n1.to_i < 10  %>
+          <% @n1 = "0" + jugadat.n1.to_s %>
+          <% else %>
+          <% @n1 = jugadat.n1.to_s %>
+          <% end %>
+
+          <% if jugadat.n2 == nil  %>
+          <% @n2 = "*" %>
+          <% elsif jugadat.n2.to_i < 10  %>
+          <% @n2 = "0" + jugadat.n2.to_s %>
+          <% else %>
+          <% @n2 = jugadat.n2.to_s %>
+          <% end %>
+
+          <% if jugadat.n3 == nil  %>
+          <% @n3 = "*" %>
+          <% elsif jugadat.n3.to_i < 10  %>
+          <% @n3 = "0" + jugadat.n3.to_s %>
+          <% else %>
+          <% @n3 = jugadat.n3.to_s %>
+          <% end %>
+
+            <tr>
+
+            <% @linea_pelea =  Lineat.today.where(:pelea => jugadat.pelea.to_i).first || nil %>
+
+            <td style="font-size: 110%; color: darkblue"><b><%=jugadat.pelea.to_i%>-<%=@linea_pelea.coliseo.to_s[1..1]%> </td>
+           <!--  <td style="text-align: center;"><b><%= jugadat.apuestacinta %></td> -->
+            
+              
+            <%if @linea_pelea != nil %>
+
+              <%if ( (jugadat.apuestacinta.to_s == "-") || (jugadat.apuestacinta.to_s == "+") ) %>
+                
+                <%if ( (jugadat.apuestacinta.to_s == "-")  ) %>
+                  <td style="font-size: 90%;"><%= "T.menos-" %></td>
+                <%end%>
+
+                <%if ( (jugadat.apuestacinta.to_s == "+")  ) %>
+                  <td style="font-size: 90%;" ><%= "T.mas+" %></td>
+                <%end%>
+
+              <%end%>
+
+
+              <%if (jugadat.apuestacinta.to_s == "azul") %>
+                  <td style="font-size: 90%;" ><%=@linea_pelea.azul.to_s[0..5]%></td>
+              <%end%>
+
+              <%if (jugadat.apuestacinta.to_s == "blanco") %>
+                  <td style="font-size: 90%;" ><%=@linea_pelea.blanco.to_s[0..5]%></td>
+              <%end%>
+
+            <%else%>
+
+              <td style="font-size: 90%;" > A vs B </td>
+
             <%end%>
 
-          <%end%>
 
+              
 
-          <%if (jugadat.apuestacinta.to_s == "azul") %>
-              <td style="font-size: 65%;" ><%=@linea_pelea.azul.to_s[0..7]%></td>
-          <%end%>
+              <%if ( ( (jugadat.apuestacinta == "-" )|| (jugadat.apuestacinta == "+")) && (@linea_pelea != nil) ) %>
+                 <td style="font-size: 110%; text-align: left;"><%= jugadat.apuestacinta %><%=@linea_pelea.tiempoml%></td>
+              <%else%>
+                  <td style="font-size: 110%; text-align: left;"><%= jugadat.apuestacinta %></td>
+              <%end%>
 
-          <%if (jugadat.apuestacinta.to_s == "blanco") %>
-              <td style="font-size: 65%;" ><%=@linea_pelea.blanco.to_s[0..7]%></td>
-          <%end%>
+              
 
-        <%else%>
+              <td style="font-size: 90%" ><%= jugadat.ml %></td>
+              
+            </tr>
 
-          <td style="font-size: 65%;" > A vs B </td>
-
-        <%end%>
-
-
-          
-
-          <%if ( ( (jugadat.apuestacinta == "-" )|| (jugadat.apuestacinta == "+")) && (@linea_pelea != nil) ) %>
-             <td style="font-size: 70%; text-align: left;"><%= jugadat.apuestacinta %><%=@linea_pelea.tiempoml%></td>
-          <%else%>
-              <td style="font-size: 70%; text-align: left;"><%= jugadat.apuestacinta %></td>
-          <%end%>
-
-          
-
-          <td style="font-size: 70%" ><%= jugadat.ml %></td>
-          
-        </tr>
-
-      <% end %>
-    </tbody>
-  </table>
+          <% end %>
+        </tbody>
+      </table>
 
 
 
-</br>
+    </br>
 
-  Apostado:....$ <%= session[:apostado_tk] %></br></br>
-  Ganacia :.....$ <%= session[:ganancia_tk] %></br></br>
-  <b>A COBRAR:...$ <%= session[:acobrar_tk]  %></br></br>
+      Apostado:....$ <%= session[:apostado_tk] %></br>
+      Ganacia :.....$ <%= session[:ganancia_tk] %></br>
+      <b>A COBRAR:..$ <%= session[:acobrar_tk]  %></br>
 
-  <% session[:hora_impresion] %></br> 
-  
-  Buena Suerte!</br></br>
-  <%=session[:ticket]%>+<%=session[:serial]%> </br>
+      <% session[:hora_impresion] %></br> 
+      
+      Buena Suerte!</br>
+      <%=session[:ticket]%>+<%=session[:serial]%> </br>
 
-<button class="buttontk" onclick="location.href='../jugadalots/new';"></button>
-<button class="buttontk" onclick="aumentar_font_mediano1();" style="background-color: orange;"></button>
-<button class="buttontk" onclick="aumentar_font_mediano2();" style="background-color: darkorange;"></button>
-<button class="buttontk" onclick="aumentar_font_mediano3();" style="background-color: darkred;"></button>
-<button class="buttontk" onclick="aumentar_font_grande();" style="background-color: red;"></button>
-
-
-</h4>
+    </h4>
 
 
 
-<script type="text/javascript">
-  
-  function retornar_inicio(argument) {
-    // body...
-    //history.back();
-   ///onclick="location.href='../jugadalots/new';"
-  }
-
-  function aumentar_font_mediano1(argument) {
-    // body...
-    document.getElementById("tamano_ticket").style="font-size: 19px";
-  }
-
-  function aumentar_font_mediano2(argument) {
-    // body...
-    document.getElementById("tamano_ticket").style="font-size: 23px";
-  }
-
-  function aumentar_font_mediano3(argument) {
-    // body...
-    document.getElementById("tamano_ticket").style="font-size: 26px";
-  }
-
-
-  function aumentar_font_grande(argument) {
-    // body...
-    //alert('klk');
-    document.getElementById("tamano_ticket").style="font-size: 28px";
-  }
- 
-  function PrintElemConTabla(elem)
-  {
-      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-      mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-      mywindow.document.write('</head><body >');
-    //  mywindow.document.write('<h1>' + document.title  + '</h1>');
-      mywindow.document.write(document.getElementById(elem).innerHTML);
-      mywindow.document.write('</body></html>');
-
-      mywindow.document.close(); // necessary for IE >= 10
-      mywindow.focus(); // necessary for IE >= 10*/
-
-      mywindow.print();
-      mywindow.close();
-
-      return true;
-  }  
-
-// esta funcion de copiar fue sacada de este link: https://stackoverflow.com/questions/36639681/how-to-copy-text-from-a-div-to-clipboard
-function copy_ticket(containerid) {
-  if (document.selection) {
-    var range = document.body.createTextRange();
-    range.moveToElementText(document.getElementById(containerid));
-    range.select().createTextRange();
-    document.execCommand("copy");
-  } else if (window.getSelection) {
-    var range = document.createRange();
-    range.selectNode(document.getElementById(containerid));
-    window.getSelection().addRange(range);
-    document.execCommand("copy");
-    alert("MovilPrint Ready Ok.")
-  }
-}
-
-
-</script>
+ </div>
 
 
 
@@ -279,31 +355,98 @@ function copy_ticket(containerid) {
 
 
 
+    <script type="text/javascript">
+
+      function aumentar_font_este_div(argument) {
+        // body...
+        document.getElementById("tamano_ticket_pc").style="font-size: 16px";
+      }
 
 
 
+      function ocultar_menu_solo(argument) {
+        // body...
+        document.getElementById("detalles_usuario").style="display:none";
+      }
 
 
+      function ocultar_todo_menu(argument) {
+        // body...
+        //ocultar menus para dejar impresion srceen mode print ok.
+        document.getElementById("ocultar_div1_si_iphone").style="display:none";
+        document.getElementById("detalles_usuario").style="display:none";
+        document.getElementById("boton_inicio").style="display:none";
+        
+
+      }
 
 
+      
+      function retornar_inicio(argument) {
+        // body...
+        //history.back();
+       ///onclick="location.href='../jugadalots/new';"
+      }
+
+      function aumentar_font_mediano1(argument) {
+        // body...
+        document.getElementById("tamano_ticket").style="font-size: 19px";
+      }
+
+      function aumentar_font_mediano2(argument) {
+        // body...
+        document.getElementById("tamano_ticket").style="font-size: 23px";
+      }
+
+      function aumentar_font_mediano3(argument) {
+        // body...
+        document.getElementById("tamano_ticket").style="font-size: 26px";
+      }
 
 
+      function aumentar_font_grande(argument) {
+        // body...
+        //alert('klk');
+        document.getElementById("tamano_ticket").style="font-size: 28px";
+      }
+     
+      function PrintElemConTabla(elem)
+      {
+          var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+          mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+          mywindow.document.write('</head><body >');
+        //  mywindow.document.write('<h1>' + document.title  + '</h1>');
+          mywindow.document.write(document.getElementById(elem).innerHTML);
+          mywindow.document.write('</body></html>');
+
+          mywindow.document.close(); // necessary for IE >= 10
+          mywindow.focus(); // necessary for IE >= 10*/
+
+          mywindow.print();
+          mywindow.close();
+
+          return true;
+      }  
+
+    // esta funcion de copiar fue sacada de este link: https://stackoverflow.com/questions/36639681/how-to-copy-text-from-a-div-to-clipboard
+    function copy_ticket(containerid) {
+      if (document.selection) {
+        var range = document.body.createTextRange();
+        range.moveToElementText(document.getElementById(containerid));
+        range.select().createTextRange();
+        document.execCommand("copy");
+      } else if (window.getSelection) {
+        var range = document.createRange();
+        range.selectNode(document.getElementById(containerid));
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        alert("MovilPrint Ready Ok.")
+      }
+    }
 
 
+    </script>
 
-
-
-
-  
-</div>
    
-
-
-
-
-
-
-<%end%>
-
                         
 
