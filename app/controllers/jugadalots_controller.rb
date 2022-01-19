@@ -1036,7 +1036,7 @@ class JugadalotsController < ApplicationController
 
 
               #verificar si este ticket fue impreso o es un tk virtual no impreso, en este caso no aplica para consulta gadadores o demas, redireccionar ok
-              @ticket_fast = Ticket.where(:id => @ticket , :serial => @serial)
+              @ticket_fast = Ticket.where(:id => @ticket , :serial => @serial).first
               
               if @ticket_fast.valid?
                   if @ticket_fast.fechaimpresion == nil
