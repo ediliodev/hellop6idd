@@ -1023,7 +1023,7 @@ class JugadalotsController < ApplicationController
               @ticket = @dataframe[0].to_s[3..(@dataframe[0].size-1)]
               @serial = @dataframe[1]
 
-              if  @serial.to_s == "000" # no se necesita serial original si la Central lo consulta con /ctsn+0000 ok
+              if  @serial.to_s == "000" # TBN SE PUEDE PONER POR CURRENT USER ADMINT TYPE TBN LATER OK. no se necesita serial original si la Central lo consulta con /ctsn+0000 ok
                   @t_valido = Ticket.where(:id => @ticket).first
               else
                  #ticket existe con informacion suministrada?
@@ -1036,18 +1036,21 @@ class JugadalotsController < ApplicationController
 
 
               #verificar si este ticket fue impreso o es un tk virtual no impreso, en este caso no aplica para consulta gadadores o demas, redireccionar ok
-              @ticket_fue_impreso = Ticket.where(:id => @ticket , :serial => @serial).first.fechaimpresion || nil
-              if @ticket_fue_impreso == nil
-                redirect_to "/jugadalots/new", notice: "X Ticket No valido, random /ct ok." and return 
+              @ticket_fast = Ticket.where(:id => @ticket , :serial => @serial)
+              
+              if @ticket_fast.valid?
+                  if @ticket_fast.fechaimpresion == nil
+                    redirect_to "/jugadalots/new", notice: "X Ticket No valido. NotprintedRandom check" and return                   
+                  end              
+              else
+                redirect_to "/jugadalots/new", notice: "X Ticket No valido." and return 
               end
-             
+
               #verificar si este ticket tiene jugadas, esto porque en tkconsultado details puede no tener jugadas, por tanto el ticket a consultar no tiene jugadas ok, esto pasa en new session tk ok ted
               @tiene_jugadas_validas = Jugadalot.where(:ticket_id => @ticket_id)
               if not @tiene_jugadas_validas
                 redirect_to "/jugadalots/new", notice: "X No tiene jugadas validas para consultar." and return 
               end
-
-
              
 
               @activo =  @t_valido.activo.nil? ?  "PDTE." : @t_valido.activo.to_s
