@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :lineats
   get '/procesar_resultados', to: 'lineats#procesar_resultados'
   get '/tkconsultado', to: 'jugadalots#tkconsultado'
+
   
 
   resources :trabats

@@ -48,6 +48,7 @@
         <td style="color: darkgreen"><%= lineat.tiempofinalizado %></td>
         <td><% link_to 'Show', lineat %></td>
         <td><%= link_to 'Editar', edit_lineat_path(lineat) %></td>
+        <td><%= link_to '*CERRAR PELEA*', edit_lineat_path(lineat.id.to_s + "-klk") %></td>
         <td><% link_to 'Destroy', lineat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

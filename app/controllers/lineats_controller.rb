@@ -1,5 +1,5 @@
 class LineatsController < ApplicationController
-  before_action :set_lineat, only: [:show, :edit, :update, :destroy]
+  before_action :set_lineat, only: [:show, :edit, :update, :destroy, :cerrar]
 
   # GET /lineats
   # GET /lineats.json
@@ -36,6 +36,38 @@ class LineatsController < ApplicationController
 
   # GET /lineats/1/edit
   def edit
+
+  if params[:id].to_s.split("-")[1] == "klk"
+    #params[:id] = params[:id].to_s.split("-")[0].to_i #volver a convertir luego de detectado ok.
+    @lineat = Lineat.find(  params[:id].to_s.split("-")[0].to_i )
+    @lineat.status = "cerrada"
+    
+    if @lineat.save
+       redirect_to "/lineats", notice: "PELEA #{@lineat.pelea} CERRADA OK" and return 
+    else  
+      redirect_to "/lineats", notice: "X. TRATE DE NUEVO X." and return 
+    end
+
+  end
+
+   
+
+    #format.html { redirect_to lineats_url, notice: 'Cerrada ok' }
+    #edit la refiere al formulario de edit de una vez, el controller no procesa nada noramlmente, pero en nuestro caso agregaremos una accion truqeada para desde aqui mismo poder cerrar la pelea directamente sin tener que entrar al formulrio ok ted 
+    #if ( set_lineat.to_s.split("-")[1] == "klk" )
+    #  redirect_to "/jugadalots/new", notice: "8888 " and return 
+      #redirect_to lineats_url, notice: 'Cerrada okkkkkkkkkk'and return
+      #cerrar pelea y redireccionar index ok
+      #@lineat = Lineat.find(set_lineat.to_s.split("-")[0]) #buscar la linea actual en base al id enviado url
+      #@lineat.status = "cerrada"
+      #if @lineat.save
+      #  format.html { redirect_to lineats_url, notice: 'Cerrada ok' }
+      #else
+     #   format.html { redirect_to lineats_url, notice: 'X .Intente de nuevo X' }
+     # end
+
+   # end
+
   end
 
   # POST /lineats
@@ -163,6 +195,17 @@ class LineatsController < ApplicationController
       format.html { redirect_to lineats_url, notice: 'Linea was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def cerrar
+    @lineat.status = "cerrada"
+     
+    if @lineat.save # actualizar cierre pelea ok
+       format.html { redirect_to lineats_url, notice: 'PELEA #{@lineat.pelea} CERRADA CORRECTAMENTE OK.' }
+    else
+      format.html { redirect_to lineats_url, notice: 'X No se pudo. Trate de Nuevo.' }
+    end
+
   end
 
 
