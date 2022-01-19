@@ -1034,18 +1034,21 @@ class JugadalotsController < ApplicationController
                 redirect_to "/jugadalots/new", notice: "X No se pudo consultar este ticket. Ticket o Serial invalido. Favor verificar. " and return 
               end 
 
+
               #verificar si este ticket fue impreso o es un tk virtual no impreso, en este caso no aplica para consulta gadadores o demas, redireccionar ok
-              @ticket_fue_impreso = Ticket.where(:id => @ticket , :serial => @serial).first || nil
-              if @ticket_fue_impreso.fechaimpresion == nil
+              @ticket_fue_impreso = Ticket.where(:id => @ticket , :serial => @serial).first.fechaimpresion || nil
+              if @ticket_fue_impreso == nil
                 redirect_to "/jugadalots/new", notice: "X Ticket No valido, random /ct ok." and return 
               end
-
+             
               #verificar si este ticket tiene jugadas, esto porque en tkconsultado details puede no tener jugadas, por tanto el ticket a consultar no tiene jugadas ok, esto pasa en new session tk ok ted
               @tiene_jugadas_validas = Jugadalot.where(:ticket_id => @ticket_id)
               if not @tiene_jugadas_validas
                 redirect_to "/jugadalots/new", notice: "X No tiene jugadas validas para consultar." and return 
               end
 
+
+             
 
               @activo =  @t_valido.activo.nil? ?  "PDTE." : @t_valido.activo.to_s
               @ganador =  @t_valido.ganador.nil? ? "PDTE." : @t_valido.ganador.to_s
